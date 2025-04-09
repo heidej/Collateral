@@ -1,0 +1,275 @@
+Collateral Web 
+
+
+92351: Objects “owned” by a scenario not visible to other scenarios. Some situations require multiple 
+scenarios for the same customer (branch is working PCA loans while Lending Operations is working 
+on FLCA loans; loans may be booked at different times and be at different stages). User is unable to 
+see which objects are “owned” by which scenario; if they inadvertently make a change in an 
+object “owned” by another scenario, CW locks up, FPI has to script out the scenario and we start 
+over. This typically happens on complex relationships. 
+
+TFS 92351 – Enhance scenarios for object 
+ownership; 
+
+TFS 92357 – Multiple Collateral Scenarios 
+
+ 
+
+Feature Overview 
+
+ 
+
+Document Change History 
+
+
+Version 
+
+Date Changed 
+
+Description 
+
+Approved By 
+
+Date Approved 
+
+1 
+
+08/26/16 
+
+Document started 
+
+Rebeca 
+McFarland 
+
+08/26/16 
+
+2 
+
+09/08/16 
+
+Updated mock-ups and other edits 
+
+Bevin 
+Morrissey 
+
+09/08/16 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+ 
+
+FPI Credit Products 
+
+September 8, 2016 
+
+ 
+
+Table of Contents 
+Collateral Web ...................................................................................................................................................... 1 
+Document Change History ................................................................................................................................. 1 
+Statement of the Problem ............................................................................................................................... 2 
+FPI Recommendation....................................................................................................................................... 3 
+Creating a New Scenario ............................................................................................................................ 3 
+Submitting Scenarios to EmPOWER ............................................................................................................ 5 
+
+
+92357: Goal is to reduce the number of multiple collateral scenarios. It is probably infrequent that 
+staff would want to create multiple scenarios for the same group of loans. Would like a warning if 
+possible. 
+
+ 
+
+
+
+TFS 92351 
+– 
+Enhance 
+scenarios for object 
+ownership; TFS 92357 
+– 
+Multiple Collateral 
+Scenarios 
+
+
+ 
+
+Statement of the Problem 
+
+ 
+
+ 
+
+ 
+
+Employee #1 wants to work on the short and long term loans on the left side of the picture (scope #1) 
+in Scenario #1. 
+
+ 
+
+Employee #2 wants to work on the short term loan on the right side of the picture (scope #2) in 
+Scenario #2. 
+
+ 
+
+If one of these two employees updates collateral belonging to a loan in the opposite scope, the two 
+scenarios become entangled and FPI has to manually clean up data in the database with a script. 
+
+ 
+
+We would like to make it more obvious which collateral objects belong to which scope, and make it 
+more difficult to lock up scenarios by creating multiple scenarios that include the same scope. 
+
+ 
+
+
+FPI Recommendation 
+
+ 
+
+Creating a New Scenario 
+
+ 
+
+When you start a new scenario, the app will ask you which scope/loans you want to include in your 
+new scenario. 
+
+ 
+
+• If a scenario already exists for a particular scope, an alert will fire to tell you. 
+• Identified scopes in the scenario are pinned; all other scopes are grayed out. 
+• You will have to start a new scenario to work on any of the other scope(s) that you did not 
+initially include. 
+• If multiple scenarios exist for a particular scope, when you go to submit any one of them to 
+EmPOWER, an alert will warn you that all other scenarios for this scope will be deleted. 
+– If you decide to continue and submit your scenario to EmPOWER, then all other 
+scenarios for that scope, or that include that scope, are deleted. 
+
+
+
+
+ 
+
+If you need to add scopes to your scenario, then you can copy the scenario and select additional 
+scopes at the time of creation. 
+
+ 
+
+In our example, for Employee #1 who is working on the short and long term loans on the left side of 
+the picture (scope #1) in Scenario #1, this means that scope #2, the short term loan on the right and 
+its associated collateral objects, is grayed out. 
+
+ 
+
+ 
+
+
+Employee #1 can still see the objects in scope #2, but they will not have the ability to make changes 
+to the scope #2 objects from within Scenario #1. 
+
+ 
+
+If Employee #1 needs to work on any items in scope #2, they can either do so from within Scenario 
+#2 (which includes scope #2), or a new scenario has to be created. 
+
+ 
+
+If they wish to create a new scenario, Employee #1 would then copy Scenario #1 to create Scenario 
+#3. 
+
+ 
+
+ 
+
+ 
+
+As they do so, they will select the scope(s) that they would like to be included in Scenario #3. 
+
+ 
+
+ 
+
+
+ 
+
+
+cid:image002.png@01D2091B.2DC3A850
+If they include scope #2, which is already included in another scenario, the following alert appears: 
+
+ 
+
+ 
+
+ 
+
+ Clicking “OK” means the new scenario will be created and they can now work on all objects 
+from across all scopes in the new scenario. 
+
+
+ 
+
+ Selecting “Edit” will send them back to the Scope Selection modal for the new scenario. 
+
+
+ 
+
+For customers with multiple scopes, a scrollbar will allow scrolling between all available scopes. 
+
+ 
+
+ 
+
+Submitting Scenarios to EmPOWER 
+
+ 
+
+By submitting a scenario to EmPower, all OTHER scenarios that include the same scopes as those 
+included in the scenario being submitted will be DELETED. 
+
+ 
+
+For example, if you were to submit Scenario #2 from the above example, which includes scope #2, 
+Scenario #3 would be deleted, as it also includes scope #2. 
+
+ 
+
+This is consistent with how the application works today. 
+
+ 
+
+ 
+
+ 
+
+

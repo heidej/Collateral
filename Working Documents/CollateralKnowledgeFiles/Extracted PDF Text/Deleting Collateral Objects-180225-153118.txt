@@ -1,0 +1,308 @@
+Creating/Editing/Deleting Collateral Objects
+
+Business Requirements:
+
+Users need the ability to create, edit or delete a collateral object and link it to other objects in the collateral 
+visualization canvas.
+
+
+When a collateral object is created, certain key data points need to be collected and stored in a pop-up screen where 
+users can enter this information.
+
+The basic overview of this will be covered below, but a special function of capturing this data is covered further 
+here: Data Wizards for data entry - Collateral Object 
+
+
+
+
+
+
+
+Functional Requirements:
+
+Must Have’s:
+
+Create a drag and drop functionality to add new collateral object. The functionality should allow a user to grab a 
+collateral object from the side navigation menu, and drop it onto the applicable object they would like to link it to. The 
+collateral objects that can be created are:
+
+Real Estate
+
+
+Farm Product/Crops
+
+
+Inventory/Accts Rec
+
+
+Livestock
+
+
+Machinery/Equipment
+
+
+Motor Vehicles (cars, trucks)
+
+
+Stocks/Bonds (Reg. U)
+
+
+Stocks/Bonds (not Reg. U)
+
+
+Other
+
+
+
+
+
+
+
+NOTE: The above list of collateral objects is a baseline and is subject to change based on the association or outside 
+company using the Collateral App.
+
+Collateral Objects types are NOT editable by the ACA staff in any way. The standard list of Collateral Objects 
+mentioned above and any of their configurations can only be edited/added/removed by specified Admin users.
+
+
+Collateral objects can be linked to the other following objects:
+
+Loans
+
+
+Security Documents
+
+
+Collateral Detail (NOTE: This link will be created automatically based on underlying data and will not be user 
+created)
+
+
+Customers/Owner (NOTE: This link will be created automatically based on underlying data and will not be user 
+created)
+
+
+Location?
+
+
+
+
+
+The following data points need to be collected for each piece of collateral when it is created. This will be done with 
+some sort of “Modal” or pop-up screen for users to enter information in. (NOTE: This is assuming we are only 
+capturing basic information needed to create the collateral. All other collateral detail changes or 
+additions would be done on the actual collateral record in AgWorx, or all in the creation modal/data 
+wizard? This might include Lien Amounts, NRV, Appraisal information, etc.)
+
+Real Estate:
+
+Sub-Type = Real Estate
+
+
+Relationship
+
+
+
+
+
+
+
+
+
+
+
+Ownership Percentage
+
+
+Primary owner checkbox
+
+
+Collateral Association
+
+Owner (Fee)
+
+
+Leasehold Interest
+
+
+
+
+
+Value/Amount
+
+
+Collateral Amount
+
+
+Address
+
+Street Address
+
+
+City
+
+
+State
+
+
+Zip Code
+
+
+
+
+
+Description
+
+
+
+
+
+Farm Product/Crops:
+
+Sub-Type = Farm Products
+
+
+Same as Real Estate
+
+
+
+
+
+Inventory/Accts Rec:
+
+Sub-Type = Inventory/Accts Rec
+
+
+Same as Real Estate
+
+
+
+
+
+Livestock:
+
+Sub-Type = Livestock
+
+
+Same as Real Estate
+
+
+
+
+
+Machinery/Equipment:
+
+Sub-Type = Machinery/Equipment
+
+
+Same as Real Estate
+
+
+
+
+
+Motor Vehicles (cars, trucks)
+
+Sub-Type = Motor Vehicles
+
+
+Same as Real Estate
+
+
+
+
+
+Stocks/Bonds (Reg. U)
+
+Sub-Type = Stocks/Bonds (Reg. U)
+
+
+Same as Real Estate
+
+
+
+
+
+Stocks/Bonds (not Reg. U)
+
+Sub-Type = Stocks/Bonds (Reg. U)
+
+
+Same as Real Estate
+
+
+
+
+
+Other
+
+Sub-Type = Other/Miscellaneous OR Water Rights
+
+
+Same as Real Estate
+
+
+
+
+
+
+
+
+Users need the ability to Edit an existing collateral object. 
+
+They should be able to “Right-click” with their mouse on an existing collateral object and select an “Edit” option. 
+This would bring the user back into the creation modal when they first created the object and allow them to make 
+changes and then hit a “Save” button.
+
+
+
+
+
+Users need to have the ability to delete a collateral item. 
+
+Ability to “Right-click” with their mouse on an existing collateral object and select an “Delete” option. 
+
+
+If User clicks on “Delete” and pop-up should appear asking user to confirm that they want to delete this item. 
+(Would have a “Yes” or “Cancel” (No Thanks?) button options.
+
+
+Once user clicks “Yes”, the collateral item would be deleted and would no longer appear on the collateral canvas.
+
+
+
+
+
+
+
+
+NOTE: Once a user has clicked “Yes” to delete the collateral item, ALL links tied to that collateral item will also 
+be removed.
+
+
+
+
+
+
+
+
+
+
+Screenshots of old functionality: (NOTE: These screenshots are of the older version. The 
+new functionality may look similar to this, but will not be exact. This is just for example 
+only.)
+
+Drag and drop functionality:
+
+ 
+
+image-20240508-194936.png 
+
+
+
+Screen mock-up of where data entry would be done when creating a new collateral object after dragging it and 
+dropping it on another object on the collateral canvas:
+
+image-20240508-194713.png 
+
+
+

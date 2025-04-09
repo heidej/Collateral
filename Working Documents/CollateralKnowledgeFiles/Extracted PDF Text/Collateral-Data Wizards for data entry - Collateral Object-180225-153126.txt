@@ -1,0 +1,291 @@
+Data Wizards for data entry - Collateral Object
+
+Business Requirements:
+
+Create smart data wizards to help guide users when they are entering data on objects. These wizards will be used 
+when a user is adding/editing new or existing objects to the collateral canvas. 
+The end goal is that this will make entering data easier by providing a functional flow of entering data fields that 
+makes sense to the user. This feature is basically a “smart walk through” indicating which fields of information are 
+required to complete, and which fields are optional. It should be easy and straightforward for the user, and should NOT 
+make things more difficult or confusing.
+
+
+
+
+Functional Requirements:
+
+Must Have’s:
+
+Data wizards will open when a user selects to create a new object, or when editing an existing object. Objects that 
+should have smart data wizards:
+
+Collateral
+
+
+Security Document (Covered in a separate BRD here (insert link))
+
+
+
+
+
+The data wizard modal/screen will have different panels on the top left indicating key groups of information that are 
+required for creation on an object. (NOTE: these will be different for each different object, and ACA specific as well).
+
+
+Panel Colors and Fields Behavior:
+
+Panels will be color coded to show which are required, which are optional, and what has been completed or is 
+incomplete. If you click INTO a field on a required panel, you will then be forced to fill out all the required fields or 
+exit the wizard. Even if the fields are not filled out immediately, the system will fire an error if a scenario is 
+submitted without all the required fields completed. 
+
+
+Data fields that are REQUIRED will be highlighted in RED. Panel colors descriptions are below:
+
+Orange - Required (Incomplete)
+
+
+Green - Required (Completed)
+
+
+Black - Optional
+
+
+
+
+
+
+
+
+Collateral Object Panel Names and Fields: (Configurable based on if the ACA or outside customer wants this 
+ability)
+
+Panel 1 - Collateral
+
+Fields needed to save the object and display:
+
+Collateral Type (display the collateral type selected and pulled onto the canvas e.g. Real Estate, Machinery & 
+Equipment, Inventory, etal.)
+
+
+Description (text field to label the collateral with a meaningful name to the end user)
+
+
+Market Value (money)
+
+
+NRV % (percent)
+
+
+
+
+
+Other fields that can be entered and may be required
+
+Non-FCS Prior Lien (Money)
+
+
+
+
+
+Added fields when Collateral Type is Real Estate
+
+MV Improvements (Money)
+
+
+FEMA (checkbox)
+
+
+Land in Transition (checkbox)
+
+
+
+
+
+
+
+
+Panel 2 (for all Collateral) – Owners
+
+Collateral Owner
+
+
+
+
+
+
+
+
+
+
+
+Primary Owner (checkbox)
+
+
+Percentage Owned
+
+
+
+
+
+Panel 3 (for all Collateral ) - Appraisal Information
+
+Assessed Method
+
+
+Assessment Name
+
+
+Appraiser
+
+
+Assessment Date
+
+
+Assessment Comments
+
+
+
+
+
+Panel 4 (Real Estate Collateral Only) - Acres, Income, Debt
+
+Acres
+
+
+Income
+
+
+Debt
+
+
+
+
+
+
+
+
+
+
+NOTE: The above list is subject to change based on the FPI ACA or outside company using the Collateral App.
+
+Navigating between tabs - There will be multiple ways for users to navigate between tabs:
+
+User can click the “Next” button on the bottom right of the modal/screen and that will move them to the next 
+numerical tab in the modal.
+
+
+User can click the “Back” button on the bottom right of the modal/screen and that will move them to the previous 
+numerical tab in the modal.
+
+
+User can manually click on another tab to switch to it.
+
+
+User can click the “Continue Later” button. This button will save existing information entered and exit out of the 
+Data Wizard completely. (Ignores validation rules)
+
+
+NOTE: If you click INTO a field on a required panel, you will then be forced to fill out all the required fields or exit 
+the wizard. Even if the fields are not filled out immediately, the system will fire an error if a scenario is 
+submitted without all the required fields completed. 
+
+
+
+
+
+Saving Behavior 
+
+A “Save” on the Data Wizard modal will will be triggered every time a user selects the “Next” OR “Back” button, 
+AND if they manually click on another tab to navigate to.
+
+
+A “Save” will also happen when a user clicks the “Continue Later” button. (This will save entered information and 
+also completely exit the Data Wizard while ignoring validation rules.)
+
+
+
+
+
+Validation Rules
+
+Validation rules for required fields will run every time a “Save” is completed. (“Save” functionality is discussed in 
+section 7 above). A “Save” will be anytime a user clicks the “Next”, “Back” or “Done” buttons, or manually clicks on 
+another tab to navigate to.
+
+This means that every time a user tries to move to another tab, a “Validation then Save” happens. If the 
+required fields were not filled out, an error message will pop up saying “All required fields are not completed”.
+
+Required fields are discussed above in section 5. All required fields should already be highlighted or have a 
+red border around them when the user views a tab.
+
+
+The red border/highlight around required fields will be removed once the user has successfully entered 
+information.
+
+
+
+
+
+
+
+
+NOTE: The “Done” button will run ALL validation rules for the entire Data Wizard tabs, not just the final tab’s fields. 
+
+
+
+
+
+How to Exit the Data Wizard
+
+User can navigate through all the available tabs and enter the required information. Upon completion of required 
+fields in final tab, the user can click the “Done” button. If all required fields are filled out successfully, the Data 
+Wizard will close.
+
+
+After clicking the “Done” button, if validation does NOT pass for all the required fields, an error message will pop up 
+saying “All required fields are not completed”. The user must complete the required highlighted fields and click the 
+“Done” button again. If all validation rules are satisfied, the Data Wizard will close.
+
+
+
+
+
+
+
+
+User can click the “Continue Later” button. This will save any field information already entered, and close out of the 
+Data Wizard. 
+
+As stated above, this function will Save any information entered, ignoring validation rules, and will completely 
+exit the Data Wizard.
+
+
+
+
+
+
+
+
+
+
+Non-Functional Requirements:
+
+TBD
+
+
+
+
+Screenshots of old functionality: (NOTE: These screenshots are of the older version. The 
+new functionality may look similar to this, but will not be exact. This is just for example 
+only.)
+
+ 
+
+image-20240510-202027.png 
+
+
+image-20240510-201844.png 
+
+
+

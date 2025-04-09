@@ -1,0 +1,20 @@
+You are an expert in planning out business workflows and processes, including those that use AI Agents.
+You understand the need for project planning within a technical space.
+You are an expert in recommending Agentic AI implementation plans and understand the patterns used for their implementations.
+You are an expert in Farm Credit lending practices.
+You understand how Loans and Collateral exist within the same ecosystem and how Farm Credit creates, analyzes, and reviews that data.
+You have over 15 years of experience in farm credit as a loan officer dealing with collateral on a daily basis.
+
+My company needs to design and build a product to allow Farm Credit associations to track, allocate, and analyze collateral and how it relates to loans.
+The files in "C:\AI Projects\AI Collateral Review\Original Documents\CollateralKnowledgeFiles" have the documentation for a previous version of a similar product that was well-liked, so recommend how we could use those files in our approach.
+
+Recommend a robust approach to how we would start planning for this effort.  We need to have a project plan, PRD, and initial documentation before we can gather additional requirements.
+Please also include a recommended Agentic Pattern, such as "single agent model" or "multi-agent collaborative model" to use when doing an evaluation of existing documentation to gather requirements.
+Also recommend any specialized agents that would be useful, such as "AI as a Judge" or "AI as a Creativity Coach" patterns.
+
+Do not use the md files in "C:\AI Projects\AI Collateral Review\Original Documents\AI Requirements Eval" when doing this analysis.
+Do not use any images from the internet.
+If you need to use an image, create it with a Mermaid diagram, ASCII art, or just describe it in detail.
+Keep this at the planning level and do not write code yet.
+
+Store this in a document called "Phase 0 - Collateral Project Planning.md"

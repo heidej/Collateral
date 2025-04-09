@@ -1,0 +1,9 @@
+step 0: ask LLM to come up with a plan for executing the project.  Might help to adjust roles and experts.  Design a plan and all that.
+	Have the "manager" watching the execution of the designing compared to the overall plan
+	
+We asked the LLM to create a project plan and work through the various elements of executing a project
+We then had another LLM analyze the planning document and make recommendations based on what it was seeing as missing or needing an update.
+
+Worked through a lot of the details on getting documentation together, ended up having a number of things generated in separate contexts that matched up pretty well, so I'm calling it a success.
+
+We'll move on to actual user story/requirements generation to get things going.

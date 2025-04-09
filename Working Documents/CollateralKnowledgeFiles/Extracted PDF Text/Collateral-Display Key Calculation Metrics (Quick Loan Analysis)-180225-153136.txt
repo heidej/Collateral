@@ -1,0 +1,164 @@
+Display Key Calculation Metrics (Quick Loan Analysis)
+
+Business Requirements:
+
+Create a Quick Loan Analysis feature that will calculate and display key calculation metrics for the loans that are 
+currently in view on the Collateral Visualization Canvas. This feature can be opened or hidden from view by the user. 
+This is essentially a “snapshot” or condensed calculation view of the more in-depth Collateral Analysis Screen. (Insert 
+future Confluence Link here)
+
+
+
+
+Functional Requirements:
+
+Must Have’s:
+
+When first opening the Collateral App, the Quick Loan Analysis modal will be hidden and display as a Link in the 
+bottom right of the screen. The link will say “Quick Analysis”. (See screenshot below)
+
+
+Clicking on that link will open the Quick Loan Analysis calculation modal. This calculation modal will also be displayed 
+on the bottom right of the screen. (See screenshot below)
+
+
+The Quick Loan Analysis box can be closed by clicking the minimize button image-20240530-183219.png 
+
+
+
+Once Quick Loan Analysis box is open, the user can click the “View Collateral Analysis” link that will take them to the 
+full Collateral Analysis Screen. (Insert future Confluence Link here)
+
+
+The Quick Loan Analysis box will display five columns of information:
+
+Loan Number (Name?): This will display the AgWorx loan number
+
+
+Type (Loan Type): This is the Loan Type chosen for the loan 
+
+“LT” = Long Term
+
+
+“IT” = Intermediate Loan
+
+
+“ST” = Short Term
+
+
+
+
+
+Loan Amount: This is the Total Commitment Amount
+
+
+LN/MV: This is a calculation of Loan Amount divided by Market Value of the linked collateral
+
+Loan Amount = Adj. Loan Amount (calculation described below)
+
+
+Market Value = Allocated Market Value (calculation described below)
+
+
+
+
+
+LN/NRV%: This is the calculation of Loan Amount divided by Net Realizable Value (NRV) of the linked collateral
+
+Loan Amount = Adj. Loan Amount (calculation described below)
+
+
+NRV% = Final Adj. NRV Amount (calculation described below)
+
+
+
+
+
+
+
+
+Must Have: Click a button to run calculations and update the values.
+
+Nice to Have: Auto-Update the values in the Quick Loan Analysis as changes are made that will impact calculations.
+
+
+
+
+
+The Quick Loan Analysis will only contain “Open” loans. No “Closed Loans” will be displayed.
+
+
+
+
+Collateral Calculations Overview 
+
+Total Loan Amounts: Summation of all loans in the same position 
+
+
+Market Value: Value of the collateral 
+
+
+Allocation %: Loan Amount (÷) Total Loan Amounts 
+
+
+Allocated Market Value: Market Value (x) Allocation % 
+
+
+Final Adj. NRV Amount: Allocated Market Value (x) NRV% (x) Lien Position % 
+
+
+
+
+Loan Calculations Overview 
+
+Loan Amount: Total Commitment Amount 
+
+
+
+
+
+Adj. Loan Amount: Loan Amount (+) Prior Liens (Non-FCS + FCS) ((FCS = Farm Credit System, Non-FCS is any loan 
+that is not a part of the FCS))
+
+
+Allocated Market Value: Summation of all Allocated Market Value of Collateral 
+
+
+Final Adj. NRV Amount: Summation of all Final Adj. NRV Amount 
+
+
+Loan/MV: Adj. Loan Amount (÷) Allocated Market Value 
+
+
+Loan/NRV: Adj. Loan Amount (÷) Final Adj. NRV Amount
+
+
+
+
+Nice to Have’s:
+
+The loan name/number will be a hyperlink and clicking on it will open that loan up in AgWorx.
+
+
+
+
+Non-Functional Requirements:
+
+TBD
+
+
+
+
+Screenshots of old functionality: (NOTE: These screenshots are of the older version. The 
+new functionality may look similar to this, but will not be exact. This is just for example 
+only.)
+
+Link that will open up Quick Loan Analysis modal:
+
+image-20240530-191016.png 
+
+
+image-20240530-192213.png 
+
+
+

@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web of Liability - Farm Credit Collateral Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00703c;
+            --primary-light: #e6f5ee;
+            --primary-hover: #005c31;
+            --bg-light: #f9fafb;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-teal: #10b981;
+            --white: #ffffff;
+            --border-light: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            
+            /* Entity colors */
+            --loan-color: #ec4899;
+            --realestate-color: #10b981;
+            --account-color: #f59e0b;
+            --equipment-color: #38bdf8;
+            --livestock-color: #a3e635;
+            --legal-color: #8b5cf6;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        /* App Layout */
+        .app-layout {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 240px;
+            background-color: var(--white);
+            height: 100vh;
+            padding-top: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-brand {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-brand img {
+            height: 32px;
+            margin-right: 0.75rem;
+        }
+        
+        .sidebar-brand-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0.5rem 0;
+            flex: 1;
+        }
+        
+        .nav-section {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+            margin-top: 1rem;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            color: var(--text-medium);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            margin: 0 0.5rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        .sidebar-nav a.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .sidebar-nav i {
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        .user-role {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            height: 70px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+        }
+        
+        .breadcrumb li {
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin: 0 0.5rem;
+            color: var(--text-light);
+        }
+        
+        .breadcrumb a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+        
+        .breadcrumb li:last-child {
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar {
+            position: relative;
+            margin-right: 1.5rem;
+        }
+        
+        .search-bar input {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 0.375rem;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            font-size: 0.875rem;
+            width: 300px;
+            transition: all 0.2s;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 112, 60, 0.2);
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .header-actions .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            margin-left: 0.75rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .header-actions .icon-btn:hover {
+            background-color: var(--border-light);
+            color: var(--text-dark);
+        }
+        
+        /* Visualization styles */
+        .web-visualization {
+            cursor: grab;
+        }
+        
+        .web-visualization .node {
+            cursor: grab;
+        }
+        
+        .web-visualization .node-circle {
+            stroke: var(--primary);
+            stroke-width: 2;
+        }
+        
+        .web-visualization .account-circle {
+            fill: var(--account-color);
+        }
+        
+        .web-visualization .loan-circle {
+            fill: var(--loan-color);
+        }
+        
+        .web-visualization .realestate-circle {
+            fill: var(--realestate-color);
+        }
+        
+        .web-visualization .equipment-circle {
+            fill: var(--equipment-color);
+        }
+        
+        .web-visualization .livestock-circle {
+            fill: var(--livestock-color);
+        }
+        
+        .web-visualization .legal-circle {
+            fill: var(--legal-color);
+        }
+        
+        .web-visualization .node-icon {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        
+        .web-visualization .node-label {
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .web-visualization .link {
+            stroke: var(--primary);
+            stroke-width: 1;
+            stroke-opacity: 0.5;
+        }
+        
+        .web-visualization .document-link {
+            stroke: var(--legal-color);
+            stroke-opacity: 0.7;
+        }
+        
+        .web-visualization .high-risk-link {
+            stroke: var(--danger);
+            stroke-opacity: 1;
+            stroke-dasharray: 5,5;
+        }
+        
+        .web-visualization .ownership-link {
+            stroke: var(--primary);
+            stroke-opacity: 0.5;
+        }
+        
+        /* Link position indicator */
+        .lien-position-indicator {
+            fill: white;
+            stroke: var(--primary);
+            stroke-width: 1.5;
+        }
+        
+        .high-risk-link .lien-position-indicator {
+            stroke: var(--danger);
+        }
+        
+        .lien-position-text {
+            font-size: 10px;
+            font-weight: 600;
+            fill: var(--text-dark);
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+        }
+        
+        /* Details panel styles */
+        .details-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            overflow-y: auto;
+            padding: 1.5rem;
+            transition: right 0.3s ease;
+        }
+        
+        .details-panel.open {
+            right: 0;
+        }
+        
+        .details-panel h2 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            padding-right: 30px; /* Add space for the close button */
+        }
+
+        .details-close-btn {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .details-close-btn:hover {
+            background-color: var(--border-light);
+            color: var(--text-dark);
+        }
+
+        .details-close-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .details-panel .details-category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .details-panel .details-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .details-panel .details-label {
+            font-size: 0.875rem;
+            color: var(--text-medium);
+            margin-right: 0.5rem;
+        }
+        
+        .details-panel .details-value {
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        .details-panel .details-status {
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .details-panel .details-status.high-risk {
+            color: var(--danger);
+        }
+        
+        .linked-accounts, .connected-entities {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .linked-account, .connected-entity {
+            display: flex;
+            background-color: rgba(0, 112, 60, 0.05);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            align-items: center;
+        }
+        
+        .account-icon, .entity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .entity-icon.loan-color {
+            background-color: var(--loan-color);
+        }
+        
+        .entity-icon.realestate-color {
+            background-color: var(--realestate-color);
+        }
+        
+        .entity-icon.equipment-color {
+            background-color: var(--equipment-color);
+        }
+        
+        .entity-icon.livestock-color {
+            background-color: var(--livestock-color);
+        }
+        
+        .entity-icon.account-color {
+            background-color: var(--account-color);
+        }
+        
+        .entity-icon.legal-color {
+            background-color: var(--legal-color);
+        }
+        
+        .account-info, .entity-info {
+            flex: 1;
+        }
+        
+        .account-name, .entity-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .account-relationship, .entity-relationship {
+            font-size: 0.875rem;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-style: italic;
+        }
+        
+        .account-details, .entity-details {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-medium);
+        }
+        
+        .no-accounts, .no-entities {
+            color: var(--text-light);
+            font-style: italic;
+            padding: 0.5rem 0;
+        }
+        
+        .connected-entity.high-risk .entity-relationship {
+            color: var(--danger);
+        }
+        
+        .details-panel .connected-entities {
+            margin-top: 1rem;
+        }
+        
+        .details-panel .entity-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        /* Linked Accounts Styles */
+        
+        /* Page Container styles */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 70px);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .page-header {
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .customer-info {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .customer-detail {
+            margin-right: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .customer-detail i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .visualization-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Controls */
+        .controls-panel {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 20;
+            display: flex;
+            background-color: var(--white);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+        }
+        
+        .control-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 0.375rem;
+            background-color: var(--white);
+            color: var(--text-medium);
+            border: 1px solid var(--border-light);
+            margin-right: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .control-button:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        .control-button:last-child {
+            margin-right: 0;
+        }
+        
+        /* Legend */
+        .legend-panel {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 20;
+            background-color: var(--white);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            min-width: 200px;
+        }
+        
+        .legend-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .legend-section {
+            margin-bottom: 1rem;
+        }
+        
+        .legend-section-title {
+            font-weight: 500;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .legend-account {
+            background-color: var(--account-color);
+        }
+        
+        .legend-loan {
+            background-color: var(--loan-color);
+        }
+        
+        .legend-realestate {
+            background-color: var(--realestate-color);
+        }
+        
+        .legend-equipment {
+            background-color: var(--equipment-color);
+        }
+        
+        .legend-livestock {
+            background-color: var(--livestock-color);
+        }
+        
+        .legend-legal {
+            background-color: var(--legal-color);
+        }
+        
+        .legend-text {
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .legend-line {
+            width: 20px;
+            height: 2px;
+            margin-right: 8px;
+        }
+        
+        .legend-normal {
+            background-color: var(--primary);
+            opacity: 0.5;
+        }
+        
+        .legend-document-link {
+            background-color: var(--legal-color);
+            opacity: 0.7;
+        }
+        
+        .legend-high-risk {
+            background-color: var(--danger);
+            opacity: 1;
+            height: 0;
+            border-top: 2px dashed var(--danger);
+        }
+        
+        /* CollBot Styles */
+        .collbot-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px 0 0 8px;
+            padding: 12px 10px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .collbot-toggle i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .collbot-toggle-text {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .collbot-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .collbot-panel.active {
+            right: 0;
+        }
+        
+        .collbot-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .collbot-title {
+            display: flex;
+            align-items: center;
+        }
+        
+        .collbot-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .collbot-icon i {
+            font-size: 1.25rem;
+        }
+        
+        .collbot-info h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .collbot-info p {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .collbot-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+        
+        .collbot-close:hover {
+            color: var(--text-dark);
+        }
+        
+        .collbot-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .collbot-search {
+            margin-bottom: 1.5rem;
+        }
+        
+        .collbot-search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        
+        .collbot-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        .collbot-search-input:focus {
+            outline: none;
+        }
+        
+        .collbot-send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .collbot-send-btn:hover {
+            background-color: #00602f;
+        }
+        
+        .collbot-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .collbot-example {
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            font-size: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .collbot-example:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <img src="https://placehold.co/32x32/00703c/FFFFFF.svg" alt="Logo">
+                <div class="sidebar-brand-text">Farm Credit</div>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <div class="nav-section">Main</div>
+                <li>
+                    <a href="Modern_Dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Search.html">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Web.html" class="active">
+                        <i class="fas fa-project-diagram"></i>
+                        Web of Liability
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_ColForm.html">
+                        <i class="fas fa-file-alt"></i>
+                        Collateral
+                    </a>
+                </li>
+                
+                <div class="nav-section">Management</div>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-users"></i>
+                        Customers
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        Reports
+                    </a>
+                </li>
+                
+                <div class="nav-section">System</div>
+                <li>
+                    <a href="Modern_Admin.html">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        Help Center
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Loan Officer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Customers</a></li>
+                        <li>Web of Liability</li>
+                    </ul>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search for customers, loans, or collateral..." />
+                    </div>
+                    
+                    <button class="icon-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    
+                    <button class="icon-btn">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Page Container -->
+            <div class="page-container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">Web of Liability: Smith Family Farms</h1>
+                    <div class="customer-info">
+                        <div class="customer-detail">
+                            <i class="fas fa-user"></i>
+                            <span>Customer ID: 1024789</span>
+                        </div>
+                        <div class="customer-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Relationship Since: Mar 15, 2010</span>
+                        </div>
+                        <div class="customer-detail">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Entity Type: Family Business</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="visualization-container" class="visualization-container">
+                    <!-- Legend Panel -->
+                    <div class="legend-panel">
+                        <div class="legend-title">Legend</div>
+                        
+                        <!-- Node types -->
+                        <div class="legend-section">
+                            <div class="legend-section-title">Entity Types</div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-loan"></div>
+                                <div class="legend-text">Loan</div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-realestate"></div>
+                                <div class="legend-text">Real Estate</div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-equipment"></div>
+                                <div class="legend-text">Equipment</div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-livestock"></div>
+                                <div class="legend-text">Livestock</div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-legal"></div>
+                                <div class="legend-text">Legal Document</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Relationship types -->
+                        <div class="legend-section">
+                            <div class="legend-section-title">Relationship Types</div>
+                            <div class="legend-item">
+                                <div class="legend-line legend-normal"></div>
+                                <div class="legend-text">Standard Relationship</div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-line legend-document-link"></div>
+                                <div class="legend-text">Legal Document</div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-line legend-high-risk"></div>
+                                <div class="legend-text">High Risk</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Controls Panel -->
+                    <div class="controls-panel">
+                        <button class="control-button" onclick="resetToColumnLayout()" title="Reset Layout">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="control-button" onclick="zoomBy(1.2)" title="Zoom In">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="control-button" onclick="zoomBy(0.8)" title="Zoom Out">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <button class="control-button" onclick="resetZoom()" title="Reset Zoom">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CollBot Panel -->
+        <div class="collbot-panel">
+            <div class="collbot-header">
+                <div class="collbot-title">
+                    <div class="collbot-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="collbot-info">
+                        <h3>CollBot</h3>
+                        <p>Your AI collateral management assistant.</p>
+                    </div>
+                </div>
+                <button class="collbot-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="collbot-body">
+                <div class="collbot-search">
+                    <div class="collbot-search-bar">
+                        <input type="text" class="collbot-search-input" placeholder="Ask CollBot anything...">
+                        <button class="collbot-send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="collbot-examples">
+                    <span class="collbot-example">Explain the connection between these entities</span>
+                    <span class="collbot-example">Identify high-risk connections</span>
+                    <span class="collbot-example">How are loans secured in this web?</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CollBot Toggle -->
+        <div class="collbot-toggle">
+            <i class="fas fa-robot"></i>
+            <div class="collbot-toggle-text">CollBot</div>
+        </div>
+    </div>
+
+    <div id="details-panel" class="details-panel">
+        <button id="details-close-btn" class="details-close-btn" aria-label="Close details"><i class="fas fa-times"></i></button>
+        <h2 id="details-title"></h2>
+        <div id="details-content"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the visualization
+            createVisualization();
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                updateVisualization();
+            });
+            
+            // CollBot toggle functionality
+            const collbotToggle = document.querySelector('.collbot-toggle');
+            const collbotPanel = document.querySelector('.collbot-panel');
+            
+            collbotToggle.addEventListener('click', function() {
+                collbotPanel.classList.toggle('active');
+            });
+            
+            // CollBot close button functionality
+            const collbotClose = document.querySelector('.collbot-close');
+            
+            collbotClose.addEventListener('click', function() {
+                collbotPanel.classList.remove('active');
+            });
+        });
+        
+        // Main container for the visualization
+        let svg, container, simulation, links, nodes;
+        let nodeData = [];
+        let linkData = [];
+        let zoomLevel = 1;
+        
+        // Account data - stored separately from visualization nodes
+        const accountData = [
+            { id: 'A1', name: 'Smith Family Farms', type: 'account', subtype: 'Business', customerId: '1024789', relationshipSince: '2010-03-15', contact: 'John Smith' },
+            { id: 'A2', name: 'Smith Agricultural LLC', type: 'account', subtype: 'LLC', customerId: '1024790', relationshipSince: '2015-07-22', contact: 'Jane Smith' }
+        ];
+        
+        // Account to collateral/loan mappings
+        const accountMappings = [
+            { accountId: 'A1', entityId: 'RE1', relationship: 'owns' },
+            { accountId: 'A1', entityId: 'RE2', relationship: 'owns' },
+            { accountId: 'A1', entityId: 'RE3', relationship: 'owns' },
+            { accountId: 'A1', entityId: 'EQ1', relationship: 'owns' },
+            { accountId: 'A1', entityId: 'EQ2', relationship: 'owns' },
+            { accountId: 'A1', entityId: 'LS1', relationship: 'owns' },
+            { accountId: 'A1', entityId: 'L1', relationship: 'borrower' },
+            { accountId: 'A1', entityId: 'L2', relationship: 'borrower' },
+            { accountId: 'A1', entityId: 'L3', relationship: 'borrower' },
+            // Link legal documents to accounts based on their associated loans
+            { accountId: 'A1', entityId: 'D1', relationship: 'legal holder' },
+            { accountId: 'A1', entityId: 'D2', relationship: 'legal holder' },
+            { accountId: 'A1', entityId: 'D3', relationship: 'legal holder' },
+            { accountId: 'A1', entityId: 'D4', relationship: 'legal holder' },
+            { accountId: 'A2', entityId: 'RE4', relationship: 'owns' },
+            { accountId: 'A2', entityId: 'RE5', relationship: 'owns' },
+            { accountId: 'A2', entityId: 'EQ3', relationship: 'owns' },
+            { accountId: 'A2', entityId: 'LS2', relationship: 'owns' },
+            { accountId: 'A2', entityId: 'EQ4', relationship: 'owns' },
+            { accountId: 'A2', entityId: 'L4', relationship: 'borrower' },
+            { accountId: 'A2', entityId: 'L5', relationship: 'borrower' },
+            { accountId: 'A2', entityId: 'L6', relationship: 'borrower' },
+            // Link legal documents to accounts based on their associated loans
+            { accountId: 'A2', entityId: 'D5', relationship: 'legal holder' },
+            { accountId: 'A2', entityId: 'D6', relationship: 'legal holder' },
+            { accountId: 'A2', entityId: 'D7', relationship: 'legal holder' },
+            { accountId: 'A2', entityId: 'D8', relationship: 'legal holder' }
+        ];
+        
+        // Function to show details panel
+        function showDetailsPanel(node) {
+            const detailsPanel = document.getElementById('details-panel');
+            const detailsTitle = document.getElementById('details-title');
+            const detailsContent = document.getElementById('details-content');
+            
+            // Set details panel title and content based on node type
+            detailsTitle.textContent = node.name;
+            let content = `<div class="details-category ${node.type}-category">${node.type}</div>`;
+            
+            if (node.type === 'loan') {
+                content += `
+                    <div class="details-item">
+                        <div class="details-label">Loan Number:</div>
+                        <div class="details-value">${node.id}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Type:</div>
+                        <div class="details-value">${node.subtype}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Amount:</div>
+                        <div class="details-value">$${node.amount.toLocaleString()}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Origination Date:</div>
+                        <div class="details-value">${node.originationDate}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Maturity Date:</div>
+                        <div class="details-value">${node.maturityDate}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Status:</div>
+                        <div class="details-value details-status ${node.status.toLowerCase()}">${node.status}</div>
+                    </div>
+                `;
+            } else if (node.type === 'realestate') {
+                content += `
+                    <div class="details-item">
+                        <div class="details-label">Type:</div>
+                        <div class="details-value">${node.subtype}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Size:</div>
+                        <div class="details-value">${node.size}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Location:</div>
+                        <div class="details-value">${node.location}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Appraised Value:</div>
+                        <div class="details-value">$${node.value.toLocaleString()}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Last Appraisal:</div>
+                        <div class="details-value">${node.lastAppraisal}</div>
+                    </div>
+                `;
+            } else if (node.type === 'equipment' || node.type === 'livestock') {
+                content += `
+                    <div class="details-item">
+                        <div class="details-label">Description:</div>
+                        <div class="details-value">${node.description}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Value:</div>
+                        <div class="details-value">$${node.value.toLocaleString()}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Acquisition Date:</div>
+                        <div class="details-value">${node.acquisitionDate}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Condition:</div>
+                        <div class="details-value">${node.condition}</div>
+                    </div>
+                `;
+            } else if (node.type === 'account') {
+                content += `
+                    <div class="details-item">
+                        <div class="details-label">Account Number:</div>
+                        <div class="details-value">${node.accountNumber}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Type:</div>
+                        <div class="details-value">${node.subtype}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Balance:</div>
+                        <div class="details-value">$${node.value.toLocaleString()}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Open Date:</div>
+                        <div class="details-value">${node.openDate}</div>
+                    </div>
+                `;
+            } else if (node.type === 'legal') {
+                content += `
+                    <div class="details-item">
+                        <div class="details-label">Document Type:</div>
+                        <div class="details-value">${node.documentType}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Execution Date:</div>
+                        <div class="details-value">${node.executionDate}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Expiration Date:</div>
+                        <div class="details-value">${node.expirationDate}</div>
+                    </div>
+                    <div class="details-item">
+                        <div class="details-label">Status:</div>
+                        <div class="details-value details-status ${node.status.toLowerCase()}">${node.status}</div>
+                    </div>
+                `;
+            }
+            
+            // Add linked accounts section
+            content += `<h3 class="details-section-title">Linked Accounts</h3>`;
+            content += `<div class="linked-accounts">`;
+            
+            // Find linked accounts
+            const linkedAccounts = accountMappings
+                .filter(mapping => mapping.entityId === node.id)
+                .map(mapping => {
+                    const account = accountData.find(a => a.id === mapping.accountId);
+                    return {
+                        account: account,
+                        relationship: mapping.relationship
+                    };
+                });
+            
+            if (linkedAccounts.length > 0) {
+                linkedAccounts.forEach(linked => {
+                    content += `
+                        <div class="linked-account">
+                            <div class="account-icon"><i class="fas fa-user"></i></div>
+                            <div class="account-info">
+                                <div class="account-name">${linked.account.name}</div>
+                                <div class="account-relationship">${linked.relationship} this ${node.type}</div>
+                                <div class="account-details">
+                                    <span>ID: ${linked.account.customerId}</span>
+                                    <span>Since: ${linked.account.relationshipSince}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                content += `<div class="no-accounts">No linked accounts found</div>`;
+            }
+            
+            content += `</div>`;
+            
+            // Add connected entities section
+            content += `<h3 class="details-section-title">Connected Entities</h3>`;
+            content += `<div class="connected-entities">`;
+            
+            // Find connected nodes
+            linkData.forEach(link => {
+                let connectedNode;
+                let linkType;
+                let lienPositionText = '';
+                
+                if (link.source.id === node.id) {
+                    connectedNode = link.target;
+                    linkType = 'secures';
+                    if (link.lienPosition && link.lienPosition > 1) {
+                        lienPositionText = ` (Lien Position: ${link.lienPosition})`;
+                    }
+                } else if (link.target.id === node.id) {
+                    connectedNode = link.source;
+                    if (connectedNode.type === 'loan' && node.type === 'legal') {
+                        linkType = 'documented by';
+                    } else if (connectedNode.type === 'legal' && (node.type === 'realestate' || node.type === 'equipment' || node.type === 'livestock')) {
+                        linkType = 'secured by';
+                    } else {
+                        linkType = 'secured by';
+                    }
+                    if (link.lienPosition && link.lienPosition > 1) {
+                        lienPositionText = ` (Lien Position: ${link.lienPosition})`;
+                    }
+                } else {
+                    return; // Skip if not connected to this node
+                }
+                
+                let riskClass = link.isHighRisk ? 'high-risk' : '';
+                let amount = link.amount ? `$${link.amount.toLocaleString()}` : '';
+                
+                // Select appropriate icon based on entity type
+                let typeIcon = 'fa-circle';
+                
+                if (connectedNode.type === 'loan') {
+                    typeIcon = 'fa-file-invoice-dollar';
+                } else if (connectedNode.type === 'realestate') {
+                    typeIcon = 'fa-home';
+                } else if (connectedNode.type === 'equipment') {
+                    typeIcon = 'fa-tractor';
+                } else if (connectedNode.type === 'livestock') {
+                    typeIcon = 'fa-cow';
+                } else if (connectedNode.type === 'account') {
+                    typeIcon = 'fa-user';
+                } else if (connectedNode.type === 'legal') {
+                    typeIcon = 'fa-file-alt';
+                }
+                
+                content += `
+                    <div class="connected-entity ${riskClass}">
+                        <div class="entity-icon ${connectedNode.type}-color"><i class="fas ${typeIcon}"></i></div>
+                        <div class="entity-info">
+                            <div class="entity-name">${connectedNode.name}</div>
+                            <div class="entity-relationship">${linkType}${lienPositionText}</div>
+                            <div class="entity-details">
+                                <span>Type: ${connectedNode.type}</span>
+                                ${amount ? `<span>Amount: ${amount}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            content += `</div>`;
+            
+            detailsContent.innerHTML = content;
+            detailsPanel.classList.add('open');
+        }
+        
+        // Function to hide details panel
+        function hideDetailsPanel() {
+            const detailsPanel = document.getElementById('details-panel');
+            detailsPanel.classList.remove('open');
+        }
+
+        // Add event listener for close button
+        document.getElementById('details-close-btn').addEventListener('click', hideDetailsPanel);
+        
+        // Function to update the visualization based on current container size
+        function updateVisualization() {
+            if (svg) {
+                const visualizationContainer = document.getElementById('visualization-container');
+                const width = visualizationContainer.clientWidth;
+                const height = visualizationContainer.clientHeight;
+                
+                svg.attr('width', width)
+                   .attr('height', height);
+                
+                // Restart simulation with new dimensions
+                simulation.alpha(0.3).restart();
+            }
+        }
+        
+        // Function to update node positions
+        function updateNodePositions() {
+            nodes.attr('transform', d => `translate(${d.x}, ${d.y})`);
+        }
+        
+        // Function to update link positions
+        function updateLinkPositions() {
+            links.attr('x1', d => d.source.x)
+                 .attr('y1', d => d.source.y)
+                 .attr('x2', d => d.target.x)
+                 .attr('y2', d => d.target.y);
+                 
+            // Update lien position indicators
+            d3.selectAll('.lien-position-group')
+                .attr('transform', d => {
+                    const midX = (d.source.x + d.target.x) / 2;
+                    const midY = (d.source.y + d.target.y) / 2;
+                    return `translate(${midX}, ${midY})`;
+                });
+        }
+        
+        // Function to create the visualization
+        function createVisualization() {
+            // Sample data
+            nodeData = [
+                // Loans
+                { id: 'L1', name: 'Loan #LC-2023-045', type: 'loan', amount: 350000, subtype: 'Long Term', originationDate: '2023-02-10', maturityDate: '2038-02-10', status: 'Active', x: 100, y: 50 },
+                { id: 'L2', name: 'Loan #LC-2023-078', type: 'loan', amount: 220000, subtype: 'Intermediate Term', originationDate: '2023-03-05', maturityDate: '2030-03-05', status: 'Active', x: 100, y: 120 },
+                { id: 'L3', name: 'Loan #LC-2023-091', type: 'loan', amount: 75000, subtype: 'Short Term', originationDate: '2023-05-20', maturityDate: '2025-05-20', status: 'Active', x: 100, y: 190 },
+                { id: 'L4', name: 'Loan #LC-2023-103', type: 'loan', amount: 430000, subtype: 'Long Term', originationDate: '2024-01-15', maturityDate: '2039-01-15', status: 'Active', x: 100, y: 260 },
+                { id: 'L5', name: 'Loan #LC-2023-118', type: 'loan', amount: 175000, subtype: 'Intermediate Term', originationDate: '2024-02-18', maturityDate: '2031-02-18', status: 'Active', x: 100, y: 330 },
+                { id: 'L6', name: 'Loan #LC-2023-129', type: 'loan', amount: 255000, subtype: 'Operating', originationDate: '2024-03-01', maturityDate: '2026-03-01', status: 'Active', x: 100, y: 400 },
+                
+                // Legal Documents
+                { id: 'D1', name: 'Security Agreement #SA-001', type: 'legal', documentType: 'Security Agreement', executionDate: '2023-02-10', expirationDate: '2038-02-10', status: 'Active', x: 250, y: 50 },
+                { id: 'D2', name: 'Trust Agreement #TA-002', type: 'legal', documentType: 'Trust Agreement', executionDate: '2023-03-05', expirationDate: '2030-03-05', status: 'Active', x: 250, y: 120 },
+                { id: 'D3', name: 'Security Agreement #SA-003', type: 'legal', documentType: 'Security Agreement', executionDate: '2023-03-05', expirationDate: '2030-03-05', status: 'Active', x: 250, y: 190 },
+                { id: 'D4', name: 'Security Agreement #SA-004', type: 'legal', documentType: 'Security Agreement', executionDate: '2023-05-20', expirationDate: '2025-05-20', status: 'Active', x: 250, y: 230 },
+                { id: 'D5', name: 'Trust Agreement #TA-005', type: 'legal', documentType: 'Trust Agreement', executionDate: '2024-01-15', expirationDate: '2039-01-15', status: 'Active', x: 250, y: 280 },
+                { id: 'D6', name: 'UCC Filing #UCC-006', type: 'legal', documentType: 'UCC Filing', executionDate: '2024-01-15', expirationDate: '2029-01-15', status: 'Active', x: 250, y: 330 },
+                { id: 'D7', name: 'Security Agreement #SA-007', type: 'legal', documentType: 'Security Agreement', executionDate: '2024-02-18', expirationDate: '2031-02-18', status: 'Active', x: 250, y: 370 },
+                { id: 'D8', name: 'UCC Filing #UCC-008', type: 'legal', documentType: 'UCC Filing', executionDate: '2024-03-01', expirationDate: '2029-03-01', status: 'Active', x: 250, y: 430 },
+                
+                // Real Estate
+                { id: 'RE1', name: 'Davis Farm', type: 'realestate', subtype: 'Agricultural Land', size: '120 Acres', location: 'North County', value: 450000, lastAppraisal: '2023-08-10', x: 400, y: 50 },
+                { id: 'RE2', name: 'Johnson Property', type: 'realestate', subtype: 'Agricultural Land', size: '85 Acres', location: 'South County', value: 250000, lastAppraisal: '2023-09-15', x: 400, y: 120 },
+                { id: 'RE3', name: 'Smith Commercial Building', type: 'realestate', subtype: 'Commercial', size: '15,000 sq ft', location: 'Main Street', value: 675000, lastAppraisal: '2023-10-05', x: 400, y: 190 },
+                { id: 'RE4', name: 'Taylor Warehouse', type: 'realestate', subtype: 'Commercial', size: '8,000 sq ft', location: 'Industrial Park', value: 380000, lastAppraisal: '2023-11-20', x: 400, y: 260 },
+                { id: 'RE5', name: 'Wilson Land', type: 'realestate', subtype: 'Residential', size: '2 Acres', location: 'Westview', value: 200000, lastAppraisal: '2023-12-05', x: 400, y: 330 },
+                
+                // Equipment
+                { id: 'EQ1', name: 'Tractor (John Deere)', type: 'equipment', subtype: 'Farm Equipment', value: 125000, acquisitionDate: '2022-05-15', condition: 'Excellent', x: 550, y: 120 },
+                { id: 'EQ2', name: 'Combine Harvester', type: 'equipment', subtype: 'Farm Equipment', value: 210000, acquisitionDate: '2021-07-22', condition: 'Good', x: 550, y: 190 },
+                { id: 'EQ3', name: 'Grain Silo', type: 'equipment', subtype: 'Storage', value: 85000, acquisitionDate: '2023-03-10', condition: 'Excellent', x: 550, y: 260 },
+                { id: 'EQ4', name: 'Irrigation System', type: 'equipment', subtype: 'Farm Equipment', value: 65000, acquisitionDate: '2022-09-05', condition: 'Good', x: 550, y: 330 },
+                
+                // Livestock
+                { id: 'LS1', name: 'Cattle Herd (50 head)', type: 'livestock', subtype: 'Cattle', value: 130000, acquisitionDate: 'Various', condition: 'Healthy', x: 700, y: 190 },
+                { id: 'LS2', name: 'Poultry Operation', type: 'livestock', subtype: 'Poultry', value: 95000, acquisitionDate: 'Various', condition: 'Healthy', x: 700, y: 260 },
+                
+                // Accounts
+                { id: 'AC1', name: 'Davis Checking Account', type: 'account', subtype: 'Checking', value: 75000, accountNumber: '1234567890', openDate: '2010-06-15', x: 850, y: 50 },
+                { id: 'AC2', name: 'Johnson Savings Account', type: 'account', subtype: 'Savings', value: 120000, accountNumber: '0987654321', openDate: '2015-03-22', x: 850, y: 120 },
+                { id: 'AC3', name: 'Smith Business Account', type: 'account', subtype: 'Business Checking', value: 230000, accountNumber: '5432167890', openDate: '2018-11-05', x: 850, y: 190 }
+            ];
+            
+            linkData = [
+                // Loan to Legal Document relationships
+                { source: 'L1', target: 'D1', type: 'document', isHighRisk: false },
+                { source: 'L2', target: 'D2', type: 'document', isHighRisk: false },
+                { source: 'L2', target: 'D3', type: 'document', isHighRisk: false },
+                { source: 'L3', target: 'D4', type: 'document', isHighRisk: false },
+                { source: 'L4', target: 'D5', type: 'document', isHighRisk: true },
+                { source: 'L4', target: 'D6', type: 'document', isHighRisk: false },
+                { source: 'L5', target: 'D7', type: 'document', isHighRisk: false },
+                { source: 'L6', target: 'D8', type: 'document', isHighRisk: true },
+                
+                // Legal Document to Collateral relationships
+                { source: 'D1', target: 'RE1', type: 'collateral', amount: 350000, isHighRisk: true, lienPosition: 1 },
+                { source: 'D2', target: 'RE2', type: 'collateral', amount: 125000, isHighRisk: false, lienPosition: 2 },
+                { source: 'D3', target: 'EQ1', type: 'collateral', amount: 95000, isHighRisk: false, lienPosition: 1 },
+                { source: 'D4', target: 'LS1', type: 'collateral', amount: 75000, isHighRisk: false, lienPosition: 3 },
+                { source: 'D5', target: 'RE3', type: 'collateral', amount: 280000, isHighRisk: true, lienPosition: 1 },
+                { source: 'D6', target: 'EQ2', type: 'collateral', amount: 150000, isHighRisk: false, lienPosition: 2 },
+                { source: 'D7', target: 'RE4', type: 'collateral', amount: 110000, isHighRisk: false, lienPosition: 1 },
+                { source: 'D7', target: 'EQ3', type: 'collateral', amount: 65000, isHighRisk: false, lienPosition: 1 },
+                { source: 'D8', target: 'RE5', type: 'collateral', amount: 90000, isHighRisk: false, lienPosition: 2 },
+                { source: 'D8', target: 'LS2', type: 'collateral', amount: 120000, isHighRisk: true, lienPosition: 1 },
+                { source: 'D8', target: 'EQ4', type: 'collateral', amount: 45000, isHighRisk: false, lienPosition: 3 }
+            ];
+            
+            // Convert string IDs to node references
+            const nodeMap = {};
+            nodeData.forEach(node => {
+                nodeMap[node.id] = node;
+            });
+            
+            linkData = linkData.map(link => {
+                return {
+                    source: nodeMap[link.source],
+                    target: nodeMap[link.target],
+                    type: link.type,
+                    amount: link.amount,
+                    isHighRisk: link.isHighRisk,
+                    lienPosition: link.lienPosition
+                };
+            });
+            
+            // Get the visualization container dimensions
+            const visualizationContainer = document.getElementById('visualization-container');
+            const width = visualizationContainer.clientWidth;
+            const height = visualizationContainer.clientHeight;
+            
+            // Create SVG container
+            svg = d3.select('#visualization-container')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .attr('class', 'web-visualization');
+            
+            // Create zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.1, 3])
+                .on('zoom', zoomed);
+            
+            svg.call(zoom);
+            
+            // Create container for the visualization that will be transformed by zoom
+            container = svg.append('g')
+                .attr('class', 'container');
+            
+            // Create links
+            links = container.append('g')
+                .attr('class', 'links')
+                .selectAll('line')
+                .data(linkData)
+                .enter()
+                .append('line')
+                .attr('class', d => {
+                    let classes = `link ${d.type}-link`;
+                    if (d.isHighRisk) classes += ' high-risk-link';
+                    return classes;
+                })
+                .attr('stroke-dasharray', d => d.isHighRisk ? '5,5' : null);
+            
+            // Create lien position indicators (for positions > 1 only)
+            const lienPositionGroups = container.append('g')
+                .attr('class', 'lien-indicators')
+                .selectAll('.lien-position-group')
+                .data(linkData.filter(d => d.lienPosition > 1))
+                .enter()
+                .append('g')
+                .attr('class', d => {
+                    let classes = 'lien-position-group';
+                    if (d.isHighRisk) classes += ' high-risk';
+                    return classes;
+                })
+                .attr('transform', d => {
+                    const midX = (d.source.x + d.target.x) / 2;
+                    const midY = (d.source.y + d.target.y) / 2;
+                    return `translate(${midX}, ${midY})`;
+                });
+            
+            lienPositionGroups.append('circle')
+                .attr('r', 8)
+                .attr('class', 'lien-position-indicator');
+            
+            lienPositionGroups.append('text')
+                .attr('class', 'lien-position-text')
+                .text(d => d.lienPosition);
+            
+            // Create nodes
+            const nodeGroups = container.append('g')
+                .attr('class', 'nodes')
+                .selectAll('g')
+                .data(nodeData)
+                .enter()
+                .append('g')
+                .attr('class', d => `node ${d.type}-node`)
+                .call(d3.drag()
+                    .on('start', dragStarted)
+                    .on('drag', dragged)
+                    .on('end', dragEnded))
+                .on('click', (event, d) => {
+                    event.stopPropagation();
+                    showDetailsPanel(d);
+                });
+            
+            // Add node circles
+            nodeGroups.append('circle')
+                .attr('r', 15)
+                .attr('class', d => `node-circle ${d.type}-circle`);
+            
+            // Add node icons
+            nodeGroups.append('text')
+                .attr('class', 'node-icon')
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', 'central')
+                .attr('font-family', 'FontAwesome')
+                .text(d => {
+                    switch(d.type) {
+                        case 'loan': return '\uf09d'; // Credit card icon
+                        case 'realestate': return '\uf015'; // Home icon
+                        case 'equipment': return '\uf1b9'; // Car icon
+                        case 'livestock': return '\uf6d7'; // Cow icon
+                        case 'legal': return '\uf0f6'; // File icon
+                        default: return '\uf111'; // Circle icon
+                    }
+                });
+            
+            // Add node labels
+            nodeGroups.append('text')
+                .attr('class', 'node-label')
+                .attr('y', 25)
+                .attr('text-anchor', 'middle')
+                .text(d => d.name);
+            
+            // Setup force simulation
+            simulation = d3.forceSimulation(nodeData)
+                .force('link', d3.forceLink(linkData).id(d => d.id).distance(150))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collide', d3.forceCollide().radius(50))
+                .on('tick', tick);
+            
+            // Layout in columns by type
+            resetToColumnLayout();
+            
+            // Update positions on tick
+            function tick() {
+                updateNodePositions();
+                updateLinkPositions();
+            }
+            
+            // Setup click outside to close details panel
+            svg.on('click', () => {
+                hideDetailsPanel();
+            });
+            
+            nodes = container.selectAll('.node');
+        }
+        
+        // Function to reset nodes to column layout
+        function resetToColumnLayout() {
+            const visualizationContainer = document.getElementById('visualization-container');
+            const width = visualizationContainer.clientWidth;
+            const height = visualizationContainer.clientHeight;
+            
+            // Define column positions and spacing
+            const padding = 100;
+            const columnCount = 5;
+            const columnWidth = (width - (padding * 2)) / columnCount;
+            
+            // Group nodes by type
+            const nodesByType = {
+                loan: nodeData.filter(d => d.type === 'loan'),
+                legal: nodeData.filter(d => d.type === 'legal'),
+                realestate: nodeData.filter(d => d.type === 'realestate'),
+                equipment: nodeData.filter(d => d.type === 'equipment' || d.type === 'livestock')
+            };
+            
+            // Position each node in its column
+            const columnTypes = ['loan', 'legal', 'realestate', 'equipment'];
+            
+            columnTypes.forEach((type, columnIndex) => {
+                const nodesInColumn = nodesByType[type];
+                const columnCenterX = padding + (columnWidth * columnIndex) + (columnWidth / 2);
+                
+                nodesInColumn.forEach((node, nodeIndex) => {
+                    const rowHeight = height / (nodesInColumn.length + 1);
+                    node.fx = columnCenterX;
+                    node.fy = (nodeIndex + 1) * rowHeight;
+                });
+            });
+            
+            // Update simulation
+            simulation.alpha(0.3).restart();
+        }
+        
+        // Function for zoom events
+        function zoomed(event) {
+            container.attr('transform', event.transform);
+            zoomLevel = event.transform.k;
+        }
+        
+        // Function to zoom in/out
+        function zoomBy(factor) {
+            const visualizationContainer = document.getElementById('visualization-container');
+            const width = visualizationContainer.clientWidth;
+            const height = visualizationContainer.clientHeight;
+            
+            const transform = d3.zoomIdentity
+                .translate(width / 2, height / 2)
+                .scale(factor)
+                .translate(-width / 2, -height / 2);
+            
+            svg.transition()
+                .duration(500)
+                .call(svg.zoom().transform, transform);
+        }
+        
+        // Function to reset zoom
+        function resetZoom() {
+            svg.transition()
+                .duration(500)
+                .call(svg.zoom().transform, d3.zoomIdentity);
+        }
+        
+        // Drag functions
+        function dragStarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+            updateConnectedLinks(d);
+        }
+        
+        function dragEnded(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            // Keep the node fixed at its new position
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        // Function to update connected links during dragging
+        function updateConnectedLinks(node) {
+            links.filter(link => link.source === node || link.target === node)
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+        }
+    </script>
+</body>
+</html>

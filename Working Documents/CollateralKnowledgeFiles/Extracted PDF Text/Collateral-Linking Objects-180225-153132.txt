@@ -1,0 +1,174 @@
+Linking Objects
+
+ Business Requirements:
+
+There needs to be dotted lines displayed on the Collateral Visualization Canvas that visually shows which objects are 
+linked together. These links will visually represent the Collateral Web of Liability Canvas for the customer or 
+relationship the user is viewing.
+
+
+Links between objects can be manually created by clicking a link icon and dragging it to another object, or by 
+dragging a new object from the side navigation menu onto an existing object. (Restricted to linking rules)
+
+
+Links between objects need to be editable (updated/deleted).
+
+
+
+
+Functional Requirements:
+
+Must Have’s (Basic Linking Functionality):
+
+To link an object to another object, click on the image-20240529-200731.png 
+link icon and drag it to the other object.
+
+
+When user is dragging the link to an object, highlight valid choices with an outline around the objects that can be 
+linked to.
+
+
+What objects can be linked to each other:
+
+Loan > Security Document and Collateral
+
+
+Security Document > Loan and Collateral (UCC’s are on backlog list)
+
+
+Collateral Object > Loan, Security Document, Collateral Detail and Customer
+
+
+Collateral Detail > Collateral and (Customer??) (NOTE: This link will be created automatically based on underlying 
+data and will not be user created)
+
+
+Customer > Loan and (Collateral Detail??) (NOTE: This link will be created automatically based on underlying data 
+and will not be user created)
+
+
+
+
+
+There are invalid choices that users cannot link objects to. Trying to link to an invalid object will result in a image-20240529-200632.png 
+sign 
+letting the users know that they cannot link those two objects together.
+
+
+Unperfected Collateral - Loans must be linked to a Security Document AND a piece of collateral. When a user links a 
+loan directly to a piece of collateral without also linking to a security document, the line linking the two objects will 
+appear as a red dotted line. (See screenshot below)
+
+
+
+
+Must Have’s (Deleting Links): 
+
+Users need to be able to delete a link between objects. To delete a link, users should click on the link to select it which 
+will turn the black dotted line to a red line. Users will then right click on the red line/link and a pop-up menu will then 
+appear allowing you to choose to “Delete” or “Update Relationship”. Users would select “Delete” and the link will 
+disappear.
+
+User can delete a line between Loan, Security Document, and Collateral.
+
+
+
+
+
+
+
+Must Have’s (Updating Links Lien and AOC designation): 
+
+Users should be able to update or delete the link relationship using the “Update Relationship” function. Users would 
+follow steps in FR5 above and select the “Update Relationship” button. Once there, eligible relationship updates will 
+be:
+NOTE: Lien position is ONLY editable between the Security Document and Collateral Objects
+
+Abundance of Caution (AOC) flag checkbox
+
+If this is selected, a white icon with the designated “A” will be displayed on that link.
+
+
+
+
+
+Lien Positions
+
+
+
+
+
+
+
+
+Users have the ability to manually change the lien position on a link between the Collateral and Security 
+Document object.
+
+
+If a lien designation other than First Position is entered, such as 2nd, a white icon with the designation “2” will 
+be displayed on that link. 
+
+
+NOTE: The link between the Collateral object and Security Document object will always default to “First Lien” 
+position as long as the Collateral is NOT tied to another existing Security Document object. If the Collateral is 
+already being secured under a First Lien position, then the system will assume a Second Lien Position on this 
+new Security Document. but the user can change that also.
+
+
+
+
+
+Lien Position and Abundance of Caution designations can be combined. When this happens, a white circle will be 
+displayed on that link such as “2A”, which stands for 2nd lien position AND Abundance of Caution.
+
+
+
+
+
+
+
+Nice to Have’s:
+
+Pinning an object to focus only on related items. Dotted lines will appear as solid lines connecting the linked objects.
+
+
+
+
+Non-Functional Requirements:
+
+TBD
+
+
+
+
+Screenshots of old functionality: (NOTE: These screenshots are of the older version. The 
+new functionality may look similar to this, but will not be exact. This is just for example 
+only.)
+
+Screenshot of a highlighted valid object when trying to link objects together:
+
+image-20240529-212004.png
+Screenshot of what it looks like trying to link objects that can’t be linked:
+
+image-20240529-211748.png
+Editing lien position and Abundance of Caution checkbox on “Update Relationship” screen:
+
+
+image-20240529-210814.png
+Deleting a link between objects. Note the “Red” line currently selected:
+
+image-20240529-211239.png
+Display indicators on links between Collateral and Security Document objects. This link indicates a 2nd lien position and 
+AOC (Abundance of caution):
+
+image-20240529-212535.png
+
+This is what a loan link looks like that is incorrectly linked directly to a piece of collateral WITHOUT linking to a security 
+document:
+
+ 
+
+image-20240618-144421.png 
+
+
+

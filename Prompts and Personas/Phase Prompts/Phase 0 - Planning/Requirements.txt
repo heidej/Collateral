@@ -1,0 +1,85 @@
+If you want to create an image, do not use images from the internet.  Instead, use ASCII art, mermaid diagrams, or describe the concept with words.  Do not use any images from outside sources.
+
+The below content contains requirements for a collateral application for Farm Credit.  As experts in Farm Credit and how collateral is used within that ecosystem, we need recommendations on how to build a collateral product.    There are some additional prompt details in the file that should help.  We want to make sure that we incorporate using agents to make users' lives easier and add automation, so please rely on the AI Designer for that input.
+
+I am trying to create solution for collateral analysis for users within a farm credit association
+The audience for the app is the staff at the farm credit association, referred to as users
+When we refer to customers, they are the borrowers who have loan and collateral details currently in an existing system
+Customers do not have any access to this solution
+A record is the set of details stored in the database about the collateral, account, or loan
+The solution should integrate with an existing database to retrieve loan and account data
+There will be calculations performed that are specific to each farm credit association
+There are certain features that are required, including:
+-Users should be able to create new collateral records
+-Users should be able to edit collateral records
+-Users should not be able to edit loan records or account records shown in the solution
+-Users should be able to link new collateral records to existing loan records
+-Users should be able to search for existing collateral records
+-Users should be able to see a visual representation of the loans and collateral associated with an account
+-Users should be able to see a web of liability for customers
+-Users should be able to simulate changes to collateral allocations to loans to see what effect the change would have on the web of liability
+-Users should be able to create reports on data within the solution
+
+The system key value determinations of market value and net realizable value (NRV)
+
+Appraisal methods supported include comparable market valuation, benchmark per acre valuations, and income-based methodologies
+
+Associations can establish net realizable value rules by collateral type or other attributes
+
+Users should be able to set lien positions of loans against collateral
+
+Association may have custom NRV rules based on lien position and whether the prior lien holder is a Farm Credit entity or an outside lender
+
+The system records census tract, flood map, water district, etc. GIS type information and allows monitoring / reporting based on that information
+
+Users can import and/or enter collateral information germane to property tax information and integration with escrow reporting is supported
+
+Specifically authorized users can perform Portfolio valuation updates can be done based on benchmark valuation updates and applied to all related collateral properties, which in turn updates the related L/AV, L/NRV, and LGD calculations
+
+Users can generate a report for internal use that may include information that is not presented to the customers (e.g., NRV methodologies)
+
+Users can generate a report for external sharing with the customers that is formatted differently than the internal report
+
+Users should be able to generate an appraisal update request and initiate a workflow request
+
+Authorized Users should be able to perform portfolio level efficiency and bottleneck analysis of collateral updates, time to market, accuracy, etc.
+
+Mapping related data integration (GPS coordinates, Census Tracts, etc.)
+
+Flood map integration / overlay
+
+Water District integration / mapping / overlay
+
+Region collateral / loan concentration analysis
+
+Collateral Benchmarking
+
+Visual presentation of relationships between property-owners-legal documents
+
+Requirements from Code Analysis/Visual Analysis
+
+Users should be able to create new collateral records
+
+Users should be able to edit collateral records
+
+Users should not be able to edit loan records or account records shown in the solution
+
+Users should be able to link new collateral records to existing loan records
+
+Users should be able to search for existing collateral records
+
+Users should be able to see a visual representation of the loans and collateral associated with an account
+
+Users should be able to see a web of liability for customers
+
+Users should be able to simulate changes to collateral allocations to loans to see what effect the change would have on the web of liability
+
+Users should be able to create reports on data within the solution
+
+When linking a loan and collateral, certain data should be included on those links, including:
+-The lien position for the collateral to loan
+-Whether or not there is an Abundance of Caution on the link
+
+On the Loan records, data should be shown for the "Loan to Value" ratio, both the Actual Value and the Net Realizable Value
+
+We need to have some sort of collateral benchmarking as part of the solution

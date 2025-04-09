@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Collateral - Farm Credit Collateral Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="logo">Farm Credit CMS</div>
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="collateral-form.html" class="nav-item active">
+                <i class="fas fa-plus-circle"></i>
+                <span>New Collateral</span>
+            </a>
+            <a href="web-of-liability.html" class="nav-item">
+                <i class="fas fa-project-diagram"></i>
+                <span>Web of Liability</span>
+            </a>
+            <a href="search-results.html" class="nav-item">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reports</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navigation Bar -->
+            <div class="top-bar">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for customers, loans, or collateral...">
+                </div>
+                <div class="user-actions">
+                    <button class="icon-button">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="icon-button">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">JD</div>
+                        <span>Jane Doe</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="container">
+                <div class="page-header">
+                    <h1>Create New Collateral</h1>
+                    <div class="page-actions">
+                        <button class="button secondary">Cancel</button>
+                        <button class="button">Save as Draft</button>
+                    </div>
+                </div>
+                
+                <div class="wizard-container">
+                    <div class="wizard-progress">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Collateral Type</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Basic Information</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Documentation</div>
+                        </div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Valuation</div>
+                        </div>
+                        <div class="progress-step" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-label">Review & Submit</div>
+                        </div>
+                    </div>
+
+                    <div class="wizard-content">
+                        <!-- Step 1: Collateral Type -->
+                        <div class="wizard-step active" data-step="1">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Select Collateral Type</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="collateral-type-grid">
+                                        <div class="collateral-type-card" data-type="real-estate">
+                                            <div class="type-icon">
+                                                <i class="fas fa-home"></i>
+                                            </div>
+                                            <div class="type-label">Real Estate</div>
+                                            <div class="type-description">Land, buildings, and permanent structures</div>
+                                        </div>
+                                        <div class="collateral-type-card" data-type="equipment">
+                                            <div class="type-icon">
+                                                <i class="fas fa-tractor"></i>
+                                            </div>
+                                            <div class="type-label">Equipment</div>
+                                            <div class="type-description">Machinery, vehicles, and tools</div>
+                                        </div>
+                                        <div class="collateral-type-card" data-type="livestock">
+                                            <div class="type-icon">
+                                                <i class="fas fa-horse"></i>
+                                            </div>
+                                            <div class="type-label">Livestock</div>
+                                            <div class="type-description">Animals raised for agricultural purposes</div>
+                                        </div>
+                                        <div class="collateral-type-card" data-type="crops">
+                                            <div class="type-icon">
+                                                <i class="fas fa-seedling"></i>
+                                            </div>
+                                            <div class="type-label">Crops</div>
+                                            <div class="type-description">Growing or harvested agricultural products</div>
+                                        </div>
+                                        <div class="collateral-type-card" data-type="legal">
+                                            <div class="type-icon">
+                                                <i class="fas fa-file-contract"></i>
+                                            </div>
+                                            <div class="type-label">Legal Documents</div>
+                                            <div class="type-description">Contracts, certificates, and agreements</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Basic Information -->
+                        <div class="wizard-step" data-step="2">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Basic Information</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="panel-required">
+                                        <div class="panel-header">
+                                            <h4>Required Information</h4>
+                                            <span class="required-label">Required</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="collateral-name" class="form-label">Collateral Name</label>
+                                            <input type="text" id="collateral-name" class="form-control" placeholder="E.g., Smith Farm North">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group form-group-half">
+                                                <label for="owner-name" class="form-label">Owner Name</label>
+                                                <input type="text" id="owner-name" class="form-control" placeholder="Primary owner name">
+                                            </div>
+                                            <div class="form-group form-group-half">
+                                                <label for="customer-id" class="form-label">Customer ID</label>
+                                                <input type="text" id="customer-id" class="form-control" placeholder="Enter customer ID">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description" class="form-label">Description</label>
+                                            <textarea id="description" class="form-control" rows="3" placeholder="Brief description of the collateral"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="panel-optional">
+                                        <div class="panel-header">
+                                            <h4>Location Information</h4>
+                                            <span class="optional-label">Optional</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" id="address" class="form-control" placeholder="Street address">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group form-group-third">
+                                                <label for="city" class="form-label">City</label>
+                                                <input type="text" id="city" class="form-control" placeholder="City">
+                                            </div>
+                                            <div class="form-group form-group-third">
+                                                <label for="state" class="form-label">State</label>
+                                                <select id="state" class="form-control">
+                                                    <option value="">Select state</option>
+                                                    <option value="AL">Alabama</option>
+                                                    <option value="AK">Alaska</option>
+                                                    <!-- Other states would go here -->
+                                                </select>
+                                            </div>
+                                            <div class="form-group form-group-third">
+                                                <label for="zip" class="form-label">ZIP Code</label>
+                                                <input type="text" id="zip" class="form-control" placeholder="ZIP code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="panel-optional">
+                                        <div class="panel-header">
+                                            <h4>Additional Information</h4>
+                                            <span class="optional-label">Optional</span>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group form-group-half">
+                                                <label for="acquisition-date" class="form-label">Acquisition Date</label>
+                                                <input type="date" id="acquisition-date" class="form-control">
+                                            </div>
+                                            <div class="form-group form-group-half">
+                                                <label for="condition" class="form-label">Condition</label>
+                                                <select id="condition" class="form-control">
+                                                    <option value="">Select condition</option>
+                                                    <option value="excellent">Excellent</option>
+                                                    <option value="good">Good</option>
+                                                    <option value="fair">Fair</option>
+                                                    <option value="poor">Poor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="notes" class="form-label">Notes</label>
+                                            <textarea id="notes" class="form-control" rows="2" placeholder="Any additional notes about this collateral"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional steps would go here -->
+                    </div>
+
+                    <div class="wizard-controls">
+                        <button class="button secondary" id="prev-step" disabled>Back</button>
+                        <button class="button" id="next-step">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add custom styles for the wizard
+            const style = document.createElement('style');
+            style.textContent = `
+                .page-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 2rem;
+                }
+                
+                .page-actions {
+                    display: flex;
+                    gap: 10px;
+                }
+                
+                .wizard-container {
+                    background-color: var(--white);
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                    margin-bottom: 2rem;
+                }
+                
+                .wizard-progress {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1.5rem;
+                    border-bottom: 1px solid var(--light-gray);
+                }
+                
+                .progress-step {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    position: relative;
+                    flex: 1;
+                }
+                
+                .progress-step:not(:last-child)::after {
+                    content: '';
+                    position: absolute;
+                    top: 15px;
+                    right: -50%;
+                    width: 100%;
+                    height: 2px;
+                    background-color: var(--light-gray);
+                    z-index: 1;
+                }
+                
+                .progress-step.active ~ .progress-step:not(:last-child)::after {
+                    background-color: var(--light-gray);
+                }
+                
+                .progress-step.active:not(:last-child)::after,
+                .progress-step.completed:not(:last-child)::after {
+                    background-color: var(--primary-color);
+                }
+                
+                .step-number {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background-color: var(--light-gray);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--mid-gray);
+                    font-weight: 500;
+                    margin-bottom: 8px;
+                    position: relative;
+                    z-index: 2;
+                }
+                
+                .progress-step.active .step-number {
+                    background-color: var(--primary-color);
+                    color: var(--white);
+                }
+                
+                .progress-step.completed .step-number {
+                    background-color: var(--primary-color);
+                    color: var(--white);
+                }
+                
+                .progress-step.completed .step-number::after {
+                    content: '✓';
+                }
+                
+                .step-label {
+                    font-size: var(--font-size-small);
+                    color: var(--mid-gray);
+                    text-align: center;
+                }
+                
+                .progress-step.active .step-label {
+                    color: var(--primary-color);
+                    font-weight: 500;
+                }
+                
+                .wizard-content {
+                    padding: 1.5rem;
+                }
+                
+                .wizard-step {
+                    display: none;
+                }
+                
+                .wizard-step.active {
+                    display: block;
+                }
+                
+                .wizard-controls {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1.5rem;
+                    border-top: 1px solid var(--light-gray);
+                }
+                
+                /* Collateral type selection */
+                .collateral-type-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                    gap: 15px;
+                }
+                
+                .collateral-type-card {
+                    border: 2px solid var(--light-gray);
+                    border-radius: 8px;
+                    padding: 1.25rem;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                }
+                
+                .collateral-type-card:hover {
+                    border-color: var(--primary-color);
+                    transform: translateY(-3px);
+                }
+                
+                .collateral-type-card.selected {
+                    border-color: var(--primary-color);
+                    background-color: rgba(0, 111, 81, 0.05);
+                }
+                
+                .type-icon {
+                    font-size: 2rem;
+                    color: var(--primary-color);
+                    margin-bottom: 0.75rem;
+                }
+                
+                .type-label {
+                    font-weight: 500;
+                    margin-bottom: 0.5rem;
+                }
+                
+                .type-description {
+                    font-size: var(--font-size-small);
+                    color: var(--mid-gray);
+                }
+                
+                /* Form panels */
+                .panel-required,
+                .panel-optional {
+                    border: 1px solid var(--light-gray);
+                    border-radius: 8px;
+                    margin-bottom: 1.5rem;
+                }
+                
+                .panel-required {
+                    border-left: 4px solid var(--alert-red);
+                }
+                
+                .panel-optional {
+                    border-left: 4px solid var(--mid-gray);
+                }
+                
+                .panel-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0.75rem 1rem;
+                    background-color: var(--off-white);
+                    border-bottom: 1px solid var(--light-gray);
+                    border-top-left-radius: 8px;
+                    border-top-right-radius: 8px;
+                }
+                
+                .panel-header h4 {
+                    margin: 0;
+                    font-size: var(--font-size-body);
+                }
+                
+                .required-label {
+                    background-color: rgba(208, 2, 27, 0.1);
+                    color: var(--alert-red);
+                    padding: 2px 8px;
+                    font-size: var(--font-size-caption);
+                    border-radius: 4px;
+                }
+                
+                .optional-label {
+                    background-color: rgba(108, 117, 125, 0.1);
+                    color: var(--mid-gray);
+                    padding: 2px 8px;
+                    font-size: var(--font-size-caption);
+                    border-radius: 4px;
+                }
+                
+                .panel-required .card-body,
+                .panel-optional .card-body {
+                    padding: 1rem;
+                }
+                
+                .form-row {
+                    display: flex;
+                    margin: 0 -10px;
+                }
+                
+                .form-group-half {
+                    flex: 0 0 50%;
+                    padding: 0 10px;
+                }
+                
+                .form-group-third {
+                    flex: 0 0 33.333%;
+                    padding: 0 10px;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Collateral type selection
+            const typeCards = document.querySelectorAll('.collateral-type-card');
+            typeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selected class from all cards
+                    typeCards.forEach(c => c.classList.remove('selected'));
+                    // Add selected class to the clicked card
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Wizard navigation
+            const nextBtn = document.getElementById('next-step');
+            const prevBtn = document.getElementById('prev-btn');
+            
+            let currentStep = 1;
+            const totalSteps = 5;
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentStep < totalSteps) {
+                    // Hide current step
+                    document.querySelector(`.wizard-step[data-step="${currentStep}"]`).classList.remove('active');
+                    // Update progress
+                    document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('completed');
+                    
+                    // Show next step
+                    currentStep++;
+                    document.querySelector(`.wizard-step[data-step="${currentStep}"]`).classList.add('active');
+                    document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('active');
+                    
+                    // Update buttons
+                    if (currentStep > 1) {
+                        document.getElementById('prev-step').disabled = false;
+                    }
+                    
+                    if (currentStep === totalSteps) {
+                        nextBtn.textContent = 'Submit';
+                    }
+                }
+            });
+            
+            if (document.getElementById('prev-step')) {
+                document.getElementById('prev-step').addEventListener('click', function() {
+                    if (currentStep > 1) {
+                        // Hide current step
+                        document.querySelector(`.wizard-step[data-step="${currentStep}"]`).classList.remove('active');
+                        document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+                        
+                        // Show previous step
+                        currentStep--;
+                        document.querySelector(`.wizard-step[data-step="${currentStep}"]`).classList.add('active');
+                        
+                        // Update buttons
+                        if (currentStep === 1) {
+                            this.disabled = true;
+                        }
+                        
+                        if (currentStep < totalSteps) {
+                            nextBtn.textContent = 'Next';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

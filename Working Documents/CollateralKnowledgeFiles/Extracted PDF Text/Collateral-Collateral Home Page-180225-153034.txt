@@ -1,0 +1,103 @@
+Collateral Home Page
+
+Business Requirements:
+
+Create a collateral home screen when launching the Collateral App NOT in the context of a customer. The home screen 
+would be a landing page where the user could perform a search for the customer or loan they are looking for, and then 
+load the collateral canvas once the customer/loan was identified and selected. The Home Page will also Further 
+information on the search feature is located here: Customer Search Feature
+
+
+
+
+Functional Requirements:
+
+Must Have’s:
+
+Create a Collateral Home Page that will display when opening the Collateral App NOT within the context of a customer, 
+and no data loaded. (Assuming there is the ability to launch this way) 
+
+
+The Home Page will have search functionality described previously here (Customer Search Feature) that will then 
+allow user to search for a customer or loan and load it in the app.
+
+Once a customer/loan is selected, data will be retrieved from appropriate databases and load the current collateral 
+canvas view. 
+
+
+The customers name will also be displayed in the upper left of the screen once loaded to indicate visually to the 
+user what customer they are currently viewing.
+
+
+NOTE: Please see the screenshot below of what the Home screen could look like after first loading and NOT in the 
+context of a customer.
+
+
+
+
+
+Once a Customer has been selected, there should be tabs at the top of the screen that will allow you to easily switch 
+between different views. The tabs that will be available are:
+
+Home Page: This tab will look like this image-20240618-202622.png 
+(Or some version of a house). 
+
+Opening this tab will load the Home Screen.
+
+
+
+
+
+Collateral View: This tab will look like this image-20240618-204012.png 
+
+
+Opening tab will load the Collateral Visualization Canvas of the customer currently selected. Collateral Visualization Canvas 
+
+
+
+
+
+Collateral Analysis: This tab will look like this image-20240618-204715.png 
+
+
+Opening this tab will load the Collateral Analysis screen that will contain all the detailed calculations for the 
+customer currently selected. (Insert future confluence link here)
+
+
+
+
+
+
+
+
+Users will have the ability to toggle between all the tabs when a customer has been selected and loaded.
+
+
+When a tab is selected, the background of the tab will shift to a white background with black lettering to visually 
+indicate to the user which tab is currently selected. 
+
+
+
+
+Screenshots of old functionality: (NOTE: These screenshots are of the older version. The 
+new functionality may look similar to this, but will not be exact. This is just for example 
+only.)
+
+Example of the Home Screen when NO customer has been selected after first launching the program:
+
+
+image-20240726-194902.png
+Example of the home screen with available tabs once a customer has been selected:
+
+image-20240618-210759.png 
+
+
+ 
+
+Basic overview of the tabs that are available and the name of the customer:
+
+
+image-20240618-205804.png 
+
+
+

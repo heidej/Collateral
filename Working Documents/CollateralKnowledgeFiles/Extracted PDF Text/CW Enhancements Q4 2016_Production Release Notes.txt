@@ -1,0 +1,823 @@
+Collateral Web 
+
+
+Main areas of focus in this Collateral Web production release include: 
+
+Q4 2016 Enhancements Production Release Notes 
+
+ 
+
+Welcome to v2016.10.31.0001! 
+
+ FEMA Hyperlink for Flood Maps on the Buildings Panel 
+ Purchased Participations Secured by Chattel 
+ Lien Position Configurable by ACA 
+ Ability to Edit Loan Position from Collateral Analysis Screen 
+ Ability to Edit Partial Releases Before Scenario is Submitted 
+ Updated Real Estate Collateral to follow new IRS Requirements 
+
+
+ 
+
+ 
+
+FPI Credit Products 
+
+November 12, 2016 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+Table of Contents 
+Collateral Web ...................................................................................................................................................... 1 
+FEMA Hyperlink for Flood Maps (FCE/YKE/AgC ONLY) ................................................................................ 2 
+Farm Credit East ............................................................................................................................................ 2 
+Yankee ............................................................................................................................................................ 2 
+AgCountry ...................................................................................................................................................... 3 
+Lien Position Configurable by Association .................................................................................................... 4 
+Farm Credit East and Yankee ..................................................................................................................... 4 
+Ability to Edit Loan Position on Collateral Analysis Screen (FCE/YKE ONLY) ............................................. 5 
+Ability to Edit Partial Releases Prior to Submission ........................................................................................ 6 
+Summary Level Partial Releases .................................................................................................................. 6 
+Detail Level Partial Releases ........................................................................................................................ 7 
+New Collateral Cannot be Partially Released .......................................................................................... 8 
+Partial Releases of Zero Value ..................................................................................................................... 9 
+Purchased Participation Loans Secured by Chattel (FCE/YKE ONLY) .................................................... 10 
+Updates to Real Estate Collateral for New IRS Requirements .................................................................. 11 
+Location ........................................................................................................................................................ 11 
+Primary Location (1098) .............................................................................................................................. 12 
+Business Rules for Invalid Address .............................................................................................................. 13 
+Resolved Items .................................................................................................................................................... 14 
+
+
+ 
+
+ 
+
+ 
+
+
+FEMA Hyperlink for Flood Maps (FCE/YKE/AgC ONLY) 
+
+ 
+
+Previously in Desktop EmPOWER, a hyperlink was available in LOS that brought you to the FEMA 
+Determination site. This hyperlink is now available in Collateral Web for Farm Credit East, Yankee, and 
+AgCountry. Each association will be directed to the following sites: 
+
+ 
+
+ Farm Credit East: http://www.interflood.com/ 
+ Yankee: http://www.interflood.com/ 
+ AgCountry: https://lender.floodapp.com 
+
+
+Farm Credit East 
+
+ 
+
+In Farm Credit East, on the Check All That Apply panel, indicate that “The property includes buildings 
+or improvements”. The Search Flood Maps hyperlink will then appear on the Buildings panel. 
+
+ 
+
+ 
+
+Yankee 
+
+ 
+
+In Yankee, the Search Flood Maps hyperlink will appear on the Buildings panel. 
+
+ 
+
+
+AgCountry 
+
+ 
+
+In AgCountry, Search Flood Maps will appear on the Buildings & Improvements panel. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+Lien Position Configurable by Association 
+
+Whether lien positioning is an active feature of Collateral Web is now configurable by 
+association. 
+
+Farm Credit East and Yankee have elected to configure lien positioning OFF. All other 
+associations will continue with lien positioning configured ON. 
+
+Farm Credit East and Yankee 
+
+In Farm Credit East and Yankee, Collateral Web will no longer default lien position. Previously, 
+in a scenario with multiple security documents, linking collateral to an existing security 
+document would default the lien as “2nd position”. You would then need to change it back 
+to 1st position. 
+
+When collateral is linked, lien position will no longer be displayed. This change will prevent 
+you from having to continually update lien position for each collateral relationship, resulting 
+in greater productivity and efficiency. 
+
+In the example below, linking the Real Estate to Security Document 10/06/2016 (on the left) 
+will display the Smart Link Wizard without the lien position. Select Save to finishing linking the 
+collateral. 
+
+ 
+
+ 
+
+
+Ability to Edit Loan Position on Collateral Analysis Screen 
+(FCE/YKE ONLY) 
+
+ 
+
+If lien positioning is configured OFF for your association, you can now edit loan position from the 
+Collateral Analysis screen. Previously, it was a requirement for security documents to be linked to 
+collateral when setting loan position. However, security documents do not factor into the position 
+each loan is in. 
+
+ 
+
+This enhancement will allow you to stay on the Collateral Analysis grid. You no longer have to 
+navigate to the Collateral View screen to make these changes. 
+
+ 
+
+To edit loan position on the Collateral Analysis grid, hover your cursor on the loan you would like to 
+edit. This will display the Update Relationship menu. Selecting the menu will display the screen to edit 
+loan position. Select Save to complete. 
+
+ 
+
+ 
+
+ 
+
+Any changes made to loan position will display on the Collateral Analysis grid. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+Ability to Edit Partial Releases Prior to Submission 
+
+ 
+
+Previously, once a partial release was saved, it could not be modified. To make any changes, the 
+collateral would have to be deleted and re-entered. 
+
+ 
+
+Now, if you have not yet submitted your scenario, you can click into the Partial Release History tab 
+on the Partial Release Smart Data Wizard and edit the release information. 
+
+ 
+
+Under the Partial Release History tab, every release will be displayed. The edit hyperlink appears to 
+the left of each release. You may also delete summary level partial releases. 
+
+ 
+
+ 
+
+ 
+
+Summary Level Partial Releases 
+
+ 
+
+For summary level partial releases, selecting edit allows you to make changes to the Release 
+Description, Release Date, Release Legal Description, and Market Value being released. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+Detail Level Partial Releases 
+
+ 
+
+For detail level partial releases, you cannot enter a specific market value as you can at the summary 
+level. Selecting a detail record for partial release will release the entire value of the detail. 
+
+ 
+
+ 
+
+ 
+
+If you want to release only a portion of a detail record: 
+
+ 
+
+1) Create an additional detail record for the amount that will NOT be released. 
+o Example: The value of the collateral after the partial release should equal $1,000,000 
+
+
+
+
+ 
+
+ 
+
+
+2) Perform a partial release of the original detail record: 
+
+
+ 
+
+ 
+
+ 
+
+New Collateral Cannot be Partially Released 
+
+ 
+
+For new collateral or new detail records under existing collateral, you will not be able to do a partial 
+release. On the detail items menu, the Partial Release Selection will be grayed out. You will not be 
+able to select the checkbox under Partial Release Selection for a detail record that was created as 
+part of this scenario. 
+
+ 
+
+An orange NEW! icon will appear on the new detail record rows as a notification. 
+
+ 
+
+ 
+
+ 
+
+REMINDER: On new collateral objects created as part of this scenario, Partial Release will not appear 
+as an option on the drop-down menu. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+Partial Releases of Zero Value 
+
+ 
+
+In the event that you want to release a portion of collateral but do not want to release any value 
+associated with it, you can now enter $0 as the Market Value being released. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+Purchased Participation Loans Secured by Chattel (FCE/YKE 
+ONLY) 
+
+ 
+
+For Farm Credit East and Yankee, purchased participations are categorized as long-term loans in 
+Collateral Web. 
+
+ 
+
+Normally, chattel is not factored into the L/MV% for a long-term loan. With this update, chattel will 
+now be factored into the calculation for long-term purchased participations. 
+
+ 
+
+In the below example, the $2,000,000 purchased partifipation is a long-term loan secured by 
+$10,000,000 of chattel. The L/MV% is calculated as 20.00%. 
+
+ 
+
+ 
+
+ 
+
+Using this same example, if the long-term loan is not a purchased participation loan, then the L/MV% 
+will continue to be calculated as zero. 
+
+ 
+
+
+THERE IS CURRENTLY NO WARNING IN EmPOWER IF YOU CHANGE AN ADDRESS LINKED TO 
+COLLATERAL. Please be cautious as you make address changes. 
+
+ 
+
+A future enhancement in desktop EmPOWER will provide a warning that the address is linked to 
+collateral. 
+
+ 
+
+Updates to Real Estate Collateral for New IRS Requirements 
+
+ 
+
+For the 2016 tax year, the IRS has made some changes to the 1098 form as relates to reporting 
+addresses on collateral securing real estate. These changes are specific to Box 7 - Address of 
+Property Securing Mortgage, Box 8 - Property Address (If Different from Payer’s/Borrower’s Address), 
+and Box 9 - Property Description (If No Address Available) on the 1098 form. To view the full IRS 
+Instructions for Form 1098, click here. 
+
+ 
+
+As a result, changes have been made the Location panel on the Real Estate Smart Data Wizard to 
+help capture the information that the IRS now requires. 
+
+ 
+
+Location 
+
+ 
+
+On the Location panel, all addresses currently available in EmPOWER for all of the customer’s groups 
+will appear in the Existing Addresses box. The names of any customers associated with that address 
+will show up in parentheses after the zip code. If there are multiple customers associated, they will be 
+separated by a semi-colon. 
+
+ 
+
+If you see the address you need in the Existing Addresses list, select the address, and then click the 
+Add Location w/ Selected Address hyperlink. 
+
+ 
+
+ 
+
+ 
+
+Selecting an address from the Existing Addresses box creates a link between Collateral Web and the 
+address in desktop EmPOWER CRM. 
+
+ 
+
+Addresses selected via the Existing Addresses box will be read-only rows in the location grid. Changes 
+to existing addresses can only be made in desktop EmPOWER. 
+
+ 
+
+ 
+
+
+If this particular piece of collateral’s address is not already an existing address, select Add Location 
+w/ New Address. A new blank row will populate in the location grid. 
+
+ 
+
+ 
+
+ 
+
+Enter either a valid mailing address (Address Line 1, City, State, and Zip), OR, enter the Property 
+Description (APN) with the State and County in which the piece of real estate is located. 
+
+ 
+
+Primary Location (1098) 
+
+ 
+
+For all associations except Northwest, you will also see a new panel called Primary Location (1098). 
+This panel is used to select the location that will be used on the 1098 form for this collateral object. 
+
+ 
+
+The panel pulls all locations from both the Overall and any detail rows on the Location panel. The 
+radio button to select the Primary for 1098 will default to the first available location in this list. You may 
+change the selection using the radio button. 
+
+ 
+
+ 
+
+ 
+
+In Northwest ONLY, the Primary for 1098 radio button is included in the grid on the Location panel. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+In some cases, a single collateral object may have multiple detail records securing multiple 
+loans. Each detail record may have a different primary address. 
+
+ 
+
+In this situation, you should split out the individual detail records from that collateral using a Split 
+Tract. Once you have done so, you can set a different primary address for each collateral 
+object. 
+
+ 
+
+ 
+
+Business Rules for Invalid Address 
+
+ 
+
+You must fill out the following fields on the Location panel to pass all Business Rules: 
+
+ Address Line 1 (Address), City, State and Zip Code 
+
+
+OR 
+
+ Property Description (APN), County, and State 
+
+
+ 
+
+If you are missing any of the above fields for the location row set as the Primary for 1098, you will 
+have an invalid address. 
+
+ 
+
+If you attempt to submit or validate a scenario with an invalid address for the primary location for the 
+1098, or if you do not include any address, you will receive the following soft error: 
+
+ 
+
+“The Primary Location for Real Property Collateral ‘House’ does not have either a valid mailing 
+address, or a Property Description with County and State information. This is required for IRS 
+reporting.” 
+
+ 
+
+ 
+
+ 
+
+You will still be able to submit the scenario and book loans, as needed. HOWEVER, we strongly 
+recommend that you enter all collateral address information before submitting. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+Resolved Items 
+
+
+TFS # 
+
+Summary Description 
+
+Detail Description / Resolution 
+
+INC # 
+
+FCE 
+
+YNK 
+
+NW 
+
+FCW 
+
+AgC 
+
+89509 
+
+2016 Tax Season IRS 
+Requirements for Real 
+Estate Collateral 
+
+On the Location panel, you now 
+have the ability to link to Exisitng 
+Addresses from desktop 
+EmPOWER, or to add new 
+addresses. You will be required to 
+enter either a valid mailing 
+address, OR the Property 
+Description (APN) with the County 
+and State in which the real estate 
+is located. In addition, there is a 
+new panel, Primary Location 
+(1098), to indicate which address 
+is the primary for Tax Form 1098. 
+
+ 
+
+X 
+
+X 
+
+X 
+
+X 
+
+X 
+
+92340 
+
+Add FEMA Hyperlink 
+for flood maps 
+
+FCE, YNK and AgC ONLY – FEMA 
+Hyperlink for flood maps will 
+appear on Buildings Panel. You 
+will be forwarded to the 
+appropriate website to search 
+flood maps. 
+
+ 
+
+X 
+
+X 
+
+ 
+
+ 
+
+X 
+
+92354 
+
+Purchased 
+participations secured 
+by chattel 
+
+FCE and YNK ONLY - For Farm 
+Credit East and Yankee, 
+purchased participations are 
+categorized as long-term loans in 
+Collateral Web. Normally, chattel 
+is not factored into the L/MV% for 
+a long-term loan. With this 
+update, chattel will now be 
+factored into the calculation for 
+long-term purchased 
+participations. 
+
+ 
+
+X 
+
+X 
+
+ 
+
+ 
+
+ 
+
+92360 
+
+Lien position 
+configurable by 
+association 
+
+Whether or not lien positioning is 
+an active feature of Collateral 
+Web is now configurable by 
+association. Yankee and Farm 
+Credit East have elected to 
+configure lien positioning OFF. All 
+other associations will leave lien 
+positioning configured ON. 
+
+ 
+
+X 
+
+X 
+
+X 
+
+X 
+
+X 
+
+92363 
+
+Ability to edit loan 
+position from 
+Collateral Analysis 
+screen 
+
+FCE and YNK ONLY – If lien 
+positioning is configured OFF for 
+an association, you now have the 
+ability to edit the loan position 
+from the Collateral Analysis 
+screen, instead of just the 
+Collateral View screen. When you 
+hover over the loan you wish to 
+edit, the “Update Relationship” 
+menu will appear. Use this menu 
+to edit the loan position and AOC 
+from the Collateral Analysis 
+screen. 
+
+ 
+
+X 
+
+X 
+
+ 
+
+ 
+
+ 
+
+
+
+
+TFS # 
+
+Summary Description 
+
+Detail Description / Resolution 
+
+INC # 
+
+FCE 
+
+YNK 
+
+NW 
+
+FCW 
+
+AgC 
+
+92961 
+
+Partial Releases 
+editable 
+
+You may now edit Partial Release 
+prior to submitting a scenario. On 
+the Partial Release History tab, 
+you can edit Release Description, 
+Release Legal Description, 
+Release Date, and Market Value 
+being released (summary level). 
+You will not be able to edit the 
+value for detail level releases. 
+
+ 
+
+X 
+
+X 
+
+X 
+
+X 
+
+X 
+
+96782 
+
+Partial Releases can 
+have a value of zero 
+
+For summary level partial releases, 
+you may now enter $0.00 as the 
+market value being released. This 
+will help keep track of legal 
+information associated with 
+releases of zero value. 
+
+ 
+
+X 
+
+X 
+
+X 
+
+X 
+
+X 
+
+96859 
+
+Radio button for 1098 
+on Location panel 
+
+NW ONLY – Since Northwest did 
+not configure the ability to add 
+detail on the Location panel, 
+there is no need to have a 
+separate panel to set the primary 
+location to send to the 1098 form. 
+The radio button to indicate the 
+primary address for the 1098 will 
+appear on the Location panel for 
+Northwest. 
+
+ 
+
+ 
+
+ 
+
+X 
+
+ 
+
+ 
+
+96868 
+
+Identify customers 
+name in Existing 
+Addresses of Location 
+panel 
+
+For each address that is pulled 
+from EmPower, the customer’s 
+name will appear in parenthesis 
+next to each address. If there are 
+multiple customers associated 
+with a particular address, they will 
+be separated by a semi-colon. 
+
+ 
+
+X 
+
+X 
+
+X 
+
+X 
+
+X 
+
+
+
+ 
+
+

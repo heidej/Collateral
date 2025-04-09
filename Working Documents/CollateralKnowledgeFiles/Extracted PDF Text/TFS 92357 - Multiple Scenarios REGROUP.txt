@@ -1,0 +1,471 @@
+Collateral Web 
+
+
+Modify the process by which scenarios are created and modified to include various scopes. This is to 
+help draw awareness to existing scenarios that already include a certain scope and hopefully 
+minimize, if not completely eliminate, the need for data cleanups. 
+
+TFS 92351 – Enhance scenarios for object 
+ownership; 
+
+TFS 92357 – Multiple Collateral Scenarios 
+
+ 
+
+Feature Overview 
+
+ 
+
+Document Change History 
+
+
+Version 
+
+Date Changed 
+
+Description 
+
+Approved By 
+
+Date Approved 
+
+1 
+
+08/26/16 
+
+Document started 
+
+Rebeca McFarland 
+
+08/26/16 
+
+2 
+
+09/08/16 
+
+Updated mock-ups and other 
+edits 
+
+Bevin Morrissey 
+
+09/08/16 
+
+3 
+
+09/22/16 
+
+Design regroup 
+
+Bevin Morrissey 
+
+09/23/16 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+FPI Credit Products 
+
+September 23, 2016 
+
+ 
+
+Table of Contents 
+Collateral Web ...................................................................................................................................................... 1 
+Document Change History ................................................................................................................................. 1 
+Statement of the Problem ............................................................................................................................... 2 
+FPI RECOMMENDATION.................................................................................................................................... 3 
+View Current Production .............................................................................................................................. 4 
+Create New Scenario ................................................................................................................................... 5 
+Continue with Existing Scenario .................................................................................................................. 7 
+Edit Scenario Scopes .................................................................................................................................... 9 
+Association Parameter ............................................................................................................................... 10 
+Collateral Analysis Screen .......................................................................................................................... 10 
+Submitting Scenarios to EmPOWER .......................................................................................................... 11 
+
+TFS 92351 
+– 
+Enhance scenarios for object 
+ownership; TFS 92357 
+– 
+Multiple Collateral 
+Scenarios 
+
+
+ 
+
+Statement of the Problem 
+
+ 
+
+ 
+
+ 
+
+Employee #1 wants to work on the short and long term loans on the left side of the picture (scope #1) 
+in Scenario #1. 
+
+ 
+
+Employee #2 wants to work on the short term loan on the right side of the picture (scope #2) in 
+Scenario #2. 
+
+ 
+
+If one of these two employees updates collateral belonging to a loan in the opposite scope, the two 
+scenarios become entangled and FPI has to manually clean up data in the database with a script. 
+
+ 
+
+We would like to make it more obvious which collateral objects belong to which scope, and make it 
+more difficult to lock up scenarios by creating multiple scenarios that include the same scope. 
+
+ 
+
+
+FPI RECOMMENDATION 
+
+ 
+
+If you launch Collateral Web via a favorites shortcut or by entering in the URL in your browser address 
+bar, once you open a customer, you will see that customer’s “Current Production” Collateral View in 
+READ ONLY. See the View Current Production section to continue. 
+
+ 
+
+When launching Collateral Web from EmPOWER, you will be presented with a “Select” message box 
+of options: 
+
+a) View Current Production 
+b) Create New Scenario 
+c) Continue with Existing Scenario (only available if at least one scenario already exists) 
+
+
+ 
+
+ 
+
+ 
+
+Selecting “Cancel” will bring you to your Collateral Web Home Page under the customer launched 
+from EmPOWER. 
+
+ 
+
+ 
+
+
+View Current Production 
+
+ 
+
+Selecting “View Current Production” opens all Current Production scopes in READ ONLY. 
+
+ 
+
+ 
+
+ 
+
+If from here you wish to start a new scenario, select the “Current Production” scenario menu. The 
+existing “Copy Scenario” link will be updated to “Create Scenario”. 
+
+ 
+
+ 
+
+ 
+
+If you then click “Create Scenario”, the Create New Scenario message box will come up. See the 
+Create New Scenario section below to continue. 
+
+ 
+
+ 
+
+
+Create New Scenario 
+
+ 
+
+If you choose to Create New Scenario, you will be prompted to enter a label for the new scenario 
+and select the scope(s) you would like to include. 
+
+ 
+
+ 
+
+ 
+
+ The scenario from which you are accessing the Create New Scenario feature will be 
+automatically selected in the “Copy From:” field. 
+
+
+ 
+
+ If, however, you came in to Collateral from EmPOWER and had no existing scenarios, “Current 
+Production” will be automatically selected. 
+
+
+ 
+
+ If you click “Cancel”, you will be redirected to this customer’s “Current Production” Collateral 
+View screen in READ ONLY. 
+
+
+ 
+
+ If multiple scenarios exist, you may change the “Copy From:” selection to any of the existing 
+scenarios or “Current Production”. 
+
+
+ 
+
+ If you are starting from “Current Production”, no scopes will be selected. You will need to make a 
+scope selection based on the loans, and those loans’ associated collateral objects, that you wish 
+to work on. 
+
+
+ 
+
+ If you are copying from another existing scenario, the scopes that were included in that existing 
+scenario will be checked. You will have the option of adding in any other scopes that were not 
+included in the scenario you are copying from at this point. 
+
+
+ 
+
+Click “OK” to create the scenario. 
+
+ 
+
+As soon as you click “OK”, if you have selected a scope that exists in another scenario, you will 
+receive an alert. 
+
+
+FPI can investigate adding an association parameter that would allow an ACA to set a cap on 
+how many scenarios PER SCOPE can be created. 
+
+ 
+
+This means that if you set the cap to ONE, and you attempt to create a new scenario that 
+includes a scope that is already included in a different existing scenario, you will not be allowed 
+to do so. Click this box to jump to the Association Parameter section below for more information. 
+
+ 
+
+ 
+
+You can choose if you would like to Cancel your create process entirely, Continue, or Go Back to the 
+Create New Scenario window to change your scope selection. 
+
+ 
+
+ 
+
+ 
+
+Any scopes that were not selected will be grayed out when your new scenario is created. 
+
+ 
+
+ 
+
+
+Continue with Existing Scenario 
+
+ 
+
+If, when you first access Collateral Web from EmPOWER, there are existing scenarios, you may select 
+“Continue With Existing Scenario” and then click “Next”. (“Cancel” will take you to the Collateral 
+Web Home Page.) 
+
+ 
+
+ 
+
+ 
+
+A new window, “Select Existing Scenario”, will provide a list of all existing scenarios and the 
+scopes/loans they include. 
+
+ 
+
+ 
+
+ 
+
+If you click “Cancel”, you will be redirected to this customer’s “Current Production” Collateral View 
+screen in READ ONLY. Or, select a scenario and click “OK” to open it. 
+
+ 
+
+
+FPI can investigate adding an association parameter that would allow an ACA to set a cap on 
+how many scenarios PER SCOPE can be created. 
+
+ 
+
+This means that if you set the cap to ONE, and you attempt to create a new scenario that 
+includes a scope that is already included in a different existing scenario, you will not be allowed 
+to do so. Click this box to jump to the Association Parameter section below for more information. 
+
+If you choose a scenario that does not include the scope with the commitment from which you 
+accessed Collateral Web, the following alert will pop up: 
+
+ 
+
+ 
+
+ 
+
+“No Thanks” will open the scenario without adding Scope 1234. 
+
+ 
+
+Selecting “YES”, IF Scope 1234 is not already part of another existing scenario, adds Scope 1234 to 
+“What If #2” and opens “What If #2” on the Collateral View screen. 
+
+ 
+
+If, however, Scope 1234 is already part of another existing scenario, a second alert will pop up. 
+
+ 
+
+ 
+
+ 
+
+You can choose if you would like to: 
+
+ Cancel your process entirely and go to “Current Production” Collateral View for this customer 
+ Continue, and Scope 1234 will be added to scenario “What If #2” which will be opened on 
+the Collateral View screen 
+ Go Back to the Select Existing Scenario window to change your scenario selection. 
+
+
+ 
+
+ 
+
+ 
+
+
+FPI can investigate adding an association parameter that would allow an ACA to set a cap on 
+how many scenarios PER SCOPE can be created. 
+
+ 
+
+This means that if you set the cap to ONE, and you attempt to create a new scenario that 
+includes a scope that is already included in a different existing scenario, you will not be allowed 
+to do so. Click this box to jump to the Association Parameter section below for more information. 
+
+Edit Scenario Scopes 
+
+ 
+
+As you work on your scenario, if you decide that you need to add any of the scopes not initially 
+included (those that are currently grayed out), you will need to go back to the scenario menu, and 
+click the “Edit Scenario Scopes” link. 
+
+ 
+
+ 
+
+ 
+
+This “Edit Scenario Scopes” link will only appear in this menu when you have scenarios available to 
+edit. 
+
+ 
+
+ 
+
+ 
+
+As soon as you click “OK”, if you have selected a scope that exists in another scenario, you will 
+receive an alert. You can choose if you would like to Continue, or Go Back to the Edit Scenario 
+Scopes window to change your scope selection. 
+
+ 
+
+ 
+
+ 
+
+Once you have added a scope to your scenario, it will no longer be grayed out on the Collateral 
+View screen. 
+
+
+The Collateral Analysis screen will also be updated to mimic the Collateral View screen in 
+regards to editing scopes, based on the scenario and which scopes are currently included in 
+the scenario. 
+
+Association Parameter 
+
+ 
+
+If desired, FPI can investigate adding an association parameter that would allow an ACA to place a 
+cap on the number of scenarios allowed PER SCOPE. 
+
+ 
+
+This would allow the number of scenarios per scope to be configurable by association. 
+
+ 
+
+If only one is allowed, and you try to create a new scenario that includes a scope that is already part 
+of an existing scenario, you will not be allowed to continue. 
+
+ 
+
+If a different maximum is set, say three, once three scenarios exist that include that particular scope, 
+you will not be allowed to create a fourth that includes that scope. 
+
+ 
+
+ 
+
+ 
+
+You will be able to either: 
+
+ Continue your work on that scope by opening one of the existing scenarios that includes that 
+scope already. 
+ Delete one of the existing scenarios so that you can create a new one that includes that 
+particular scope. 
+
+
+ 
+
+Collateral Analysis Screen 
+
+ 
+
+ 
+
+ 
+
+
+Submitting Scenarios to EmPOWER 
+
+ 
+
+By submitting a scenario to EmPower, all other scenarios that include the same scopes as those 
+included in the scenario being submitted will be DELETED. 
+
+ 
+
+This is consistent with how the application works today. 
+
+

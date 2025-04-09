@@ -1,0 +1,140 @@
+Collateral Web of Liability Canvas Display
+
+Business Requirements:
+
+Create a web of liability algorithm that will recognize and aggregate all key relationships for a customer using their 
+related loan structure or collateral ownership. This algorithm logic will help to accurately display all related collateral 
+information on the Collateral Visualization Canvas in a picture view for all loans or collateral the customer is a part of. 
+At a minimum, the web of liability display needs to aggregate all collateral information for a customer and accurately 
+display it on the Collateral Visualization Canvas. This should allow the ACA user to easily be able to see ALL collateral 
+structure in one place. The ACA user should not have to search and hunt around for the appropriate view or customer 
+to find the loan and collateral they are looking for.
+
+
+
+
+Functional Requirements:
+
+Must Have’s:
+
+The logic for bringing in and display loan and collateral structure should look to these main loan and collateral 
+relationships:
+
+Should display ALL loans the customer is the Primary Borrower on.
+
+
+Should display ALL loans the customer is a Co-Borrower on.
+
+
+Should Display ALL loans the customer is a Guarantor on.
+
+
+Should display ALL loans where the customer is a Collateral Owner of a piece of collateral linked to a loan.
+
+
+
+
+
+The liability algorithm will also recognize and organize loan to collateral relationships that are either “Crossed” or 
+“Shared”.
+
+Loans in a “Crossed” relationship have the below characteristics:
+
+They share ALL the same collateral
+
+
+Have the same lien position for each collateral
+
+
+Have the same Abundance of Caution (AOC) designation for each collateral
+
+
+Are not secured by any additional collateral
+
+
+
+
+
+Loans in a “Shared” relationship have the below characteristics:
+
+Share SOME, but not all the same collateral
+
+
+May have separate security documents
+
+
+May have different lien positions
+
+
+May have different AOC designations 
+
+
+
+
+
+
+
+
+Loan types should be grouped together on the collateral canvas for more logical and easy viewing for the user. 
+
+ST (Short Term) loans are generally grouped together on the LEFT side of the collateral canvas.
+
+ST loans are loans up to 5 years in length.
+
+
+
+
+
+IT (Intermediate Term) loans are generally grouped together in the MIDDLE of the collateral canvas.
+
+IT loans are 5 - 10 years in length.
+
+
+
+
+
+LT (Long Term) loans are generally grouped together on the RIGHT side of the collateral canvas.
+
+LT loans are 10-40> years in length.
+
+
+
+
+
+
+
+
+
+
+NOTE: This logic is assuming we are going to be displaying the entire “Customer View” on the Collateral 
+Visualization Canvas. This could change depending on future decisions on how to aggregate and display 
+collateral information. 
+
+
+Non-Functional Requirements:
+
+TBD
+
+
+
+
+Screenshots of old functionality: (NOTE: These screenshots are of the older version. The 
+new functionality may look similar to this, but will not be exact. This is just for example 
+only.)
+
+This is a hypothetical web of liability view of a customer who is tied to multiple pieces of collateral, on several different 
+loans via different borrowing structures and collateral ownership. The goal is just to show what a potential view would 
+look like on a slightly more complex customer with many different relationships:
+
+Crossed vs. Shared Collateral relationship:
+
+image-20240530-172416.png
+
+image-20240507-145702.png
+This screenshot shows how loan types are grouped on the collateral canvas:
+
+image-20240507-154211.png
+
+ 
+
+

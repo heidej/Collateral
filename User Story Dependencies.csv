@@ -1,0 +1,65 @@
+Source Story,Target Story,Dependency Type,Rationale
+CRM-001,NULL,Foundation,Base functionality for creating collateral records
+CRM-002,CRM-001,Direct,Editing records requires that records exist first
+CRM-003,CRM-001,Direct,Searching requires that records exist to be searched
+CRM-004,CRM-001,Direct,Viewing records requires that records exist to be viewed
+CRM-005,CRM-001,Direct,Deleting records requires that records exist to be deleted
+CRM-006,CRM-001,Enhancement,Batch operations enhance the basic record management
+CRM-007,CRM-001,Enhancement,Document attachment enhances the basic record information
+CRM-008,CRM-001,Enhancement,Image capture enhances the record documentation capabilities
+CRM-009,CRM-003,Enhancement,Advanced search enhances the basic search capability
+RLM-001,CRM-001,Direct,Linking collateral to loans requires collateral records to exist
+RLM-002,RLM-001,Direct,Managing multiple relationships requires the ability to create relationships
+RLM-003,RLM-001,Enhancement,Collateral history builds on relationship tracking
+RLM-004,RLM-001,Direct,Assignment of collateral requires relationship capabilities
+RLM-005,RLM-001,Direct,Partial allocation requires relationship management
+RLM-006,CRM-001,Enhancement,Borrower profiles enhance collateral record context
+VRA-001,CRM-001,Direct,Valuations require collateral records to exist
+VRA-002,VRA-001,Enhancement,Appraisal tracking enhances the valuation capabilities
+VRA-003,VRA-001,Enhancement,Historical valuations extend basic valuation functionality
+VRA-004,VRA-001,Enhancement,Valuation comparisons build on basic valuation data
+VRA-005,VRA-001,Direct,Value trend analysis requires valuation data
+VRA-006,VRA-001,Direct,Depreciation calculations require initial valuation data
+VRA-007,VRA-001,Enhancement,Value alerts enhance valuation monitoring
+VRA-008,VRA-001,Enhancement,Market data integration extends valuation capabilities
+VRA-009,VRA-006,Direct,Configurable depreciation rules extend basic depreciation
+VRA-010,VRA-001,Enhancement,Bulk value updates enhance efficiency of valuations
+VRA-011,VRA-001,Direct,NRV calculation requires valuation methodology
+VRA-012,VRA-011,Direct,Stress testing builds on NRV calculations
+VRA-013,VRA-011,Enhancement,NRV rule management enhances the NRV calculation
+VRA-014,VRA-011,Compliance,Compliance verification requires NRV rules
+VRA-015,VRA-001,Enhancement,AI assistance enhances valuation process
+WFN-001,CRM-001,Enhancement,Notifications enhance collateral management
+WFN-002,WFN-001,Direct,Custom notification rules require notification system
+WFN-003,VRA-002,Enhancement,Expiration alerts enhance appraisal tracking
+WFN-004,WFN-001,Enhancement,Approval workflows enhance change management
+WFN-005,WFN-001,Direct,Task assignment requires notification infrastructure
+VIS-001,CRM-001,Enhancement,Map visualization enhances collateral context
+VIS-002,VIS-001,Enhancement,Proximity analysis extends mapping capabilities
+VIS-003,VIS-001,Enhancement,Concentration visualization extends mapping
+VIS-004,VIS-001,Enhancement,Custom map layers enhance visualization flexibility
+VIS-005,VIS-001,Enhancement,Interactive dashboards build on visualization framework
+VIS-006,VIS-001,Enhancement,Property boundaries enhance spatial understanding
+REP-001,CRM-001,Direct,Reports require collateral data to exist
+REP-002,REP-001,Enhancement,Customizable reports extend reporting capabilities
+REP-003,REP-001,Enhancement,Scheduled reports enhance reporting automation
+REP-004,REP-001,Enhancement,Data export enhances data accessibility
+REP-005,REP-001,Enhancement,Dashboards provide enhanced data visualization
+REP-006,REP-001,Direct,Compliance reports require reporting foundation
+REP-007,REP-001,Enhancement,Ad-hoc reporting extends standard reports
+REP-008,REP-001,Direct,Lender portal requires reporting capabilities
+SCI-001,NULL,Foundation,User management is a foundation capability
+SCI-002,NULL,Foundation,Role management is a foundation capability
+SCI-003,NULL,Foundation,System settings are foundation capabilities 
+SCI-004,NULL,Integration,API access is a foundation capability
+SCI-005,SCI-004,Integration,Third-party integration requires API foundation
+SCI-006,NULL,Foundation,Mobile accessibility is a foundation capability
+SCI-007,NULL,Foundation,Offline mode is a foundation capability
+SCI-008,NULL,Foundation,Performance monitoring is a foundation capability
+SCI-009,NULL,Testing,Update testing is a foundation capability
+SCD-001,NULL,Auditing,Audit trails are a foundation security capability
+SCD-002,NULL,Data Quality,Validation rules are a foundation data quality capability
+SCD-003,NULL,Backup,Backup processes are a foundation security capability
+SCD-004,SCD-001,Compliance,Compliance review requires audit trail capability
+SCD-005,SCD-001,Security,Access logs build on audit capabilities
+SCD-006,NULL,Security,Data encryption is a foundation security capability

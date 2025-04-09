@@ -1,0 +1,131 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>User Story Dependency Analysis Dashboard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                background-color: #f8f9fa;
+                color: #333;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: white;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                border-radius: 5px;
+            }
+            h1 {
+                color: #2c3e50;
+                border-bottom: 2px solid #3498db;
+                padding-bottom: 10px;
+                margin-top: 0;
+            }
+            h2 {
+                color: #3498db;
+                margin-top: 30px;
+            }
+            .card {
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 20px;
+                margin-bottom: 20px;
+                background-color: #fff;
+                transition: transform 0.3s ease;
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            .card h3 {
+                margin-top: 0;
+                color: #2c3e50;
+            }
+            .card p {
+                color: #666;
+            }
+            .card a {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 8px 16px;
+                background-color: #3498db;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+            }
+            .card a:hover {
+                background-color: #2980b9;
+            }
+            .summary {
+                background-color: #f1f8ff;
+                border-left: 4px solid #3498db;
+                padding: 15px;
+                margin-bottom: 30px;
+            }
+            .footer {
+                margin-top: 50px;
+                text-align: center;
+                color: #7f8c8d;
+                font-size: 0.9em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>User Story Dependency Analysis Dashboard</h1>
+            
+            <div class="summary">
+                <h2>Project Overview</h2>
+                <p>This dashboard provides various interactive visualizations of the dependencies between user stories in the Collateral Management System. Use these visualizations to better understand the relationships, critical paths, and module interactions within the system.</p>
+            </div>
+            
+            <h2>Available Visualizations</h2>
+            <div class="visualizations">
+    
+                <div class="card">
+                    <h3>Interactive Network Graph</h3>
+                    <p>Explore the full dependency network with interactive nodes and edges. Hover for details and drag nodes to rearrange the view.</p>
+                    <a href="interactive_network.html" target="_blank">Open Visualization</a>
+                </div>
+        
+                <div class="card">
+                    <h3>Module Dependency Flow (Sankey)</h3>
+                    <p>Visualize how dependencies flow between different modules using a Sankey diagram.</p>
+                    <a href="module_sankey.html" target="_blank">Open Visualization</a>
+                </div>
+        
+                <div class="card">
+                    <h3>Interactive Dependency Matrix</h3>
+                    <p>View the dependency relationships in matrix form. Red lines separate different modules.</p>
+                    <a href="dependency_matrix.html" target="_blank">Open Visualization</a>
+                </div>
+        
+                <div class="card">
+                    <h3>Critical Path Analysis</h3>
+                    <p>Identify the most critical user stories based on how many other stories depend on them.</p>
+                    <a href="critical_path.html" target="_blank">Open Visualization</a>
+                </div>
+        
+                <div class="card">
+                    <h3>Dependency Type Distribution</h3>
+                    <p>See the distribution of different dependency types across all user stories.</p>
+                    <a href="dependency_types.html" target="_blank">Open Visualization</a>
+                </div>
+        
+            </div>
+            
+            <div class="footer">
+                <p>Generated on 2025-03-14 09:17:12</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    

@@ -1,0 +1,117 @@
+Customer Search Feature
+
+Business Requirement:
+
+Create a Customer Search Feature that will allow ACA users to search for existing customers and open their collateral 
+records. 
+
+
+
+
+Functional Requirements:
+
+Must Have’s:
+
+The customer search feature should be available always, no matter where a user navigates within the application. At 
+minimum this should include:
+
+The Home Screen
+
+
+Within a customer’s collateral structure (scenario)
+
+
+
+
+
+The search would be performed by entering a Customer Name into the “search” field and hitting “enter” on the 
+keyboard or hitting a “Search” button.
+
+
+Results of the search should include all exact matches, near-matches to the customer name entered, or recently 
+opened customers.
+
+
+The user may then click on the particular customer from the search results and would be launched into that customers 
+collateral structure (scenario).
+
+
+
+
+Nice to Have’s:
+
+Create a “Tool Tip” pop-up feature that allows the user to hover their mouse over customers from their search results. 
+When the mouse is hovered over the customer name, it will display information containing:
+
+Customer Name
+
+
+Address
+
+
+Phone
+
+
+Files As name
+
+
+Associated Branch
+
+
+Last four digits of the tax identification number
+
+
+
+
+
+Create an Advanced Search feature. The search feature would allow a user to search for a customer against broad or 
+specific information such as:
+
+Branch
+
+
+Loan Officer
+
+
+Account Number
+
+
+Employee Relationship
+
+
+Loan Number
+
+
+Loan Name
+
+
+Takedown Name
+
+
+Product Package
+
+
+
+
+
+
+
+
+Screenshots of old Search functionality: (NOTE: These screenshots are of the older 
+version. The new functionality may look similar to this, but will not be exact. This is just for 
+example only.)
+
+Customer Search Bar:
+
+image-20240501-203600.png
+Search Results:
+
+image-20240501-203712.png
+Tooltip pop-up when user hovers in Search results:
+
+image-20240501-203908.png
+
+Advanced Search:
+
+image-20240501-204252.png
+
