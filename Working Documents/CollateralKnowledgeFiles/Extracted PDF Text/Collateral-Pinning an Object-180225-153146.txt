@@ -1,0 +1,113 @@
+Pinning an Object
+
+Business Requirements:
+
+Create a “Pinning” feature that allows the user to pin objects on the collateral canvas which will focus and highlight 
+linked relationships. This will allow the user to focus in on the specific loans or collateral they want to work on and 
+streamline a potentially busy screen into something more manageable and user friendly. 
+
+
+
+
+Must Have’s:
+
+When the user hovers their mouse pointer over objects on the collateral canvas, a push pin button will appear in place 
+of the mouse pointer. 
+
+NOTE: This will only apply on objects that are allowed to be pinned.
+
+
+
+
+
+Clicking the “Push Pin” button will pin that object into focus and will outline the linked relationships in that items color 
+AND change the links to show as solid lines.
+
+
+The following objects are brought to foreground when an object is pinned: 
+
+Loan 
+
+
+Security Document
+
+
+Collateral 
+
+
+Collateral Detail 
+
+
+Customer 
+
+
+
+
+
+When an objected is pinned all non-related items fade to the background. This would include:
+
+Location Object (Even if this was linked, this is for streamline purposes)
+
+
+Any other objects that are not directly linked to the object you pinned.
+
+So ALL Loan, Security Document, Collateral, Collateral Detail, Collateral Owner and Collateral Location objects 
+will disappear from the collateral canvas if they are NOT linked to the object the user pins.
+
+
+
+
+
+
+
+
+When an object is pinned, all remaining objects are centered and centrally aligned.
+
+
+Objects that can be pinned on the Collateral Canvas:
+
+Loan Object
+
+
+Security Document Object
+
+
+Collateral Object
+
+
+
+
+
+Objects that cannot be pinned are:
+
+Collateral Detail
+
+
+Collateral Owner
+
+
+Collateral Location
+
+
+
+
+
+
+
+Screenshots of “Potential” functionality: (NOTE: These screenshots are for example only 
+and could change based on decisions made during development)
+
+An example of what the “Push Pin” icon looks like:
+
+image-20240627-201704.png
+
+Collateral Canvas BEFORE pinning an object:
+
+image-20240627-202353.png
+Collateral Canvas AFTER pinning an object:
+
+image-20240627-202418.png
+
+ 
+
+

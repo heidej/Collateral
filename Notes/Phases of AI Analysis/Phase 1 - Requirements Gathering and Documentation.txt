@@ -1,0 +1,14 @@
+Working with the relevant SMEs to get the various requirements and whatnot.  We generated the requirements from an evaluation of the existing application code and the requirements documented from both the 2016 and 2024 efforts into Collateral.
+
+Requirements generated in a couple different ways...
+First generation was done by just having documents evaluated by the Windsurf 3.5 Sonnet.  This was before 3.7 Sonnet (Thinking) was available, so it was a little less effective but still gave some good information.  The eval here basically gave a list of features that would be recommended based on the product's ancestors.  It was decent, but very thorough.
+
+Second generation was done with different methodology - I created a program to do a sort of roundtable discussion with various AI membership taking on different personalities.  Specifically, I used 5 roles of Product Manager, Technical Architect, UX Designer, Business Expert, and AI Designer to have a conversation amongst themselves.  For fuel, I had the Technical Architect role do an evaluation of the code base from the 2016 effort and the documentation of the requirements from the 2024 effort.  The conversation was done using these details as the baseline for generating requirements with those 5 roles.  I ran this process 3 different times (for the "final" version), once each with DeepSeek r1, OpenAI o1, and Claude 3.7 Sonnet Thinking.
+DeepSeek - the most verbose output and also the most hallucinations.  Generated a number of concepts that don't actually exist, used external links that went nowhere.  Final version had to be wrangled a bit more than expected but gave a lot of diagramming where the other 2 didn't.
+Claude 3.7 Sonnet (Thinking) - Had just come out a couple days before I did this eval, so I had to update to use it instead of 3.5.  The thinking logic here wasn't as verbose as DeepSeek but gave a lot of the same information in a more concise fashion.  I might end up being a little biased toward 3.7 Sonnet (Thinking) after doing all the work in getting this up and running, and since Windsurf runs on it I'll just need to make sure that I'm not leaning toward single sources to get information like this.
+OpenAI o1 - Generally good information but seemed less overall usable.  Since it was the last one I did, it felt like a lot of rehashing.  Rehash is good in a sense because it means that they all agree on a path forward.
+
+Output from the roundtables was excellent.  This allowed sythesis into a single set of requirements that I added to our Confluence space as the "initial requirements".  I also had the model do an eval and give me the best options to reject, which is the rejected requirements document in the same space.  Now that refinement is effectively done, I need to have a meeting w/ the SMEs for Collateral.
+
+JR and Lori agreed to a meeting so I'll meet with them to discuss what we've got so far.
+

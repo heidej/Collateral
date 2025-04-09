@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure Layer - System Architecture</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        header {
+            background-color: #00703c;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .diagram-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #mermaid-diagram {
+            position: absolute;
+            transform-origin: 0 0;
+        }
+        .controls {
+            margin: 15px 0;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        button {
+            background-color: #00703c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #005a30;
+        }
+        .instructions {
+            background-color: #edf7f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border-left: 4px solid #00703c;
+        }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .nav-button:hover {
+            background-color: #e0e0e0;
+        }
+        .nav-button.active {
+            background-color: #00703c;
+            color: white;
+            border-color: #00703c;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Infrastructure Layer - System Architecture</h1>
+    </header>
+    
+    <div class="container">
+        <div class="navigation">
+            <a href="client_layer.html" class="nav-button">Client Layer</a>
+            <a href="frontend_layer.html" class="nav-button">Frontend Layer</a>
+            <a href="backend_layer.html" class="nav-button">Backend Layer</a>
+            <a href="ai_agents_layer.html" class="nav-button">AI Agents Layer</a>
+            <a href="database_layer.html" class="nav-button">Database Layer</a>
+            <a href="infrastructure_layer.html" class="nav-button active">Infrastructure Layer</a>
+            <a href="system_architecture_interactive.html" class="nav-button">Full Architecture</a>
+        </div>
+        
+        <div class="instructions">
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li><strong>Zoom:</strong> Use the zoom buttons or mouse wheel to zoom in/out</li>
+                <li><strong>Pan:</strong> Click and drag to move around the diagram</li>
+                <li><strong>Reset:</strong> Click "Reset View" to return to the default view</li>
+            </ul>
+        </div>
+        
+        <div class="controls">
+            <button id="zoom-in">Zoom In (+)</button>
+            <button id="zoom-out">Zoom Out (-)</button>
+            <button id="reset">Reset View</button>
+        </div>
+        
+        <div class="diagram-container" id="diagram-container">
+            <div id="mermaid-diagram">
+                <pre class="mermaid">
+graph TB
+    %% Infrastructure Layer Section
+    subgraph "Infrastructure Layer (AWS)"
+        subgraph "Compute Services"
+            EC2["EC2 Instances"]
+            LB["Load Balancer (ELB)"]
+            Lambda["Lambda Functions"]
+            ECS["ECS (Docker Containers)"]
+        end
+        
+        subgraph "Database Services"
+            RDS["RDS (PostgreSQL)"]
+            S3Storage["S3 (Document Storage)"]
+        end
+        
+        subgraph "Machine Learning Services"
+            SageMaker["SageMaker (AI Training/Inference)"]
+            Comprehend["Comprehend (NLP)"]
+        end
+        
+        subgraph "Networking/Security"
+            VPC["Virtual Private Cloud"]
+            SecurityGroups["Security Groups"]
+            WAF["Web Application Firewall"]
+            CloudFront["CloudFront (CDN)"]
+            Route53["Route 53 (DNS)"]
+        end
+        
+        subgraph "Deployment & Monitoring"
+            CodePipeline["CodePipeline (CI/CD)"]
+            CloudWatch["CloudWatch (Monitoring)"]
+            SNS["SNS (Notifications)"]
+        end
+    end
+
+    %% Infrastructure connections
+    LB --> EC2
+    LB --> ECS
+    EC2 --> Lambda
+    RDS --> PostgresDB["PostgreSQL Database"]
+    VPC --> SecurityGroups
+    SecurityGroups --> EC2
+    SecurityGroups --> RDS
+    SecurityGroups --> ECS
+    CloudFront --> LB
+    Route53 --> CloudFront
+    CodePipeline --> EC2
+    CodePipeline --> ECS
+    CodePipeline --> Lambda
+    CloudWatch --> EC2
+    CloudWatch --> RDS
+    CloudWatch --> Lambda
+    CloudWatch --> ECS
+    CloudWatch --> SNS
+    WAF --> CloudFront
+    
+    %% AI connections
+    Lambda --> SageMaker
+    SageMaker --> Comprehend
+    SageMaker --> S3Storage
+    
+    %% Style configuration
+    classDef infraLayer fill:#fff2e6,stroke:#333,stroke-width:1px
+    class EC2,LB,Lambda,ECS,RDS,S3Storage,SageMaker,Comprehend,VPC,SecurityGroups,WAF,CloudFront,Route53,CodePipeline,CloudWatch,SNS infraLayer
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            logLevel: 5,
+            flowchart: { 
+                htmlLabels: true,
+                curve: 'basis' 
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to elements
+            const diagramContainer = document.getElementById('diagram-container');
+            const mermaidDiagram = document.getElementById('mermaid-diagram');
+            const zoomInBtn = document.getElementById('zoom-in');
+            const zoomOutBtn = document.getElementById('zoom-out');
+            const resetBtn = document.getElementById('reset');
+
+            // Set initial transform values
+            let scale = 1.5;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+
+            // Function to update diagram position
+            function updateDiagramPosition() {
+                mermaidDiagram.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            }
+
+            // Zoom in button
+            zoomInBtn.addEventListener('click', function() {
+                scale *= 1.2;
+                updateDiagramPosition();
+            });
+
+            // Zoom out button
+            zoomOutBtn.addEventListener('click', function() {
+                scale = Math.max(1, scale / 1.2);
+                updateDiagramPosition();
+            });
+
+            // Reset view button
+            resetBtn.addEventListener('click', function() {
+                scale = 1.5;
+                translateX = (diagramContainer.clientWidth - mermaidDiagram.scrollWidth * scale) / 2;
+                translateY = (diagramContainer.clientHeight - mermaidDiagram.scrollHeight * scale) / 2;
+                updateDiagramPosition();
+            });
+
+            // Mouse wheel zoom
+            diagramContainer.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                const zoomIntensity = 0.1;
+                const mouseX = e.clientX - diagramContainer.getBoundingClientRect().left;
+                const mouseY = e.clientY - diagramContainer.getBoundingClientRect().top;
+                
+                // Calculate zoom direction
+                const delta = e.deltaY > 0 ? -zoomIntensity : zoomIntensity;
+                const newScale = scale * (1 + delta);
+                
+                // Limit scale to reasonable values
+                if (newScale >= 1 && newScale <= 10) {
+                    // Calculate new position to zoom towards mouse position
+                    const scaleRatio = newScale / scale;
+                    translateX = mouseX - (mouseX - translateX) * scaleRatio;
+                    translateY = mouseY - (mouseY - translateY) * scaleRatio;
+                    scale = newScale;
+                    updateDiagramPosition();
+                }
+            });
+
+            // Mouse drag to pan
+            diagramContainer.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                diagramContainer.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    translateX = e.clientX - startX;
+                    translateY = e.clientY - startY;
+                    updateDiagramPosition();
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+                diagramContainer.style.cursor = 'grab';
+            });
+
+            // Initialize cursor style
+            diagramContainer.style.cursor = 'grab';
+
+            // Wait for Mermaid to render and then center the diagram
+            setTimeout(() => {
+                const containerWidth = diagramContainer.clientWidth;
+                const containerHeight = diagramContainer.clientHeight;
+                const diagramWidth = mermaidDiagram.scrollWidth;
+                const diagramHeight = mermaidDiagram.scrollHeight;
+                
+                // Center the diagram
+                translateX = (containerWidth - diagramWidth * scale) / 2;
+                translateY = (containerHeight - diagramHeight * scale) / 2;
+                updateDiagramPosition();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

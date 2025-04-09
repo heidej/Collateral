@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 800px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-001", "label": "CRM-001", "shape": "dot", "size": 20, "title": "CRM-001\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-002", "label": "CRM-002", "shape": "dot", "size": 20, "title": "CRM-002\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-003", "label": "CRM-003", "shape": "dot", "size": 20, "title": "CRM-003\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-004", "label": "CRM-004", "shape": "dot", "size": 20, "title": "CRM-004\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-005", "label": "CRM-005", "shape": "dot", "size": 20, "title": "CRM-005\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-006", "label": "CRM-006", "shape": "dot", "size": 20, "title": "CRM-006\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-007", "label": "CRM-007", "shape": "dot", "size": 20, "title": "CRM-007\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-008", "label": "CRM-008", "shape": "dot", "size": 20, "title": "CRM-008\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#8dd3c7", "font": {"color": "black"}, "id": "CRM-009", "label": "CRM-009", "shape": "dot", "size": 20, "title": "CRM-009\u003cbr\u003eModule: CRM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#ffffb3", "font": {"color": "black"}, "id": "RLM-001", "label": "RLM-001", "shape": "dot", "size": 20, "title": "RLM-001\u003cbr\u003eModule: RLM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#ffffb3", "font": {"color": "black"}, "id": "RLM-002", "label": "RLM-002", "shape": "dot", "size": 20, "title": "RLM-002\u003cbr\u003eModule: RLM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#ffffb3", "font": {"color": "black"}, "id": "RLM-003", "label": "RLM-003", "shape": "dot", "size": 20, "title": "RLM-003\u003cbr\u003eModule: RLM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#ffffb3", "font": {"color": "black"}, "id": "RLM-004", "label": "RLM-004", "shape": "dot", "size": 20, "title": "RLM-004\u003cbr\u003eModule: RLM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#ffffb3", "font": {"color": "black"}, "id": "RLM-005", "label": "RLM-005", "shape": "dot", "size": 20, "title": "RLM-005\u003cbr\u003eModule: RLM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#ffffb3", "font": {"color": "black"}, "id": "RLM-006", "label": "RLM-006", "shape": "dot", "size": 20, "title": "RLM-006\u003cbr\u003eModule: RLM"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-001", "label": "VRA-001", "shape": "dot", "size": 20, "title": "VRA-001\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-002", "label": "VRA-002", "shape": "dot", "size": 20, "title": "VRA-002\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-003", "label": "VRA-003", "shape": "dot", "size": 20, "title": "VRA-003\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-004", "label": "VRA-004", "shape": "dot", "size": 20, "title": "VRA-004\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-005", "label": "VRA-005", "shape": "dot", "size": 20, "title": "VRA-005\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-006", "label": "VRA-006", "shape": "dot", "size": 20, "title": "VRA-006\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-007", "label": "VRA-007", "shape": "dot", "size": 20, "title": "VRA-007\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-008", "label": "VRA-008", "shape": "dot", "size": 20, "title": "VRA-008\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-009", "label": "VRA-009", "shape": "dot", "size": 20, "title": "VRA-009\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-010", "label": "VRA-010", "shape": "dot", "size": 20, "title": "VRA-010\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-011", "label": "VRA-011", "shape": "dot", "size": 20, "title": "VRA-011\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-012", "label": "VRA-012", "shape": "dot", "size": 20, "title": "VRA-012\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-013", "label": "VRA-013", "shape": "dot", "size": 20, "title": "VRA-013\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-014", "label": "VRA-014", "shape": "dot", "size": 20, "title": "VRA-014\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#bebada", "font": {"color": "black"}, "id": "VRA-015", "label": "VRA-015", "shape": "dot", "size": 20, "title": "VRA-015\u003cbr\u003eModule: VRA"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fb8072", "font": {"color": "black"}, "id": "WFN-001", "label": "WFN-001", "shape": "dot", "size": 20, "title": "WFN-001\u003cbr\u003eModule: WFN"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fb8072", "font": {"color": "black"}, "id": "WFN-002", "label": "WFN-002", "shape": "dot", "size": 20, "title": "WFN-002\u003cbr\u003eModule: WFN"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fb8072", "font": {"color": "black"}, "id": "WFN-003", "label": "WFN-003", "shape": "dot", "size": 20, "title": "WFN-003\u003cbr\u003eModule: WFN"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fb8072", "font": {"color": "black"}, "id": "WFN-004", "label": "WFN-004", "shape": "dot", "size": 20, "title": "WFN-004\u003cbr\u003eModule: WFN"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fb8072", "font": {"color": "black"}, "id": "WFN-005", "label": "WFN-005", "shape": "dot", "size": 20, "title": "WFN-005\u003cbr\u003eModule: WFN"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#80b1d3", "font": {"color": "black"}, "id": "VIS-001", "label": "VIS-001", "shape": "dot", "size": 20, "title": "VIS-001\u003cbr\u003eModule: VIS"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#80b1d3", "font": {"color": "black"}, "id": "VIS-002", "label": "VIS-002", "shape": "dot", "size": 20, "title": "VIS-002\u003cbr\u003eModule: VIS"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#80b1d3", "font": {"color": "black"}, "id": "VIS-003", "label": "VIS-003", "shape": "dot", "size": 20, "title": "VIS-003\u003cbr\u003eModule: VIS"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#80b1d3", "font": {"color": "black"}, "id": "VIS-004", "label": "VIS-004", "shape": "dot", "size": 20, "title": "VIS-004\u003cbr\u003eModule: VIS"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#80b1d3", "font": {"color": "black"}, "id": "VIS-005", "label": "VIS-005", "shape": "dot", "size": 20, "title": "VIS-005\u003cbr\u003eModule: VIS"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#80b1d3", "font": {"color": "black"}, "id": "VIS-006", "label": "VIS-006", "shape": "dot", "size": 20, "title": "VIS-006\u003cbr\u003eModule: VIS"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-001", "label": "REP-001", "shape": "dot", "size": 20, "title": "REP-001\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-002", "label": "REP-002", "shape": "dot", "size": 20, "title": "REP-002\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-003", "label": "REP-003", "shape": "dot", "size": 20, "title": "REP-003\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-004", "label": "REP-004", "shape": "dot", "size": 20, "title": "REP-004\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-005", "label": "REP-005", "shape": "dot", "size": 20, "title": "REP-005\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-006", "label": "REP-006", "shape": "dot", "size": 20, "title": "REP-006\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-007", "label": "REP-007", "shape": "dot", "size": 20, "title": "REP-007\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fdb462", "font": {"color": "black"}, "id": "REP-008", "label": "REP-008", "shape": "dot", "size": 20, "title": "REP-008\u003cbr\u003eModule: REP"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-001", "label": "SCI-001", "shape": "dot", "size": 20, "title": "SCI-001\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-002", "label": "SCI-002", "shape": "dot", "size": 20, "title": "SCI-002\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-003", "label": "SCI-003", "shape": "dot", "size": 20, "title": "SCI-003\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-004", "label": "SCI-004", "shape": "dot", "size": 20, "title": "SCI-004\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-005", "label": "SCI-005", "shape": "dot", "size": 20, "title": "SCI-005\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-006", "label": "SCI-006", "shape": "dot", "size": 20, "title": "SCI-006\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-007", "label": "SCI-007", "shape": "dot", "size": 20, "title": "SCI-007\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-008", "label": "SCI-008", "shape": "dot", "size": 20, "title": "SCI-008\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#b3de69", "font": {"color": "black"}, "id": "SCI-009", "label": "SCI-009", "shape": "dot", "size": 20, "title": "SCI-009\u003cbr\u003eModule: SCI"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fccde5", "font": {"color": "black"}, "id": "SCD-001", "label": "SCD-001", "shape": "dot", "size": 20, "title": "SCD-001\u003cbr\u003eModule: SCD"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fccde5", "font": {"color": "black"}, "id": "SCD-002", "label": "SCD-002", "shape": "dot", "size": 20, "title": "SCD-002\u003cbr\u003eModule: SCD"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fccde5", "font": {"color": "black"}, "id": "SCD-003", "label": "SCD-003", "shape": "dot", "size": 20, "title": "SCD-003\u003cbr\u003eModule: SCD"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fccde5", "font": {"color": "black"}, "id": "SCD-004", "label": "SCD-004", "shape": "dot", "size": 20, "title": "SCD-004\u003cbr\u003eModule: SCD"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fccde5", "font": {"color": "black"}, "id": "SCD-005", "label": "SCD-005", "shape": "dot", "size": 20, "title": "SCD-005\u003cbr\u003eModule: SCD"}, {"borderWidth": 2, "borderWidthSelected": 4, "color": "#fccde5", "font": {"color": "black"}, "id": "SCD-006", "label": "SCD-006", "shape": "dot", "size": 20, "title": "SCD-006\u003cbr\u003eModule: SCD"}]);
+                  edges = new vis.DataSet([{"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-002", "title": "Type: Direct\u003cbr\u003eRationale: Editing records requires that records exist first", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-003", "title": "Type: Direct\u003cbr\u003eRationale: Searching requires that records exist to be searched", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-004", "title": "Type: Direct\u003cbr\u003eRationale: Viewing records requires that records exist to be viewed", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-005", "title": "Type: Direct\u003cbr\u003eRationale: Deleting records requires that records exist to be deleted", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-006", "title": "Type: Enhancement\u003cbr\u003eRationale: Batch operations enhance the basic record management", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-007", "title": "Type: Enhancement\u003cbr\u003eRationale: Document attachment enhances the basic record information", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-008", "title": "Type: Enhancement\u003cbr\u003eRationale: Image capture enhances the record documentation capabilities", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "CRM-009", "title": "Type: Enhancement\u003cbr\u003eRationale: Advanced search enhances the basic search capability", "to": "CRM-003"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "RLM-001", "title": "Type: Direct\u003cbr\u003eRationale: Linking collateral to loans requires collateral records to exist", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "RLM-002", "title": "Type: Direct\u003cbr\u003eRationale: Managing multiple relationships requires the ability to create relationships", "to": "RLM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "RLM-003", "title": "Type: Enhancement\u003cbr\u003eRationale: Collateral history builds on relationship tracking", "to": "RLM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "RLM-004", "title": "Type: Direct\u003cbr\u003eRationale: Assignment of collateral requires relationship capabilities", "to": "RLM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "RLM-005", "title": "Type: Direct\u003cbr\u003eRationale: Partial allocation requires relationship management", "to": "RLM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "RLM-006", "title": "Type: Enhancement\u003cbr\u003eRationale: Borrower profiles enhance collateral record context", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-001", "title": "Type: Direct\u003cbr\u003eRationale: Valuations require collateral records to exist", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-002", "title": "Type: Enhancement\u003cbr\u003eRationale: Appraisal tracking enhances the valuation capabilities", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-003", "title": "Type: Enhancement\u003cbr\u003eRationale: Historical valuations extend basic valuation functionality", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-004", "title": "Type: Enhancement\u003cbr\u003eRationale: Valuation comparisons build on basic valuation data", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-005", "title": "Type: Direct\u003cbr\u003eRationale: Value trend analysis requires valuation data", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-006", "title": "Type: Direct\u003cbr\u003eRationale: Depreciation calculations require initial valuation data", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-007", "title": "Type: Enhancement\u003cbr\u003eRationale: Value alerts enhance valuation monitoring", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-008", "title": "Type: Enhancement\u003cbr\u003eRationale: Market data integration extends valuation capabilities", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-009", "title": "Type: Direct\u003cbr\u003eRationale: Configurable depreciation rules extend basic depreciation", "to": "VRA-006"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-010", "title": "Type: Enhancement\u003cbr\u003eRationale: Bulk value updates enhance efficiency of valuations", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-011", "title": "Type: Direct\u003cbr\u003eRationale: NRV calculation requires valuation methodology", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-012", "title": "Type: Direct\u003cbr\u003eRationale: Stress testing builds on NRV calculations", "to": "VRA-011"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-013", "title": "Type: Enhancement\u003cbr\u003eRationale: NRV rule management enhances the NRV calculation", "to": "VRA-011"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-014", "title": "Type: Compliance\u003cbr\u003eRationale: Compliance verification requires NRV rules", "to": "VRA-011"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VRA-015", "title": "Type: Enhancement\u003cbr\u003eRationale: AI assistance enhances valuation process", "to": "VRA-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "WFN-001", "title": "Type: Enhancement\u003cbr\u003eRationale: Notifications enhance collateral management", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "WFN-002", "title": "Type: Direct\u003cbr\u003eRationale: Custom notification rules require notification system", "to": "WFN-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "WFN-003", "title": "Type: Enhancement\u003cbr\u003eRationale: Expiration alerts enhance appraisal tracking", "to": "VRA-002"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "WFN-004", "title": "Type: Enhancement\u003cbr\u003eRationale: Approval workflows enhance change management", "to": "WFN-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "WFN-005", "title": "Type: Direct\u003cbr\u003eRationale: Task assignment requires notification infrastructure", "to": "WFN-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VIS-001", "title": "Type: Enhancement\u003cbr\u003eRationale: Map visualization enhances collateral context", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VIS-002", "title": "Type: Enhancement\u003cbr\u003eRationale: Proximity analysis extends mapping capabilities", "to": "VIS-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VIS-003", "title": "Type: Enhancement\u003cbr\u003eRationale: Concentration visualization extends mapping", "to": "VIS-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VIS-004", "title": "Type: Enhancement\u003cbr\u003eRationale: Custom map layers enhance visualization flexibility", "to": "VIS-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VIS-005", "title": "Type: Enhancement\u003cbr\u003eRationale: Interactive dashboards build on visualization framework", "to": "VIS-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "VIS-006", "title": "Type: Enhancement\u003cbr\u003eRationale: Property boundaries enhance spatial understanding", "to": "VIS-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-001", "title": "Type: Direct\u003cbr\u003eRationale: Reports require collateral data to exist", "to": "CRM-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-002", "title": "Type: Enhancement\u003cbr\u003eRationale: Customizable reports extend reporting capabilities", "to": "REP-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-003", "title": "Type: Enhancement\u003cbr\u003eRationale: Scheduled reports enhance reporting automation", "to": "REP-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-004", "title": "Type: Enhancement\u003cbr\u003eRationale: Data export enhances data accessibility", "to": "REP-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-005", "title": "Type: Enhancement\u003cbr\u003eRationale: Dashboards provide enhanced data visualization", "to": "REP-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-006", "title": "Type: Direct\u003cbr\u003eRationale: Compliance reports require reporting foundation", "to": "REP-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-007", "title": "Type: Enhancement\u003cbr\u003eRationale: Ad-hoc reporting extends standard reports", "to": "REP-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "REP-008", "title": "Type: Direct\u003cbr\u003eRationale: Lender portal requires reporting capabilities", "to": "REP-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "SCI-005", "title": "Type: Integration\u003cbr\u003eRationale: Third-party integration requires API foundation", "to": "SCI-004"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "SCD-004", "title": "Type: Compliance\u003cbr\u003eRationale: Compliance review requires audit trail capability", "to": "SCD-001"}, {"arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}, "from": "SCD-005", "title": "Type: Security\u003cbr\u003eRationale: Access logs build on audit capabilities", "to": "SCD-001"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -80000,
+            "springConstant": 0.001,
+            "springLength": 200
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

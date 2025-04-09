@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Farm Credit Collateral Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00703c;
+            --primary-hover: #005e32;
+            --primary-light: #e8f5ef;
+            --header-green: #e8f5e9;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --text-light: #6c757d;
+            --border-light: #dee2e6;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            
+            /* Result types */
+            --type-loan: #3b82f6;
+            --type-realestate: #10b981;
+            --type-account: #f59e0b;
+            --type-equipment: #38bdf8;
+            --type-livestock: #a3e635;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        /* App Layout */
+        .app-layout {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 240px;
+            background-color: var(--primary);
+            height: 100vh;
+            padding-top: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-brand {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-brand img {
+            height: 32px;
+            margin-right: 0.75rem;
+        }
+        
+        .sidebar-brand-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--white);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0.5rem 0;
+            flex: 1;
+        }
+        
+        .nav-section {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            border-radius: 0.375rem;
+            margin: 0 0.5rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        .sidebar-nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .sidebar-nav i {
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .user-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: var(--white);
+        }
+        
+        .user-role {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            background-color: var(--bg-light);
+        }
+        
+        /* Header */
+        .header {
+            height: 70px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar {
+            position: relative;
+            width: 300px;
+            margin-right: 1rem;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.25rem;
+            border: 1px solid var(--border-light);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+            transition: all 0.2s;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 112, 60, 0.1);
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .icon-btn {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.5rem;
+            border: none;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .icon-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Container */
+        .container {
+            padding: 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* Search Results */
+        .search-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+        
+        .search-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .result-count {
+            font-size: 0.875rem;
+            color: var(--text-medium);
+            margin-right: 1.5rem;
+        }
+        
+        .search-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .filter-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-medium);
+        }
+        
+        .filter-select {
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 0.375rem;
+            background-color: white;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1rem;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 112, 60, 0.1);
+        }
+        
+        .view-options {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .view-btn {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-light);
+            background-color: white;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .view-btn.active, .view-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Search Results List */
+        .search-results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        
+        .result-card {
+            background-color: var(--white);
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .result-card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+        
+        .result-card-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--header-green);
+        }
+        
+        .result-card-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .result-card-type {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            text-transform: uppercase;
+        }
+        
+        .result-card-type.loan {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--type-loan);
+        }
+        
+        .result-card-type.real-estate {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--type-realestate);
+        }
+        
+        .result-card-type.account {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--type-account);
+        }
+        
+        .result-card-type.equipment {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--type-equipment);
+        }
+        
+        .result-card-type.livestock {
+            background-color: rgba(163, 230, 53, 0.1);
+            color: var(--type-livestock);
+        }
+        
+        .result-card-content {
+            padding: 1rem;
+        }
+        
+        .result-detail-list {
+            display: grid;
+            gap: 0.5rem;
+        }
+        
+        .result-detail-item {
+            display: flex;
+        }
+        
+        .detail-label {
+            width: 100px;
+            color: var(--text-medium);
+        }
+        
+        .detail-value {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        
+        .tag {
+            padding: 0.25rem 0.5rem;
+            background-color: var(--bg-light);
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            color: var(--text-medium);
+        }
+        
+        .result-card-footer {
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-light);
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .timestamp {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background-color: var(--white);
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-light);
+        }
+        
+        .action-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.25rem;
+        }
+        
+        .pagination-item {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            color: var(--text-medium);
+            border: 1px solid var(--border-light);
+            background-color: white;
+        }
+        
+        .pagination-item:hover:not(.disabled) {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .pagination-item.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .pagination-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* CollBot Styles */
+        .collbot-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px 0 0 8px;
+            padding: 12px 10px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .collbot-toggle i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .collbot-toggle-text {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .collbot-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .collbot-panel.active {
+            right: 0;
+        }
+        
+        .collbot-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .collbot-title {
+            display: flex;
+            align-items: center;
+        }
+        
+        .collbot-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .collbot-icon i {
+            font-size: 1.25rem;
+        }
+        
+        .collbot-info h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .collbot-info p {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .collbot-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+        
+        .collbot-close:hover {
+            color: var(--text-dark);
+        }
+        
+        .collbot-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .collbot-search {
+            margin-bottom: 1.5rem;
+        }
+        
+        .collbot-search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        
+        .collbot-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        .collbot-search-input:focus {
+            outline: none;
+        }
+        
+        .collbot-send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .collbot-send-btn:hover {
+            background-color: #00602f;
+        }
+        
+        .collbot-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .collbot-example {
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            font-size: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .collbot-example:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <img src="https://placehold.co/32x32/00703c/FFFFFF.svg" alt="Logo">
+                <div class="sidebar-brand-text">Farm Credit</div>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <div class="nav-section">Main</div>
+                <li>
+                    <a href="Modern_Dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="active">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Web.html">
+                        <i class="fas fa-project-diagram"></i>
+                        Web of Liability
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_ColForm.html">
+                        <i class="fas fa-file-alt"></i>
+                        Collateral
+                    </a>
+                </li>
+                
+                <div class="nav-section">Management</div>
+                <li>
+                    <a href="Modern_Customers.html">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Reports.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                
+                <div class="nav-section">System</div>
+                <li>
+                    <a href="Modern_Admin.html">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        Help Center
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Loan Officer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="page-title">Search</h1>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search for customers, loans, or collateral..." />
+                    </div>
+                    
+                    <button class="icon-btn notification-badge">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    
+                    <button class="icon-btn">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Container -->
+            <div class="container">
+                <!-- Search Header -->
+                <div class="search-header">
+                    <h1>Search Results: "Smith Farm"</h1>
+                    <div class="search-meta">
+                        <span class="result-count">23 results found</span>
+                    </div>
+                </div>
+                
+                <!-- Search Controls -->
+                <div class="search-controls">
+                    <div class="filter-group">
+                        <span class="filter-label">Filter by:</span>
+                        <select class="filter-select">
+                            <option>All Types</option>
+                            <option>Real Estate</option>
+                            <option>Equipment</option>
+                            <option>Livestock</option>
+                            <option>Accounts</option>
+                            <option>Loans</option>
+                        </select>
+                        
+                        <select class="filter-select">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Pending</option>
+                            <option>Expired</option>
+                            <option>At Risk</option>
+                        </select>
+                        
+                        <select class="filter-select">
+                            <option>Any Value</option>
+                            <option>Under $100,000</option>
+                            <option>$100,000 - $500,000</option>
+                            <option>$500,000 - $1M</option>
+                            <option>Over $1M</option>
+                        </select>
+                    </div>
+                    
+                    <div class="view-options">
+                        <button class="view-btn active">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="view-btn">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Search Results -->
+                <div class="search-results-container">
+                    <!-- Result Card 1 - Real Estate -->
+                    <div class="result-card" onclick="window.location='Modern_Web.html'">
+                        <div class="result-card-header">
+                            <div class="result-card-title">Smith Farm North - Real Estate</div>
+                            <div class="result-card-type real-estate">Real Estate</div>
+                        </div>
+                        <div class="result-card-content">
+                            <div class="result-detail-list">
+                                <div class="result-detail-item">
+                                    <div class="detail-label">ID:</div>
+                                    <div class="detail-value">RE-2023-001</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Owner:</div>
+                                    <div class="detail-value">Smith Family Farms</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Value:</div>
+                                    <div class="detail-value">$1,250,000</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Status:</div>
+                                    <div class="detail-value">Active</div>
+                                </div>
+                            </div>
+                            <div class="tag-list">
+                                <span class="tag">Farmland</span>
+                                <span class="tag">Agricultural</span>
+                                <span class="tag">120 Acres</span>
+                            </div>
+                        </div>
+                        <div class="result-card-footer">
+                            <div class="timestamp">Last updated: Mar 15, 2023</div>
+                            <div class="action-buttons">
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Result Card 2 - Loan -->
+                    <div class="result-card">
+                        <div class="result-card-header">
+                            <div class="result-card-title">Smith Farm Operating Loan</div>
+                            <div class="result-card-type loan">Loan</div>
+                        </div>
+                        <div class="result-card-content">
+                            <div class="result-detail-list">
+                                <div class="result-detail-item">
+                                    <div class="detail-label">ID:</div>
+                                    <div class="detail-value">LN-2023-042</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Borrower:</div>
+                                    <div class="detail-value">Smith Family Farms</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Amount:</div>
+                                    <div class="detail-value">$350,000</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Status:</div>
+                                    <div class="detail-value">Active</div>
+                                </div>
+                            </div>
+                            <div class="tag-list">
+                                <span class="tag">Operating</span>
+                                <span class="tag">5-Year Term</span>
+                                <span class="tag">3.75% Rate</span>
+                            </div>
+                        </div>
+                        <div class="result-card-footer">
+                            <div class="timestamp">Last updated: Feb 28, 2023</div>
+                            <div class="action-buttons">
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Result Card 3 - Equipment -->
+                    <div class="result-card">
+                        <div class="result-card-header">
+                            <div class="result-card-title">Smith Farm Equipment - Tractors</div>
+                            <div class="result-card-type equipment">Equipment</div>
+                        </div>
+                        <div class="result-card-content">
+                            <div class="result-detail-list">
+                                <div class="result-detail-item">
+                                    <div class="detail-label">ID:</div>
+                                    <div class="detail-value">EQ-2023-078</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Owner:</div>
+                                    <div class="detail-value">Smith Family Farms</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Value:</div>
+                                    <div class="detail-value">$225,000</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Status:</div>
+                                    <div class="detail-value">Active</div>
+                                </div>
+                            </div>
+                            <div class="tag-list">
+                                <span class="tag">John Deere</span>
+                                <span class="tag">3 Units</span>
+                                <span class="tag">2020 Model</span>
+                            </div>
+                        </div>
+                        <div class="result-card-footer">
+                            <div class="timestamp">Last updated: Jan 12, 2023</div>
+                            <div class="action-buttons">
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Result Card 4 - Account -->
+                    <div class="result-card">
+                        <div class="result-card-header">
+                            <div class="result-card-title">Smith Family Farms - Business Account</div>
+                            <div class="result-card-type account">Account</div>
+                        </div>
+                        <div class="result-card-content">
+                            <div class="result-detail-list">
+                                <div class="result-detail-item">
+                                    <div class="detail-label">ID:</div>
+                                    <div class="detail-value">AC-2023-512</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Owner:</div>
+                                    <div class="detail-value">Smith Family Farms</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Balance:</div>
+                                    <div class="detail-value">$78,450</div>
+                                </div>
+                                <div class="result-detail-item">
+                                    <div class="detail-label">Status:</div>
+                                    <div class="detail-value">Active</div>
+                                </div>
+                            </div>
+                            <div class="tag-list">
+                                <span class="tag">Business</span>
+                                <span class="tag">Checking</span>
+                                <span class="tag">Primary</span>
+                            </div>
+                        </div>
+                        <div class="result-card-footer">
+                            <div class="timestamp">Last updated: Mar 20, 2023</div>
+                            <div class="action-buttons">
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-item disabled">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="pagination-item active">1</button>
+                    <button class="pagination-item">2</button>
+                    <button class="pagination-item">3</button>
+                    <button class="pagination-item">4</button>
+                    <button class="pagination-item">5</button>
+                    <button class="pagination-item">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CollBot Panel -->
+        <div class="collbot-panel">
+            <div class="collbot-header">
+                <div class="collbot-title">
+                    <div class="collbot-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="collbot-info">
+                        <h3>CollBot</h3>
+                        <p>Your AI collateral management assistant.</p>
+                    </div>
+                </div>
+                <button class="collbot-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="collbot-body">
+                <div class="collbot-search">
+                    <div class="collbot-search-bar">
+                        <input type="text" class="collbot-search-input" placeholder="Ask CollBot anything...">
+                        <button class="collbot-send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="collbot-examples">
+                    <span class="collbot-example">Find all results with high-risk status</span>
+                    <span class="collbot-example">Show me the most valuable collateral</span>
+                    <span class="collbot-example">Summarize the search results</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CollBot Toggle -->
+        <div class="collbot-toggle">
+            <i class="fas fa-robot"></i>
+            <div class="collbot-toggle-text">CollBot</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // View buttons toggle
+            const viewButtons = document.querySelectorAll('.view-btn');
+            viewButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    viewButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Here you would actually change the view (grid vs list)
+                    const isList = this.querySelector('.fa-list');
+                    const resultsContainer = document.querySelector('.search-results-container');
+                    
+                    if (isList) {
+                        resultsContainer.style.gridTemplateColumns = '1fr';
+                    } else {
+                        resultsContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(320px, 1fr))';
+                    }
+                });
+            });
+            
+            // CollBot toggle
+            const collbotToggle = document.querySelector('.collbot-toggle');
+            const collbotPanel = document.querySelector('.collbot-panel');
+            collbotToggle.addEventListener('click', function() {
+                collbotPanel.classList.toggle('active');
+            });
+            
+            // CollBot close button
+            const collbotClose = document.querySelector('.collbot-close');
+            collbotClose.addEventListener('click', function() {
+                collbotPanel.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+Collateral Visualization Canvas
+
+Business Requirements:
+
+Create a graphical summary view of all the applicable collateral information for a selected customer. This view should 
+include shapes/objects that accurately visualizes a customer’s collateral liability across all applicable loans. (NOTE: 
+The customers “Collateral Web of Liability” Business Requirements are detailed further here: Collateral Web of Liability Canvas Display
+
+
+
+
+Functional Requirements:
+
+Must Have’s:
+
+Create shapes to be displayed on the collateral canvas that each represents a different collateral object containing 
+different collateral information. This information will help to create an entire picture displaying the customers 
+collateral structure for applicable loans. 
+The shapes created for the collateral objects should be unique and easily identifiable to the user. This way they don’t 
+have to click on multiple objects to find what they are looking for or get confused in anyway by similar looking shapes. 
+They should be able to look at the collateral canvas and know that “This is the Loan Object”, “This is the Security 
+Document Object”, etc. Unique shapes for each object will also help color blind users to be able to differentiate objects 
+more easily. 
+
+
+
+Collateral shapes needing to be created for canvas display will be as follows: (NOTE: Specific Business Requirements 
+for these objects creation and use is detailed further here: (Insert future hyperlink to Confluence Page))
+
+Loan Object
+
+
+Security Document Object
+
+
+Collateral Object
+
+
+Collateral Detail Object (Nice to Have?)
+
+
+Collateral Owner Object (Nice to Have?)
+
+
+Collateral Location Object (Needed for 1098 reporting?)
+
+
+
+
+
+Collateral shapes colors will be as follows: 
+
+Loan Object (Green - TBD)
+
+
+Security Document Object (Purple - TBD)
+
+
+Collateral Object (Yellow - TBD)
+
+
+Collateral Detail Object (Light Blue - TBD)
+
+
+Collateral Owner Object (Orange - TBD)
+
+
+Collateral Location Object (Red/Magenta - TBD)
+
+
+
+
+
+Objects should display in the following order from top to bottom: 
+
+Loan 
+
+
+Security Documents 
+
+
+Collateral 
+
+
+Collateral Detail 
+
+
+Collateral Owner 
+
+
+Collateral Location 
+
+
+
+
+
+
+
+Please see the screenshot below for an OLD version of what the collateral canvas looked like. I have labeled 
+and sectioned off what the different objects are for clarification. 
+
+
+Nice to Have’s:
+
+Collateral shapes needing to be created for canvas display will be as follows:
+
+Collateral Detail Object (Nice to Have?)
+
+
+Collateral Owner Object (Nice to Have?)
+
+
+
+
+
+
+
+Non-Functional Requirements:
+
+Need to determine scale of loan complexity that can realistically be displayed all on one screen. Depending on what 
+web of liability scope that is chosen to display, this could impact system performance and usability for the user if they 
+want all loans to display on one screen.
+
+
+
+
+Screenshots of old Search functionality: (NOTE: These screenshots are of the older 
+version. The new functionality may look similar to this, but will not be exact. This is just for 
+example only.)
+
+ 
+
+OLD Collateral Canvas view with labeled sections indicating which object contains what collateral information. These 
+sections correspond to the alphabetical listing in Functional Requirement “2.a-f”. 
+
+image-20240503-195050.png 
+
+
+ 
+
+

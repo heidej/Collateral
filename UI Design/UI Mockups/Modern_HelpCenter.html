@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - Farm Credit Collateral Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00703c;
+            --primary-hover: #005e32;
+            --primary-light: #e8f5ef;
+            --primary-transparent: rgba(0, 112, 60, 0.1);
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --dark: #343a40;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --text-light: #6c757d;
+            --border-light: #dee2e6;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --header-green: #e8f5e9;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        /* App Layout */
+        .app-layout {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 240px;
+            background-color: var(--primary);
+            height: 100vh;
+            padding-top: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-brand {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-brand img {
+            height: 32px;
+            margin-right: 0.75rem;
+        }
+        
+        .sidebar-brand-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--white);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0.5rem 0;
+            flex: 1;
+        }
+        
+        .nav-section {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+        }
+        
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            margin: 0 0.5rem;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        .sidebar-nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .sidebar-nav i {
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--white);
+        }
+        
+        .user-role {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            height: 70px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            justify-content: space-between;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar {
+            position: relative;
+            margin-right: 1rem;
+        }
+        
+        .search-bar input {
+            padding: 0.5rem 1rem 0.5rem 2.25rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            width: 240px;
+            background-color: #f8f9fa;
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #5f6368;
+            font-size: 0.875rem;
+        }
+        
+        .notifications {
+            position: relative;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+        
+        .notifications i {
+            font-size: 1.125rem;
+            color: #5f6368;
+        }
+        
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #d93025;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.6875rem;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .user-menu img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .user-menu span {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #202124;
+            margin-right: 0.5rem;
+        }
+        
+        .user-menu i {
+            font-size: 0.75rem;
+            color: #5f6368;
+        }
+        
+        .container {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        /* Welcome Message and Content styling */
+        .welcome-message {
+            background-color: var(--header-green);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .welcome-message h1 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        
+        .welcome-message p {
+            color: #5f6368;
+            font-size: 0.875rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        /* Section heading */
+        .section-heading {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #202124;
+            margin: 0 0 0.75rem 0;
+        }
+        
+        /* Help Categories */
+        .help-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .help-category {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .help-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .help-category-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+        
+        .help-category-icon i {
+            font-size: 1.125rem;
+        }
+        
+        .help-category h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #202124;
+        }
+        
+        .help-category p {
+            color: #5f6368;
+            font-size: 0.75rem;
+            margin: 0;
+            line-height: 1.3;
+        }
+        
+        /* FAQ Styles */
+        .faqs {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-item h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #202124;
+            margin: 0 0 0.5rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-item p {
+            color: #5f6368;
+            font-size: 0.875rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .faq-item i {
+            color: #5f6368;
+            font-size: 0.75rem;
+        }
+        
+        /* Video Tutorial Styles */
+        .video-tutorials {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tutorial-card {
+            background-color: var(--white);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .tutorial-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tutorial-thumbnail {
+            height: 160px;
+            background-color: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tutorial-thumbnail i {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+        
+        .tutorial-info {
+            padding: 1rem;
+        }
+        
+        .tutorial-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .tutorial-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        /* Contact Support Styles */
+        .contact-support {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .contact-icon i {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        
+        .contact-info h4 {
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+        
+        .contact-info p {
+            margin: 0.25rem 0;
+            color: var(--text-medium);
+            font-size: 0.875rem;
+        }
+        
+        .support-form {
+            background-color: var(--white);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.25rem;
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* CollBot Styles */
+        .collbot-toggle {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        
+        .collbot-toggle:hover {
+            transform: scale(1.05);
+            background-color: #00602f;
+        }
+        
+        .collbot-toggle i {
+            font-size: 1.25rem;
+        }
+        
+        .collbot-panel {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 360px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            z-index: 50;
+            transform: scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        .collbot-panel.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .collbot-header {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .collbot-title {
+            display: flex;
+            align-items: center;
+        }
+        
+        .collbot-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+        }
+        
+        .collbot-icon i {
+            font-size: 1.25rem;
+        }
+        
+        .collbot-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.125rem;
+        }
+        
+        .collbot-info p {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin: 0;
+        }
+        
+        .collbot-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.25rem;
+        }
+        
+        .collbot-close:hover {
+            color: var(--text-dark);
+        }
+        
+        .collbot-body {
+            padding: 1rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .collbot-search {
+            margin-bottom: 1rem;
+        }
+        
+        .collbot-search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .collbot-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            outline: none;
+        }
+        
+        .collbot-search-input:focus {
+            background-color: var(--white);
+        }
+        
+        .collbot-send-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .collbot-send-btn:hover {
+            background-color: var(--primary-hover);
+        }
+        
+        .collbot-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .collbot-example {
+            font-size: 0.75rem;
+            color: var(--primary);
+            background-color: var(--primary-light);
+            padding: 0.375rem 0.75rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .collbot-example:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Section Headings */
+        .section-heading {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #202124;
+            margin: 0 0 0.75rem 0;
+        }
+        
+        /* Sidebar sections */
+        .sidebar-section h3 {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+            padding: 0 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <img src="https://placehold.co/32x32/00703c/FFFFFF.svg" alt="Logo">
+                <span class="sidebar-brand-text">Farm Credit</span>
+            </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-section">MAIN</div>
+                <ul>
+                    <li>
+                        <a href="Modern_Dashboard.html">
+                            <i class="fas fa-th-large"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Modern_Search.html">
+                            <i class="fas fa-search"></i>
+                            <span>Search</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Modern_Web.html">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Web of Liability</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Modern_ColForm.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Collateral</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-section">MANAGEMENT</div>
+                <ul>
+                    <li>
+                        <a href="Modern_Customers.html">
+                            <i class="fas fa-users"></i>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Modern_Reports.html">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-section">SYSTEM</div>
+                <ul>
+                    <li>
+                        <a href="Modern_Admin.html">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Modern_HelpCenter.html" class="active">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help Center</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <a href="Modern_UserSettings.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; width: 100%;">
+                        <div class="avatar">JD</div>
+                        <div class="user-info">
+                            <div class="user-name">John Doe</div>
+                            <div class="user-role">Loan Officer</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="page-title">Help Center</h1>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search help topics...">
+                    </div>
+                    
+                    <div class="notifications">
+                        <i class="far fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    
+                    <div class="user-menu">
+                        <img src="https://placehold.co/32x32/e0e0e0/a0a0a0.svg" alt="User">
+                        <span>John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="welcome-message">
+                    <h1>Help Center</h1>
+                    <p>Find answers to your questions and learn how to use the Collateral Management System</p>
+                </div>
+                
+                <h2 class="section-heading">Help Categories</h2>
+                <div class="help-categories">
+                    <!-- Getting Started -->
+                    <div class="help-category">
+                        <div class="help-category-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Getting Started</h3>
+                        <p>Learn the basics of the Collateral Management System</p>
+                    </div>
+                    
+                    <!-- Collateral Management -->
+                    <div class="help-category">
+                        <div class="help-category-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Collateral Management</h3>
+                        <p>How to manage and track collateral assets</p>
+                    </div>
+                    
+                    <!-- Customer Profiles -->
+                    <div class="help-category">
+                        <div class="help-category-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Customer Profiles</h3>
+                        <p>Managing customer information and relationships</p>
+                    </div>
+                    
+                    <!-- Web of Liability -->
+                    <div class="help-category">
+                        <div class="help-category-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <h3>Web of Liability</h3>
+                        <p>Understanding customer connections and relationships</p>
+                    </div>
+                    
+                    <!-- Reports & Analytics -->
+                    <div class="help-category">
+                        <div class="help-category-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Reports & Analytics</h3>
+                        <p>Creating and interpreting collateral reports</p>
+                    </div>
+                    
+                    <!-- Troubleshooting -->
+                    <div class="help-category">
+                        <div class="help-category-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3>Troubleshooting</h3>
+                        <p>Common issues and solutions</p>
+                    </div>
+                </div>
+                
+                <h2 class="section-heading">Frequently Asked Questions</h2>
+                <div class="faqs">
+                    <div class="faq-item">
+                        <h3>How do I add a new collateral item? <i class="fas fa-chevron-down"></i></h3>
+                        <p>Navigate to the Collateral page, click the "Add New" button, fill out the required fields, and click "Save".</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>How do I link collateral to a customer? <i class="fas fa-chevron-down"></i></h3>
+                        <p>When adding or editing a collateral item, search for and select the customer name in the "Owner" field.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>How do I generate a collateral report? <i class="fas fa-chevron-down"></i></h3>
+                        <p>Go to the Reports page, select "Collateral Report" from the report type dropdown, set your filters, and click "Generate Report".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CollBot Toggle -->
+    <button class="collbot-toggle" onclick="document.querySelector('.collbot-panel').classList.toggle('active');">
+        <i class="fas fa-robot"></i>
+    </button>
+    
+    <!-- CollBot Panel -->
+    <div class="collbot-panel">
+        <div class="collbot-header">
+            <h3>CollBot Assistant</h3>
+            <button class="collbot-close" onclick="document.querySelector('.collbot-panel').classList.toggle('active');">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="collbot-body">
+            <div class="collbot-welcome">
+                <p>Hello! I'm CollBot, your collateral management assistant. How can I help you?</p>
+            </div>
+            <div class="collbot-suggestions">
+                <p>Try asking me:</p>
+                <ul>
+                    <li>How do I navigate the Help Center?</li>
+                    <li>What resources are available for collateral management?</li>
+                    <li>How do I contact support?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="collbot-footer">
+            <input type="text" placeholder="Type your question here..." class="collbot-input">
+            <button class="collbot-send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // FAQ toggle functionality
+            $('.faq-question').click(function() {
+                $(this).toggleClass('active');
+                $(this).next('.faq-answer').toggleClass('active');
+                
+                // Close other FAQs when opening a new one
+                if($(this).hasClass('active')) {
+                    $('.faq-question').not(this).removeClass('active');
+                    $('.faq-answer').not($(this).next('.faq-answer')).removeClass('active');
+                }
+            });
+            
+            // Help category click handler
+            $('.help-category').click(function() {
+                const category = $(this).find('h3').text();
+                alert('Opening category: ' + category);
+                // In a real implementation, this would navigate to the category page
+            });
+            
+            // Tutorial card click handler
+            $('.tutorial-card').click(function() {
+                const tutorialTitle = $(this).find('h3').text();
+                alert('Playing tutorial: ' + tutorialTitle);
+                // In a real implementation, this would play the video or navigate to the video page
+            });
+            
+            // Support form submission
+            $('.support-form .btn-primary').click(function(e) {
+                e.preventDefault();
+                const name = $('#name').val();
+                const email = $('#email').val();
+                const subject = $('#subject').val();
+                const message = $('#message').val();
+                
+                if(!name || !email || !subject || !message) {
+                    alert('Please fill out all fields in the support form.');
+                    return;
+                }
+                
+                alert('Thank you for your message! Our support team will contact you within 24 hours.');
+                // Clear the form
+                $('.support-form input, .support-form textarea').val('');
+            });
+        });
+    </script>
+</body>
+</html>

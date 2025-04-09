@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings - Farm Credit Collateral Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00703c;
+            --primary-hover: #005e32;
+            --primary-light: #e8f5ef;
+            --header-green: #e8f5e9;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --text-light: #6c757d;
+            --border-light: #dee2e6;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            
+            /* Admin Status Colors */
+            --status-active: #10b981;
+            --status-inactive: #9ca3af;
+            --status-pending: #f59e0b;
+            --status-error: #ef4444;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        /* App Layout */
+        .app-layout {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 240px;
+            background-color: var(--primary);
+            height: 100vh;
+            padding-top: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-brand {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-brand img {
+            height: 32px;
+            margin-right: 0.75rem;
+        }
+        
+        .sidebar-brand-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--white);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0.5rem 0;
+            flex: 1;
+        }
+        
+        .nav-section {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            border-radius: 0.375rem;
+            margin: 0 0.5rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        .sidebar-nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .sidebar-nav i {
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .user-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: var(--white);
+        }
+        
+        .user-role {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            background-color: var(--bg-light);
+        }
+        
+        /* Header */
+        .header {
+            height: 70px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar {
+            position: relative;
+            width: 300px;
+            margin-right: 1rem;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.25rem;
+            border: 1px solid var(--border-light);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+            transition: all 0.2s;
+        }
+        
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 112, 60, 0.1);
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        .icon-btn {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.5rem;
+            border: none;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .icon-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Hero AI Search Styles */
+        .hero-ai-container {
+            background: linear-gradient(45deg, rgba(0,112,60,0.05) 0%, rgba(0,92,49,0.1) 100%);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,112,60,0.1);
+        }
+        
+        .ai-assistant-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .ai-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+        }
+        
+        .ai-icon i {
+            font-size: 1.25rem;
+        }
+        
+        .ai-intro h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+        
+        .ai-intro p {
+            color: var(--text-medium);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+        
+        .ai-search-bar {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+        
+        .ai-search-bar input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 0.5rem 0 0 0.5rem;
+            background-color: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .ai-search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0,112,60,0.1);
+        }
+        
+        .ai-search-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .ai-search-button:hover {
+            background-color: var(--primary-hover);
+        }
+        
+        .ai-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .ai-example-chip {
+            background-color: white;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
+        }
+        
+        .ai-example-chip:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Container */
+        .container {
+            padding: 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* Admin Section Styles */
+        .admin-section {
+            background-color: var(--white);
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .admin-section-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--header-green);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--text-dark);
+        }
+        
+        .section-title i {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        
+        .section-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .admin-section-content {
+            padding: 1.5rem;
+        }
+        
+        .section-desc {
+            color: var(--text-medium);
+            font-size: 0.875rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.5;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            border-radius: 0.375rem;
+            transition: all 0.15s ease-in-out;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+        }
+        
+        .btn-primary {
+            color: var(--white);
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+        
+        .btn-secondary {
+            color: var(--text-dark);
+            background-color: var(--white);
+            border-color: var(--border-light);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--bg-light);
+        }
+        
+        /* Admin Table */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .admin-table th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .admin-table td {
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .admin-table tr:hover td {
+            background-color: var(--primary-light);
+        }
+        
+        /* Status Badge */
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .status-badge.active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--status-active);
+        }
+        
+        .status-badge.inactive {
+            background-color: rgba(156, 163, 175, 0.1);
+            color: var(--status-inactive);
+        }
+        
+        .status-badge.pending {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--status-pending);
+        }
+        
+        .status-badge.error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--status-error);
+        }
+        
+        .status-badge i {
+            margin-right: 0.375rem;
+            font-size: 0.625rem;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-input, 
+        .form-select {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid var(--border-light);
+            border-radius: 0.375rem;
+            color: var(--text-dark);
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 112, 60, 0.1);
+        }
+        
+        .form-help {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-top: 0.375rem;
+        }
+        
+        .form-switch {
+            display: flex;
+            align-items: center;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+            margin-right: 0.75rem;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-light);
+            transition: 0.4s;
+            border-radius: 20px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(16px);
+        }
+        
+        .switch-label {
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        /* CollBot Styles */
+        .collbot-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px 0 0 8px;
+            padding: 12px 10px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .collbot-toggle i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .collbot-toggle-text {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .collbot-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .collbot-panel.active {
+            right: 0;
+        }
+        
+        .collbot-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .collbot-title {
+            display: flex;
+            align-items: center;
+        }
+        
+        .collbot-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .collbot-icon i {
+            font-size: 1.25rem;
+        }
+        
+        .collbot-info h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .collbot-info p {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .collbot-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+        
+        .collbot-close:hover {
+            color: var(--text-dark);
+        }
+        
+        .collbot-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .collbot-search {
+            margin-bottom: 1.5rem;
+        }
+        
+        .collbot-search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        
+        .collbot-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        .collbot-search-input:focus {
+            outline: none;
+        }
+        
+        .collbot-send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .collbot-send-btn:hover {
+            background-color: #00602f;
+        }
+        
+        .collbot-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .collbot-example {
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            font-size: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .collbot-example:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <img src="https://placehold.co/32x32/00703c/FFFFFF.svg" alt="Logo">
+                <div class="sidebar-brand-text">Farm Credit</div>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <div class="nav-section">Main</div>
+                <li>
+                    <a href="Modern_Dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Search.html">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Web.html">
+                        <i class="fas fa-project-diagram"></i>
+                        Web of Liability
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_ColForm.html">
+                        <i class="fas fa-file-alt"></i>
+                        Collateral
+                    </a>
+                </li>
+                
+                <div class="nav-section">Management</div>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Reports.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                
+                <div class="nav-section">System</div>
+                <li>
+                    <a href="#" class="active">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question-circle"></i>
+                        Help Center
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <a href="Modern_UserSettings.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; width: 100%;">
+                        <div class="user-avatar">JD</div>
+                        <div class="user-info">
+                            <div class="user-name">John Doe</div>
+                            <div class="user-role">Loan Officer</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="page-title">Settings</h1>
+                
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search settings..." />
+                    </div>
+                    
+                    <button class="icon-btn notification-badge">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    
+                    <button class="icon-btn">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Container -->
+            <div class="container">
+                <!-- Admin Header -->
+                <div class="admin-header">
+                    <h1>System Administration</h1>
+                    <p>Configure system settings, manage users, and customize collateral types.</p>
+                </div>
+                
+                <!-- Collateral Types Section -->
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div class="section-title">
+                            <i class="fas fa-tags"></i>
+                            Collateral Types
+                        </div>
+                        <button class="btn btn-primary" id="add-collateral-type">
+                            <i class="fas fa-plus"></i> Add Collateral Type
+                        </button>
+                    </div>
+                    <div class="admin-section-content">
+                        <p class="section-desc">Manage and configure collateral types used throughout the system. Each type can have custom fields and valuation rules.</p>
+                        
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Type Name</th>
+                                    <th>Category</th>
+                                    <th>Custom Fields</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Real Estate - Farmland</td>
+                                    <td>Real Estate</td>
+                                    <td>12</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-cog"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Real Estate - Buildings</td>
+                                    <td>Real Estate</td>
+                                    <td>15</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-cog"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Equipment - Heavy Machinery</td>
+                                    <td>Equipment</td>
+                                    <td>8</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-cog"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Livestock - Cattle</td>
+                                    <td>Livestock</td>
+                                    <td>6</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-cog"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Accounts - Business Checking</td>
+                                    <td>Account</td>
+                                    <td>4</td>
+                                    <td><span class="status-badge inactive"><i class="fas fa-circle"></i> Inactive</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-cog"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- User Management Section -->
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div class="section-title">
+                            <i class="fas fa-users"></i>
+                            User Management
+                        </div>
+                        <button class="btn btn-primary" id="add-user">
+                            <i class="fas fa-user-plus"></i> Add User
+                        </button>
+                    </div>
+                    <div class="admin-section-content">
+                        <p class="section-desc">Manage system users, assign roles, and set permissions. User activity is logged for auditing purposes.</p>
+                        
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Last Active</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>john.doe@farmcredit.com</td>
+                                    <td>Administrator</td>
+                                    <td>Today, 10:45 AM</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-key"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Jane Smith</td>
+                                    <td>jane.smith@farmcredit.com</td>
+                                    <td>Loan Officer</td>
+                                    <td>Today, 9:12 AM</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-key"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Robert Johnson</td>
+                                    <td>robert.johnson@farmcredit.com</td>
+                                    <td>Appraiser</td>
+                                    <td>Yesterday, 4:30 PM</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Active</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-key"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Emily Davis</td>
+                                    <td>emily.davis@farmcredit.com</td>
+                                    <td>Loan Officer</td>
+                                    <td>Mar 15, 2023</td>
+                                    <td><span class="status-badge pending"><i class="fas fa-circle"></i> Pending</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-key"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Wilson</td>
+                                    <td>michael.wilson@farmcredit.com</td>
+                                    <td>Read Only</td>
+                                    <td>Feb 28, 2023</td>
+                                    <td><span class="status-badge inactive"><i class="fas fa-circle"></i> Inactive</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-key"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- System Settings Section -->
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div class="section-title">
+                            <i class="fas fa-cogs"></i>
+                            System Settings
+                        </div>
+                        <button class="btn btn-outline" id="save-settings">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </div>
+                    <div class="admin-section-content">
+                        <p class="section-desc">Configure global system settings and preferences. Changes may require a system restart.</p>
+                        
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label class="form-label">System Name</label>
+                                <input type="text" class="form-input" value="Farm Credit Collateral Management System">
+                                <div class="form-help">This name appears in the browser title and email notifications</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Notification Settings</label>
+                                <div class="form-switch">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="switch-label">Enable email notifications</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="form-switch">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="switch-label">Enable in-app notifications</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Data Retention Policy</label>
+                                <select class="form-select">
+                                    <option value="365">1 Year</option>
+                                    <option value="730" selected>2 Years</option>
+                                    <option value="1095">3 Years</option>
+                                    <option value="1825">5 Years</option>
+                                    <option value="3650">10 Years</option>
+                                </select>
+                                <div class="form-help">How long to keep historical data before archiving</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">API Integration Status</label>
+                                <div class="form-switch">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="switch-label">Enable external API integrations</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">System Backup Schedule</label>
+                                <select class="form-select">
+                                    <option value="daily" selected>Daily (12:00 AM)</option>
+                                    <option value="weekly">Weekly (Sunday, 12:00 AM)</option>
+                                    <option value="custom">Custom Schedule</option>
+                                </select>
+                                <div class="form-help">How often the system data is backed up to secure storage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Integration Management Section -->
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div class="section-title">
+                            <i class="fas fa-plug"></i>
+                            Integrations
+                        </div>
+                        <button class="btn btn-primary" id="add-integration">
+                            <i class="fas fa-plus"></i> Add Integration
+                        </button>
+                    </div>
+                    <div class="admin-section-content">
+                        <p class="section-desc">Manage external system integrations and API keys. Secure connections are required for all integrations.</p>
+                        
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Integration</th>
+                                    <th>Type</th>
+                                    <th>Last Sync</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Banking System API</td>
+                                    <td>Financial Data</td>
+                                    <td>Today, 6:00 AM</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Connected</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-sync"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Property Valuation Service</td>
+                                    <td>Real Estate Data</td>
+                                    <td>Today, 6:00 AM</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Connected</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-sync"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Equipment Pricing API</td>
+                                    <td>Equipment Data</td>
+                                    <td>Yesterday, 6:00 AM</td>
+                                    <td><span class="status-badge error"><i class="fas fa-circle"></i> Error</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-sync"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Document Storage System</td>
+                                    <td>Document Management</td>
+                                    <td>Today, 6:00 AM</td>
+                                    <td><span class="status-badge active"><i class="fas fa-circle"></i> Connected</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-sync"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Reporting API</td>
+                                    <td>Analytics</td>
+                                    <td>Mar 15, 2023</td>
+                                    <td><span class="status-badge inactive"><i class="fas fa-circle"></i> Disabled</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn"><i class="fas fa-sync"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CollBot Toggle -->
+        <div class="collbot-toggle" id="collbot-toggle">
+            <i class="fas fa-robot"></i>
+            <div class="collbot-toggle-text">CollBot</div>
+        </div>
+        
+        <!-- CollBot Panel -->
+        <div class="collbot-panel" id="collbot-panel">
+            <div class="collbot-header">
+                <div class="collbot-title">
+                    <div class="collbot-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="collbot-info">
+                        <h3>CollBot</h3>
+                        <p>Your AI admin assistant</p>
+                    </div>
+                </div>
+                <button class="collbot-close" id="collbot-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="collbot-body">
+                <div class="collbot-search">
+                    <div class="collbot-search-bar">
+                        <input type="text" class="collbot-search-input" placeholder="Ask CollBot...">
+                        <button class="collbot-send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="collbot-examples">
+                    <span class="collbot-example">How do I add a new user?</span>
+                    <span class="collbot-example">What are the system backup options?</span>
+                    <span class="collbot-example">Help me configure API integrations</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add Collateral Type Modal
+            const addCollateralButton = document.getElementById('add-collateral-type');
+            if (addCollateralButton) {
+                addCollateralButton.addEventListener('click', function() {
+                    alert('Add Collateral Type modal would open here');
+                });
+            }
+            
+            // Add User Modal
+            const addUserButton = document.getElementById('add-user');
+            if (addUserButton) {
+                addUserButton.addEventListener('click', function() {
+                    alert('Add User modal would open here');
+                });
+            }
+            
+            // Save Settings
+            const saveSettingsButton = document.getElementById('save-settings');
+            if (saveSettingsButton) {
+                saveSettingsButton.addEventListener('click', function() {
+                    alert('Settings saved successfully!');
+                });
+            }
+            
+            // Add Integration Modal
+            const addIntegrationButton = document.getElementById('add-integration');
+            if (addIntegrationButton) {
+                addIntegrationButton.addEventListener('click', function() {
+                    alert('Add Integration modal would open here');
+                });
+            }
+            
+            // CollBot Toggle
+            const collbotToggle = document.getElementById('collbot-toggle');
+            const collbotPanel = document.getElementById('collbot-panel');
+            if (collbotToggle) {
+                collbotToggle.addEventListener('click', function() {
+                    collbotPanel.classList.add('active');
+                });
+            }
+            
+            // CollBot Close
+            const collbotClose = document.getElementById('collbot-close');
+            if (collbotClose) {
+                collbotClose.addEventListener('click', function() {
+                    collbotPanel.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

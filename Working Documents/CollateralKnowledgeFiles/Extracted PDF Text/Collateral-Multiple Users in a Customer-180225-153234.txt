@@ -1,0 +1,102 @@
+Multiple Users in a Customer
+
+Business Requirements:
+
+Create a framework within the Collateral App that will allow multiple users to to be in the same scenario (rename 
+“change?) or customer at the same time.
+
+
+
+
+Functional Requirements:
+
+Must Have’s: (Work in process as of 06/21)
+
+Multiple users must be allowed to be active and viewing a customer or collateral scenario (change?) at the same time.
+
+
+When two or more users are in the same customer/change, they both need to be able to make changes and save any 
+edits they have made at the same time.
+
+
+When two or more users are in the same customer or collateral change at the exact same time, there should be an 
+indicator in the top center of the screen to show this. This will always display on the screen when there are multiple 
+user so that there is no confusion.
+
+Option #1: This indicator will say “Another User is currently viewing this Customer” (“Screen”?)
+
+
+Option #2: An indicator will appear that shows all users initials who are currently viewing the same customer. 
+
+When you hover your mouse over the initials, the users full name will pop up by your mouse.
+
+
+
+
+
+Option #3: Using BOTH option 1 and 2.
+
+
+
+
+
+If all other users have exited out of the customer EXCEPT for one remaining user, then the above notifications or 
+indicators will disappear and no longer be visible.
+
+
+If an edit or change has been made in a customer/collateral change with multiple users in it, there needs to be a 
+notification to the other user(s).
+
+Option #1: Indicator in the upper center of screen saying “Change was made by XX (User) at 12:37pm. Please 
+Refresh”. All other users would need to refresh their screen to see updated customer/collateral canvas?
+
+
+Option #2: Have the screen automatically refresh for all other users when a change is made by another user. (Is 
+this possible or realistic?)
+
+
+
+
+
+
+
+Non-Functional Requirements:
+
+Data framework behind the scenes needs to be built that will recognize multiple users and edits/changes at the same 
+time and be able to update the appropriate database real-time. This would allow for indications and timestamps to be 
+possible in the notifications that are displayed to users.
+
+
+Need a way to detect and monitor when a user is in a customer, and when they exit.
+
+How will the collateral app know that users have left the customer? 
+
+When the close the browser tab they are in? 
+
+
+Maybe an “X” button to manually close a customer? 
+
+
+
+
+
+
+
+
+
+
+Screenshots of “Potential” functionality: (NOTE: These screenshots are for example only 
+and could change based on decisions made during development)
+
+Possible screen mock-up of indicators for multiple users in a customer at the same time:
+
+
+image-20240621-162407.png
+Possible screen mock-up of a notification when another user in the same customer has made changes:
+
+ 
+
+image-20240621-162735.png 
+
+
+

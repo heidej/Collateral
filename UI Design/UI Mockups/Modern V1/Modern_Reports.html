@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Farm Credit Collateral Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00703c;
+            --primary-hover: #005e32;
+            --primary-light: #e8f5ef;
+            --header-green: #e8f5e9;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --text-light: #6c757d;
+            --border-light: #dee2e6;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        /* App Layout */
+        .app-layout {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 240px;
+            background-color: var(--primary);
+            height: 100vh;
+            padding-top: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-brand {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-brand img {
+            height: 32px;
+            margin-right: 0.75rem;
+        }
+        
+        .sidebar-brand-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--white);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0.5rem 0;
+            flex: 1;
+        }
+        
+        .nav-section {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            margin: 0 0.5rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        .sidebar-nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .sidebar-nav i {
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            width: 1.25rem;
+            text-align: center;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--white);
+        }
+        
+        .user-role {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            height: 70px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            justify-content: space-between;
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-right: auto;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .search-input {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            width: 300px;
+            font-size: 0.875rem;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+        
+        .header-actions a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: var(--text-medium);
+            text-decoration: none;
+            margin-left: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .header-actions a:hover {
+            background-color: var(--gray-100);
+            color: var(--text-dark);
+        }
+        
+        .container {
+            padding: 2rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+        
+        .welcome-message {
+            margin-bottom: 1.5rem;
+        }
+        
+        .welcome-message h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-message p {
+            color: var(--text-medium);
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 1rem 1.25rem;
+            background-color: var(--header-green);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+        
+        .card-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-actions a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .card-body {
+            padding: 1.25rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+        
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--text-dark);
+            border-color: var(--border-light);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--gray-100);
+        }
+        
+        .btn i {
+            margin-right: 0.5rem;
+        }
+        
+        .select-control {
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            background-color: var(--white);
+            font-size: 0.875rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236c757d' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 16px 12px;
+            cursor: pointer;
+        }
+
+        /* Reports specific styling */
+        .filter-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 0.75rem;
+        }
+        
+        .filter-spacer {
+            flex: 1;
+        }
+        
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+        
+        .report-card {
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--white);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .report-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            background-color: var(--primary-light);
+        }
+        
+        .report-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-description {
+            color: var(--text-medium);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .report-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .report-meta i {
+            margin-right: 0.25rem;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-completed {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .status-pending {
+            background-color: var(--warning);
+            color: var(--text-dark);
+        }
+        
+        .status-failed {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .recent-reports-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .recent-reports-table th {
+            text-align: left;
+            padding: 0.75rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-bottom: 2px solid var(--border-light);
+        }
+        
+        .recent-reports-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .recent-reports-table tr:hover {
+            background-color: var(--gray-100);
+        }
+        
+        .action-icon {
+            color: var(--text-medium);
+            margin-right: 0.5rem;
+        }
+        
+        .action-icon:hover {
+            color: var(--primary);
+        }
+        
+        /* CollBot Styles */
+        .collbot-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px 0 0 8px;
+            padding: 12px 10px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .collbot-toggle i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .collbot-toggle-text {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .collbot-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .collbot-panel.active {
+            right: 0;
+        }
+        
+        .collbot-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .collbot-title {
+            display: flex;
+            align-items: center;
+        }
+        
+        .collbot-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .collbot-icon i {
+            font-size: 1.25rem;
+        }
+        
+        .collbot-info h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .collbot-info p {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.875rem;
+            color: var(--text-medium);
+        }
+        
+        .collbot-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+        
+        .collbot-close:hover {
+            color: var(--text-dark);
+        }
+        
+        .collbot-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .collbot-search {
+            margin-bottom: 1.5rem;
+        }
+        
+        .collbot-search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        
+        .collbot-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        .collbot-search-input:focus {
+            outline: none;
+        }
+        
+        .collbot-send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .collbot-send-btn:hover {
+            background-color: #00602f;
+        }
+        
+        .collbot-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .collbot-example {
+            background-color: var(--bg-light);
+            color: var(--text-medium);
+            font-size: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        
+        .collbot-example:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <img src="https://placehold.co/32x32/00703c/FFFFFF.svg" alt="Logo">
+                <div class="sidebar-brand-text">Farm Credit</div>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <div class="nav-section">Main</div>
+                <li>
+                    <a href="Modern_Dashboard.html">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Search.html">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Web.html">
+                        <i class="fas fa-project-diagram"></i>
+                        Web of Liability
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_ColForm.html">
+                        <i class="fas fa-file-alt"></i>
+                        Collateral
+                    </a>
+                </li>
+                
+                <div class="nav-section">Management</div>
+                <li>
+                    <a href="Modern_Customers.html">
+                        <i class="fas fa-users"></i>
+                        Customers
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_Reports.html" class="active">
+                        <i class="fas fa-chart-bar"></i>
+                        Reports
+                    </a>
+                </li>
+                
+                <div class="nav-section">System</div>
+                <li>
+                    <a href="Modern_Admin.html">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="Modern_HelpCenter.html">
+                        <i class="fas fa-question-circle"></i>
+                        Help Center
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Loan Officer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="page-title">Reports</h1>
+                
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search for customers, loans, or collateral">
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#" title="Notifications">
+                        <i class="far fa-bell"></i>
+                    </a>
+                    <a href="#" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="welcome-message">
+                    <h1>Reports</h1>
+                    <p>Manage and generate collateral and lending reports</p>
+                </div>
+                
+                <div class="filter-controls">
+                    <select class="select-control">
+                        <option>All Report Types</option>
+                        <option>Collateral Reports</option>
+                        <option>Loan Reports</option>
+                        <option>Risk Assessment</option>
+                        <option>Compliance Reports</option>
+                    </select>
+                    
+                    <select class="select-control">
+                        <option>Last 30 Days</option>
+                        <option>Current Quarter</option>
+                        <option>Year to Date</option>
+                        <option>Custom Range</option>
+                    </select>
+                    
+                    <input type="text" placeholder="Search reports..." class="search-input" style="width: 200px;">
+                    
+                    <div class="filter-spacer"></div>
+                    
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        New Report
+                    </button>
+                </div>
+                
+                <!-- Report Cards -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Report Templates</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="report-grid">
+                            <div class="report-card">
+                                <div class="card-body">
+                                    <div class="report-icon">
+                                        <i class="fas fa-file-contract"></i>
+                                    </div>
+                                    <h3 class="report-title">Collateral Coverage Report</h3>
+                                    <p class="report-description">Analysis of collateral values against loan balances with coverage ratios and deficiencies.</p>
+                                    <div class="report-meta">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            Run time: ~2 min
+                                        </span>
+                                        <a href="#" class="btn btn-secondary">Generate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="card-body">
+                                    <div class="report-icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <h3 class="report-title">Exception Report</h3>
+                                    <p class="report-description">Identifies collateral exceptions, missing documentation, and expired valuations.</p>
+                                    <div class="report-meta">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            Run time: ~3 min
+                                        </span>
+                                        <a href="#" class="btn btn-secondary">Generate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="card-body">
+                                    <div class="report-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h3 class="report-title">Trend Analysis</h3>
+                                    <p class="report-description">Historical trends of collateral values, loan balances, and coverage ratios over time.</p>
+                                    <div class="report-meta">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            Run time: ~5 min
+                                        </span>
+                                        <a href="#" class="btn btn-secondary">Generate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="card-body">
+                                    <div class="report-icon">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <h3 class="report-title">Real Estate Portfolio</h3>
+                                    <p class="report-description">Detailed analysis of real estate collateral including valuation and location data.</p>
+                                    <div class="report-meta">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            Run time: ~4 min
+                                        </span>
+                                        <a href="#" class="btn btn-secondary">Generate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="card-body">
+                                    <div class="report-icon">
+                                        <i class="fas fa-tractor"></i>
+                                    </div>
+                                    <h3 class="report-title">Equipment & Livestock</h3>
+                                    <p class="report-description">Summary of all equipment and livestock collateral with depreciation calculations.</p>
+                                    <div class="report-meta">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            Run time: ~3 min
+                                        </span>
+                                        <a href="#" class="btn btn-secondary">Generate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="report-card">
+                                <div class="card-body">
+                                    <div class="report-icon">
+                                        <i class="fas fa-balance-scale"></i>
+                                    </div>
+                                    <h3 class="report-title">Regulatory Compliance</h3>
+                                    <p class="report-description">Review of collateral documentation for regulatory compliance and audit purposes.</p>
+                                    <div class="report-meta">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            Run time: ~8 min
+                                        </span>
+                                        <a href="#" class="btn btn-secondary">Generate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Reports</h3>
+                        <div class="card-actions">
+                            <a href="#">View All</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="recent-reports-table">
+                            <thead>
+                                <tr>
+                                    <th>Report Name</th>
+                                    <th>Generated By</th>
+                                    <th>Date Generated</th>
+                                    <th>Format</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Collateral Coverage Q1</td>
+                                    <td>John Doe</td>
+                                    <td>Mar 24, 2025</td>
+                                    <td>PDF</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td>
+                                        <a href="#" class="action-icon" title="Download"><i class="fas fa-download"></i></a>
+                                        <a href="#" class="action-icon" title="View"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Exception Report - March</td>
+                                    <td>Jane Smith</td>
+                                    <td>Mar 20, 2025</td>
+                                    <td>Excel</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td>
+                                        <a href="#" class="action-icon" title="Download"><i class="fas fa-download"></i></a>
+                                        <a href="#" class="action-icon" title="View"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Regulatory Compliance Audit</td>
+                                    <td>System</td>
+                                    <td>Mar 19, 2025</td>
+                                    <td>PDF</td>
+                                    <td><span class="status-badge status-pending">Pending</span></td>
+                                    <td>
+                                        <a href="#" class="action-icon" title="View Progress"><i class="fas fa-spinner"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Equipment Valuation Report</td>
+                                    <td>Mike Johnson</td>
+                                    <td>Mar 15, 2025</td>
+                                    <td>Excel</td>
+                                    <td><span class="status-badge status-completed">Completed</span></td>
+                                    <td>
+                                        <a href="#" class="action-icon" title="Download"><i class="fas fa-download"></i></a>
+                                        <a href="#" class="action-icon" title="View"><i class="fas fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Trend Analysis - Q1 2025</td>
+                                    <td>John Doe</td>
+                                    <td>Mar 12, 2025</td>
+                                    <td>PPT</td>
+                                    <td><span class="status-badge status-failed">Failed</span></td>
+                                    <td>
+                                        <a href="#" class="action-icon" title="View Error"><i class="fas fa-exclamation-circle"></i></a>
+                                        <a href="#" class="action-icon" title="Retry"><i class="fas fa-redo"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CollBot Toggle -->
+        <div class="collbot-toggle" onclick="document.querySelector('.collbot-panel').classList.toggle('active');">
+            <i class="fas fa-robot"></i>
+            <div class="collbot-toggle-text">CollBot</div>
+        </div>
+        
+        <!-- CollBot Panel -->
+        <div class="collbot-panel">
+            <div class="collbot-header">
+                <div class="collbot-title">
+                    <div class="collbot-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="collbot-info">
+                        <h3>CollBot</h3>
+                        <p>Your AI collateral management assistant.</p>
+                    </div>
+                </div>
+                <button class="collbot-close" onclick="document.querySelector('.collbot-panel').classList.remove('active');">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="collbot-body">
+                <div class="collbot-search">
+                    <div class="collbot-search-bar">
+                        <input type="text" class="collbot-search-input" placeholder="Ask CollBot anything...">
+                        <button class="collbot-send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="collbot-examples">
+                    <span class="collbot-example">Generate collateral coverage report</span>
+                    <span class="collbot-example">Show me recent exception reports</span>
+                    <span class="collbot-example">Analyze Q1 valuation trends</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Any additional JavaScript for the Reports page
+        });
+    </script>
+</body>
+</html>

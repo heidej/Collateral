@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web of Liability - Farm Credit Collateral Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="logo">Farm Credit CMS</div>
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="collateral-form.html">
+                        <i class="fas fa-plus-circle"></i>
+                        New Collateral
+                    </a>
+                </li>
+                <li>
+                    <a href="web-of-liability.html" class="active">
+                        <i class="fas fa-project-diagram"></i>
+                        Web of Liability
+                    </a>
+                </li>
+                <li>
+                    <a href="search-results.html">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        Reports
+                    </a>
+                </li>
+                <li>
+                    <a href="admin.html">
+                        <i class="fas fa-cog"></i>
+                        Admin
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navigation Bar -->
+            <div class="top-bar">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for customers, loans, or collateral...">
+                </div>
+                <div class="user-actions">
+                    <button class="icon-button">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="icon-button">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                    <div class="user-profile">
+                        <div class="avatar">JD</div>
+                        <span>Jane Doe</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="container">
+                <div class="page-header">
+                    <div class="breadcrumbs">
+                        <a href="dashboard.html">Dashboard</a> / 
+                        <a href="search-results.html">Search</a> / 
+                        <span>Web of Liability: Smith Family Farms</span>
+                    </div>
+                    <h1>Web of Liability: Smith Family Farms</h1>
+                    <div class="customer-info">
+                        <span class="customer-id">Customer ID: 1024789</span>
+                        <span class="customer-type">Type: Commercial Farm</span>
+                    </div>
+                </div>
+                
+                <div class="visualization-container">
+                    <div class="visualization-toolbar">
+                        <div class="toolbar-group">
+                            <button class="toolbar-button" title="Zoom In">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="toolbar-button" title="Zoom Out">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                            <button class="toolbar-button" title="Reset View">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                        <div class="toolbar-group">
+                            <button class="toolbar-button" title="Add Collateral">
+                                <i class="fas fa-plus"></i> Add Collateral
+                            </button>
+                            <button class="toolbar-button" title="Add Loan">
+                                <i class="fas fa-plus"></i> Add Loan
+                            </button>
+                            <button class="toolbar-button" title="Link Objects">
+                                <i class="fas fa-link"></i> Link
+                            </button>
+                        </div>
+                        <div class="toolbar-group">
+                            <button class="toolbar-button" title="Filter">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                            <select class="toolbar-select">
+                                <option>All Relationships</option>
+                                <option>Direct Only</option>
+                                <option>High Value (>$100k)</option>
+                                <option>Collateral at Risk</option>
+                            </select>
+                        </div>
+                        <div class="toolbar-group">
+                            <button class="toolbar-button" title="Export">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="toolbar-button" title="Print">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="visualization-canvas"></div>
+                    
+                    <div class="visualization-legend">
+                        <div class="legend-title">Legend:</div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #4A90E2;"></div>
+                            <span>Loan</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #7ED321;"></div>
+                            <span>Real Estate</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #50E3C2;"></div>
+                            <span>Equipment</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #F8E71C;"></div>
+                            <span>Livestock</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #F5A623;"></div>
+                            <span>Account</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-symbol">
+                                <svg width="16" height="16">
+                                    <line x1="0" y1="8" x2="16" y2="8" stroke="#6C757D" stroke-width="2"></line>
+                                </svg>
+                            </div>
+                            <span>Regular Link</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-symbol">
+                                <svg width="16" height="16">
+                                    <line x1="0" y1="8" x2="16" y2="8" stroke="#D0021B" stroke-width="2"></line>
+                                </svg>
+                            </div>
+                            <span>High Risk Link</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-analysis-panel" id="quickAnalysisPanel">
+                    <div class="panel-header">
+                        <h3>Quick Loan Analysis</h3>
+                        <button class="icon-button" id="minimizePanel">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Loan Number</th>
+                                    <th>Type</th>
+                                    <th>Loan Amount</th>
+                                    <th>LN/MV</th>
+                                    <th>LN/NRV%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>LC-2023-045</td>
+                                    <td>LT</td>
+                                    <td>$350,000</td>
+                                    <td>67%</td>
+                                    <td>72%</td>
+                                </tr>
+                                <tr>
+                                    <td>LC-2023-046</td>
+                                    <td>IT</td>
+                                    <td>$125,000</td>
+                                    <td>58%</td>
+                                    <td>63%</td>
+                                </tr>
+                                <tr>
+                                    <td>LC-2023-089</td>
+                                    <td>ST</td>
+                                    <td>$75,000</td>
+                                    <td>45%</td>
+                                    <td>52%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="panel-actions">
+                            <a href="#" class="text-link">View Full Collateral Analysis</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add custom styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .page-header {
+                    margin-bottom: 1.5rem;
+                }
+                
+                .breadcrumbs {
+                    font-size: var(--font-size-small);
+                    color: var(--mid-gray);
+                    margin-bottom: 0.5rem;
+                }
+                
+                .breadcrumbs a {
+                    color: var(--mid-gray);
+                    text-decoration: none;
+                }
+                
+                .breadcrumbs a:hover {
+                    color: var(--primary-color);
+                }
+                
+                .customer-info {
+                    display: flex;
+                    gap: 20px;
+                    font-size: var(--font-size-small);
+                    color: var(--mid-gray);
+                    margin-top: 0.5rem;
+                }
+                
+                .visualization-container {
+                    height: 600px;
+                    margin-bottom: 2rem;
+                }
+                
+                #visualization-canvas {
+                    height: calc(100% - 100px);
+                    border-bottom: 1px solid var(--light-gray);
+                    overflow: hidden;
+                    position: relative;
+                }
+                
+                .toolbar-group {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    padding: 0 10px;
+                    border-right: 1px solid var(--light-gray);
+                }
+                
+                .toolbar-group:last-child {
+                    border-right: none;
+                }
+                
+                .toolbar-button {
+                    background: none;
+                    border: 1px solid var(--light-gray);
+                    border-radius: 4px;
+                    padding: 5px 10px;
+                    font-size: var(--font-size-small);
+                    color: var(--dark-gray);
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                }
+                
+                .toolbar-button:hover {
+                    background-color: var(--off-white);
+                }
+                
+                .toolbar-select {
+                    padding: 5px 10px;
+                    border: 1px solid var(--light-gray);
+                    border-radius: 4px;
+                    font-size: var(--font-size-small);
+                    color: var(--dark-gray);
+                }
+                
+                .legend-title {
+                    font-weight: 500;
+                    margin-right: 15px;
+                }
+                
+                .legend-symbol {
+                    width: 16px;
+                    height: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 5px;
+                }
+                
+                .quick-analysis-panel {
+                    background-color: var(--white);
+                    border-radius: 8px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    width: 100%;
+                    margin-bottom: 2rem;
+                }
+                
+                .panel-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px 15px;
+                    background-color: var(--primary-color);
+                    color: var(--white);
+                    border-top-left-radius: 8px;
+                    border-top-right-radius: 8px;
+                }
+                
+                .panel-header h3 {
+                    margin: 0;
+                    font-size: var(--font-size-body);
+                    color: var(--white);
+                }
+                
+                .panel-body {
+                    padding: 15px;
+                }
+                
+                .panel-actions {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 10px;
+                }
+                
+                .text-link {
+                    color: var(--interactive-blue);
+                    text-decoration: none;
+                    font-size: var(--font-size-small);
+                }
+                
+                .text-link:hover {
+                    text-decoration: underline;
+                }
+                
+                /* Force table to show all borders */
+                .quick-analysis-panel .table th,
+                .quick-analysis-panel .table td {
+                    border: 1px solid var(--light-gray);
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // D3.js Visualization
+            const width = document.getElementById('visualization-canvas').clientWidth;
+            const height = document.getElementById('visualization-canvas').clientHeight;
+            
+            // Sample data for visualization
+            const nodes = [
+                { id: 1, name: "Smith Family Farms", type: "account", x: width/2, y: height/2 },
+                { id: 2, name: "Farm Land - North", type: "real-estate", x: width/2 - 150, y: height/2 - 100 },
+                { id: 3, name: "Farm Land - South", type: "real-estate", x: width/2 + 150, y: height/2 - 100 },
+                { id: 4, name: "Farm Equipment", type: "equipment", x: width/2 - 180, y: height/2 + 80 },
+                { id: 5, name: "Dairy Cattle", type: "livestock", x: width/2 + 180, y: height/2 + 80 },
+                { id: 6, name: "LC-2023-045", type: "loan", x: width/2 - 250, y: height/2 - 180 },
+                { id: 7, name: "LC-2023-046", type: "loan", x: width/2, y: height/2 - 200 },
+                { id: 8, name: "LC-2023-089", type: "loan", x: width/2 + 250, y: height/2 - 180 }
+            ];
+            
+            const links = [
+                { source: 1, target: 2, value: 1 },
+                { source: 1, target: 3, value: 1 },
+                { source: 1, target: 4, value: 1 },
+                { source: 1, target: 5, value: 1 },
+                { source: 6, target: 2, value: 2, risk: "high" },
+                { source: 7, target: 3, value: 1.5 },
+                { source: 7, target: 4, value: 1 },
+                { source: 8, target: 5, value: 1.5 }
+            ];
+            
+            // Create SVG
+            const svg = d3.select("#visualization-canvas")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+            
+            // Define arrow markers for links
+            svg.append("defs").selectAll("marker")
+                .data(["end"])
+                .enter().append("marker")
+                .attr("id", d => d)
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 15)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M0,-5L10,0L0,5")
+                .attr("fill", "#6C757D");
+            
+            // Create links
+            const link = svg.append("g")
+                .selectAll("line")
+                .data(links)
+                .enter().append("line")
+                .attr("class", "link")
+                .attr("x1", d => nodes[d.source - 1].x)
+                .attr("y1", d => nodes[d.source - 1].y)
+                .attr("x2", d => nodes[d.target - 1].x)
+                .attr("y2", d => nodes[d.target - 1].y)
+                .attr("stroke-width", d => Math.sqrt(d.value) * 2)
+                .attr("stroke", d => d.risk === "high" ? "#D0021B" : "#6C757D")
+                .attr("marker-end", "url(#end)");
+            
+            // Create node groups
+            const node = svg.append("g")
+                .selectAll(".node")
+                .data(nodes)
+                .enter().append("g")
+                .attr("class", "node")
+                .attr("transform", d => `translate(${d.x},${d.y})`)
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+            
+            // Add shapes based on node type
+            node.each(function(d) {
+                if (d.type === "account") {
+                    d3.select(this).append("circle")
+                        .attr("r", 30)
+                        .attr("fill", "#F5A623")
+                        .attr("stroke", "#E09600");
+                    
+                    d3.select(this).append("text")
+                        .attr("text-anchor", "middle")
+                        .attr("dy", "0.3em")
+                        .text(d => d.name.substring(0, 2))
+                        .attr("fill", "white")
+                        .style("font-size", "14px")
+                        .style("font-weight", "bold");
+                } else if (d.type === "loan") {
+                    d3.select(this).append("rect")
+                        .attr("x", -60)
+                        .attr("y", -20)
+                        .attr("width", 120)
+                        .attr("height", 40)
+                        .attr("rx", 5)
+                        .attr("ry", 5)
+                        .attr("fill", "#4A90E2")
+                        .attr("stroke", "#3A7CBF");
+                } else if (d.type === "real-estate") {
+                    d3.select(this).append("rect")
+                        .attr("x", -50)
+                        .attr("y", -25)
+                        .attr("width", 100)
+                        .attr("height", 50)
+                        .attr("fill", "#7ED321")
+                        .attr("stroke", "#5FA919");
+                    
+                    d3.select(this).append("path")
+                        .attr("d", "M-25,-25 L0,-40 L25,-25")
+                        .attr("fill", "#7ED321")
+                        .attr("stroke", "#5FA919");
+                } else if (d.type === "equipment") {
+                    d3.select(this).append("rect")
+                        .attr("x", -40)
+                        .attr("y", -20)
+                        .attr("width", 80)
+                        .attr("height", 40)
+                        .attr("fill", "#50E3C2")
+                        .attr("stroke", "#41B49B");
+                    
+                    // Simple tractor icon
+                    d3.select(this).append("circle")
+                        .attr("cx", -15)
+                        .attr("cy", 10)
+                        .attr("r", 8)
+                        .attr("fill", "none")
+                        .attr("stroke", "#41B49B");
+                    
+                    d3.select(this).append("circle")
+                        .attr("cx", 15)
+                        .attr("cy", 10)
+                        .attr("r", 10)
+                        .attr("fill", "none")
+                        .attr("stroke", "#41B49B");
+                } else if (d.type === "livestock") {
+                    d3.select(this).append("rect")
+                        .attr("x", -40)
+                        .attr("y", -20)
+                        .attr("width", 80)
+                        .attr("height", 40)
+                        .attr("fill", "#F8E71C")
+                        .attr("stroke", "#C6B916");
+                    
+                    // Simple animal icon
+                    d3.select(this).append("path")
+                        .attr("d", "M-15,0 Q-5,-10 5,0 Q15,-10 25,0")
+                        .attr("fill", "none")
+                        .attr("stroke", "#C6B916")
+                        .attr("stroke-width", 2);
+                }
+            });
+            
+            // Add text labels below each node
+            node.append("text")
+                .attr("class", "node-label")
+                .attr("dy", d => {
+                    if (d.type === "account") return 45;
+                    if (d.type === "loan") return 35;
+                    if (d.type === "real-estate") return 45;
+                    return 35;
+                })
+                .attr("text-anchor", "middle")
+                .text(d => {
+                    // Truncate long names
+                    if (d.name.length > 15) {
+                        return d.name.substring(0, 12) + "...";
+                    }
+                    return d.name;
+                });
+            
+            // Drag functions
+            function dragstarted(event, d) {
+                if (!event.active) d3.forceSimulation().alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+            
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+                
+                // Update node position
+                d3.select(this).attr("transform", `translate(${event.x},${event.y})`);
+                
+                // Update connecting links
+                svg.selectAll(".link")
+                    .filter(l => l.source === d.id || l.target === d.id)
+                    .attr("x1", l => nodes[l.source - 1].id === d.id ? event.x : nodes[l.source - 1].x)
+                    .attr("y1", l => nodes[l.source - 1].id === d.id ? event.y : nodes[l.source - 1].y)
+                    .attr("x2", l => nodes[l.target - 1].id === d.id ? event.x : nodes[l.target - 1].x)
+                    .attr("y2", l => nodes[l.target - 1].id === d.id ? event.y : nodes[l.target - 1].y);
+            }
+            
+            function dragended(event, d) {
+                if (!event.active) d3.forceSimulation().alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+                
+                // Update node position in data
+                nodes[d.id - 1].x = event.x;
+                nodes[d.id - 1].y = event.y;
+            }
+            
+            // Quick Analysis Panel Toggle
+            const minimizePanel = document.getElementById('minimizePanel');
+            const quickAnalysisPanel = document.getElementById('quickAnalysisPanel');
+            
+            minimizePanel.addEventListener('click', function() {
+                const panelBody = quickAnalysisPanel.querySelector('.panel-body');
+                if (panelBody.style.display === 'none') {
+                    panelBody.style.display = 'block';
+                    this.innerHTML = '<i class="fas fa-minus"></i>';
+                } else {
+                    panelBody.style.display = 'none';
+                    this.innerHTML = '<i class="fas fa-plus"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

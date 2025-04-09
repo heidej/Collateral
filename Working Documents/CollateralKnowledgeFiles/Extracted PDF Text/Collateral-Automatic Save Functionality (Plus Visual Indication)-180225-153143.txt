@@ -1,0 +1,73 @@
+Automatic Save Functionality (Plus Visual Indication)
+
+Business Requirements:
+
+Create framework so that as create/edit/delete changes are made, these will be automatically saved. In the case of 
+creating through a data wizard, it will save upon completion of the wizard. Described further here: Data Wizards for 
+data entry - Collateral Object 
+
+
+Visually display on the collateral canvas that all edits/changes/delete changes have been saved.
+
+
+
+
+Functional Requirements:
+
+Must Have’s: Automatic Save Functionality
+
+An automatic “Save” will be triggered for the user on the current collateral canvas they are viewing/editing when they 
+make an addition, edit or deletion of data.
+
+Optional trigger: If a customer/collateral canvas is closed, an automatic “Save” event will be triggered. (Do we 
+need this?)
+
+
+
+
+
+
+
+Must Have’s: Visual “Save” Indicator
+
+Create a visual indication on the collateral canvas that any changes the user has made has been saved. 
+
+
+A visual indicator will display when a “Save” event has been triggered from the rules indicated in Functionality #1 
+above. 
+
+
+The visual “Save” indicator will say “Changes have been saved at 12:37pm,” in the top right side of the collateral 
+canvas.
+
+
+The “Save” indicator will display on the collateral canvas permanently until another change is made, or the 
+customer/collateral canvas is closed.
+
+If an additional change is made on an existing collateral canvas that has previously been saved, the message from 
+#4 will still display, but the time will update to the time of the current “Save” event. (ie, 1:03pm)
+
+
+
+
+
+
+
+Non-Functional Requirements:
+
+Create a “right-of-way” roadmap for whose “Save” truly gets saved when more than one user is in a customer’s 
+collateral canvas at the same time. (Would a forced refresh help with this?)
+
+
+
+
+Screenshots of “Potential” functionality: (NOTE: These screenshots are for example only 
+and could change based on decisions made during development)
+
+ 
+
+
+image-20240621-181228.png 
+
+
+
